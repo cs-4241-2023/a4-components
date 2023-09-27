@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './App.css'
 
 
@@ -44,7 +44,41 @@ function App() {
                     <input type={"number"} name={"difficulty"} placeholder={"Difficulty (1 to 10)"}/>
                     <button type={"submit"}>Submit</button>
                 </form>
+                <AssignmentTable />
             </>
         );
 }
+
+function AssignmentTable() {
+
+    React.useEffect( () =>{
+        async function getData() {
+            return await (await fetch("/get-assignments", { method: "GET"})).json();
+        }
+        getData().then(data => {
+            console.log(data)
+        })
+    }, []);
+
+
+    return (
+        <>
+            <h2>Tracked Assignments Stored on Node.js Server</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Name</th>
+                        <th>Due Date</th>
+                        <th>Difficulty</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </>
+    );
+}
+
+
 export default App
