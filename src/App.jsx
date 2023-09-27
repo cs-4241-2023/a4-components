@@ -4,9 +4,26 @@ import './App.css'
 
 function App() {
 
-    function handleClick(event) {
-        event.preventDefault();
-        alert("Hello World")
+    async function submitAssignment(e) {
+        e.preventDefault();
+
+        let form = e.target.elements;
+
+        let assignment = {
+            className: form.className.value,
+            assignmentName: form.assignmentName.value,
+            dueDate: form.dueDate.value,
+            difficulty: form.difficulty.value,
+            priority: ""
+        }
+
+        let response = await (await fetch("/submit-assignment", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(assignment)
+        })).json();
+
+        console.log(response.result)
     }
 
         return (
@@ -20,13 +37,12 @@ function App() {
                     </p>
                 </header>
 
-                <form id={"assignment-form"} autoComplete={"off"}>
-                    <input aria-label={"class-name"} type={"text"} id={"class-name"} placeholder={"Class Name"}/>
-                    <input aria-label={"assignment-name"} type={"text"} id={"assignment-name"} placeholder={"Assignment Name"}/>
-                    <input aria-label={"due-date"} type={"date"} id={"due-date"} />
-                    <input aria-label={"difficulty"} type={"number"} id={"difficulty"} placeholder={"Difficulty (1 to 10)"}/>
-                    <label form={"assignment-form"}>Completed? <input aria-label={"completed"} type={"checkbox"} id={"completed"}/></label>
-                    <button id={"submit-button"} onClick={handleClick}>Submit</button>
+                <form name={"assignment-form"} autoComplete={"off"} onSubmit={submitAssignment}>
+                    <input name={"className"} placeholder={"Class Name"}/>
+                    <input name={"assignmentName"} placeholder={"Assignment Name"}/>
+                    <input type={"date"} name={"dueDate"} />
+                    <input type={"number"} name={"difficulty"} placeholder={"Difficulty (1 to 10)"}/>
+                    <button type={"submit"}>Submit</button>
                 </form>
             </>
         );
