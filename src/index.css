@@ -1,0 +1,17 @@
+/* Reset default margin and padding body, */
+h1,
+h2,
+p,
+ul,
+li,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set a background color for the body */
+body {
+  background-image: linear-gradient(to right, #ffefba, #ffffff);
+  font-family: 'Rubik', Helvetica, Arial, sans-serif;
+
+}
