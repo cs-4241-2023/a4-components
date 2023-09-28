@@ -51,12 +51,30 @@ function App() {
 
 function AssignmentTable() {
 
+    const [assignmentData, assignmentDataSetter] = React.useState([]);
+
     React.useEffect( () =>{
         async function getData() {
             return await (await fetch("/get-assignments", { method: "GET"})).json();
         }
+
         getData().then(data => {
-            console.log(data)
+
+            const rows = [];
+
+            data.forEach(assignment => {
+              const row = (
+                  <tr key={rows.length}>
+                      <td>{assignment.className}</td>
+                      <td>{assignment.assignmentName}</td>
+                      <td>{assignment.dueDate}</td>
+                      <td>{assignment.difficulty}</td>
+                      <td>{assignment.priority}</td>
+                  </tr>
+            );
+                rows.push(row);
+            });
+            assignmentDataSetter(rows);
         })
     }, []);
 
@@ -68,12 +86,15 @@ function AssignmentTable() {
                 <thead>
                     <tr>
                         <th>Class</th>
-                        <th>Name</th>
+                        <th>Assignment Name</th>
                         <th>Due Date</th>
                         <th>Difficulty</th>
                         <th>Priority</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {assignmentData}
+                </tbody>
             </table>
 
         </>

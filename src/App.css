@@ -1,7 +1,30 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
+
+h1 {
+  font-size: 30pt;
+}
+
+input {
+  margin: 10px;
+}
+
+table {
+  margin-right: auto;
+  margin-left: auto;
+  border-collapse: collapse;
+}
+
+th {
+  border-bottom: thin solid black;
+}
+
+td {
+  padding: 5px 15px;
+}
+
 
