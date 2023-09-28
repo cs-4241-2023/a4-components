@@ -4,6 +4,7 @@ import './App.css'
 function App() {
     const [assignmentData, setAssignmentData] = React.useState([]);
     const [dataChanged, setDataChanged] = React.useState(false);
+    const [actionResult, setActionResult] = React.useState(<p></p>);
 
     React.useEffect( () =>{
         async function getData() {
@@ -52,6 +53,7 @@ function App() {
             body: JSON.stringify(assignment)
         })).json();
 
+        setActionResult(parseServerResult(response));
         setDataChanged(true);
     }
 
@@ -62,6 +64,8 @@ function App() {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(assignment)
         })).json();
+
+        setActionResult(parseServerResult(response));
         setDataChanged(true);
     }
 
@@ -72,7 +76,20 @@ function App() {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(assignment)
         })).json();
+
         setDataChanged(true);
+    }
+
+    function parseServerResult(response) {
+        let status = response.result + " " +  response.message;
+        let color = "";
+
+        if(response.result === "Success") {
+            color = "green"
+        } else {
+            color = "red"
+        }
+        return (<p style={{color: color}}>{status}</p>);
     }
 
         return (
@@ -93,6 +110,11 @@ function App() {
                     <input type={"number"} name={"difficulty"} placeholder={"Difficulty (1 to 10)"}/>
                     <button type={"submit"}>Submit</button>
                 </form>
+
+                <div>
+                    {actionResult}
+                </div>
+
                 <h2>Tracked Assignments Stored on Node.js Server</h2>
                 <table>
                     <thead>

@@ -50,13 +50,13 @@ app.post("/submit-assignment", async (request, response) => {
     // TODO: Calculate priority and reject bad data
     await assignmentCollection.insertOne(request.body);
     response.writeHead(200,{"Content-Type" : "application/json"});
-    response.end(JSON.stringify({result: "success"}));
+    response.end(JSON.stringify({result: "Success", message: ""}));
 });
 
 app.put("/edit-assignment", (request, response) => {
     // TODO: React front-end implementation for edit
     response.writeHead(200,{"Content-Type" : "application/json"});
-    response.end(JSON.stringify({result: "success"}));
+    response.end(JSON.stringify({result: "Success", message: ""}));
 });
 
 app.delete("/delete-assignment", async (request, response) => {
@@ -64,7 +64,7 @@ app.delete("/delete-assignment", async (request, response) => {
         _id: new ObjectId(request.body._id)
     });
     response.writeHead(200, {"Content-Type": "application/json"});
-    response.end(JSON.stringify({result: "success"}));
+    response.end(JSON.stringify({result: "Success", message: ""}));
 });
 
 ViteExpress.listen(app, port);
