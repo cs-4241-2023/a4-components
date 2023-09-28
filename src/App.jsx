@@ -3,6 +3,34 @@ import './App.css'
 
 
 function App() {
+    const [assignmentData, setAssignmentData] = React.useState([]);
+    const [submitted, setSubmitted] = React.useState(false);
+
+    React.useEffect( () =>{
+        async function getData() {
+            return await (await fetch("/get-assignments", { method: "GET"})).json();
+        }
+
+        getData().then(data => {
+
+            const rows = [];
+
+            data.forEach(assignment => {
+                const row = (
+                    <tr key={rows.length}>
+                        <td>{assignment.className}</td>
+                        <td>{assignment.assignmentName}</td>
+                        <td>{assignment.dueDate}</td>
+                        <td>{assignment.difficulty}</td>
+                        <td>{assignment.priority}</td>
+                    </tr>
+                );
+                rows.push(row);
+            });
+            setAssignmentData(rows);
+            setSubmitted(false);
+        })
+    }, [submitted]);
 
     async function submitAssignment(e) {
         e.preventDefault();
@@ -22,8 +50,7 @@ function App() {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(assignment)
         })).json();
-
-        console.log(response.result)
+        setSubmitted(true);
     }
 
         return (
@@ -44,46 +71,9 @@ function App() {
                     <input type={"number"} name={"difficulty"} placeholder={"Difficulty (1 to 10)"}/>
                     <button type={"submit"}>Submit</button>
                 </form>
-                <AssignmentTable />
-            </>
-        );
-}
-
-function AssignmentTable() {
-
-    const [assignmentData, assignmentDataSetter] = React.useState([]);
-
-    React.useEffect( () =>{
-        async function getData() {
-            return await (await fetch("/get-assignments", { method: "GET"})).json();
-        }
-
-        getData().then(data => {
-
-            const rows = [];
-
-            data.forEach(assignment => {
-              const row = (
-                  <tr key={rows.length}>
-                      <td>{assignment.className}</td>
-                      <td>{assignment.assignmentName}</td>
-                      <td>{assignment.dueDate}</td>
-                      <td>{assignment.difficulty}</td>
-                      <td>{assignment.priority}</td>
-                  </tr>
-            );
-                rows.push(row);
-            });
-            assignmentDataSetter(rows);
-        })
-    }, []);
-
-
-    return (
-        <>
-            <h2>Tracked Assignments Stored on Node.js Server</h2>
-            <table>
-                <thead>
+                <h2>Tracked Assignments Stored on Node.js Server</h2>
+                <table>
+                    <thead>
                     <tr>
                         <th>Class</th>
                         <th>Assignment Name</th>
@@ -91,15 +81,13 @@ function AssignmentTable() {
                         <th>Difficulty</th>
                         <th>Priority</th>
                     </tr>
-                </thead>
-                <tbody>
-                    {assignmentData}
-                </tbody>
-            </table>
-
-        </>
-    );
+                    </thead>
+                    <tbody>
+                        {assignmentData}
+                    </tbody>
+                </table>
+            </>
+        );
 }
-
 
 export default App
