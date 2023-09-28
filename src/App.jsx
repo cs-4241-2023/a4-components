@@ -1,7 +1,6 @@
 import React from 'react'
 import './App.css'
 
-
 function App() {
     const [assignmentData, setAssignmentData] = React.useState([]);
     const [dataChanged, setDataChanged] = React.useState(false);
@@ -58,26 +57,21 @@ function App() {
 
     async function editAssignment(e, assignment) {
         e.preventDefault();
-
         let response = await (await fetch("/edit-assignment", {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(assignment)
         })).json();
-
-
         setDataChanged(true);
     }
 
     async function deleteAssignment(e, assignment) {
         e.preventDefault();
-
-        let response = await (await fetch("/delete-assignment", {
+        await (await fetch("/delete-assignment", {
             method: "DELETE",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(assignment)
         })).json();
-
         setDataChanged(true);
     }
 
