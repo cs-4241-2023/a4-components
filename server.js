@@ -74,7 +74,7 @@ app.post("/submit-assignment", async (request, response) => {
                 priority: priority
             }
         );
-        result = {result: "success", message: ""};
+        result = {result: "Success", message: ""};
     }
     response.writeHead(200,{"Content-Type" : "application/json"});
     response.end(JSON.stringify(result));
