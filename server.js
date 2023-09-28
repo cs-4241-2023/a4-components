@@ -41,7 +41,7 @@ app.post('/submit', stringToJSONMiddleware, (request, response) => {
 
     // Add user vehice service appointment data to appdata
     // Before adding it to the array of JSON objects, add new derived field 
-    user_data_json['day-until-appointment'] = addNewDataField(user_data_json);
+    user_data_json.day_until_appointment = addNewDataField(user_data_json);
     user_data_json['uuid'] = crypto.randomUUID();
 
     appdata.push(user_data_json);
@@ -49,7 +49,7 @@ app.post('/submit', stringToJSONMiddleware, (request, response) => {
     console.log("Server Data after submission: ");
     console.log(appdata);
     response.writeHead(200, "OK", { 'Content-Type': 'text/plain' })
-    response.end('Success')
+    response.end('Success From Submit Request Server')
 });
 
 app.post('/delete-frm-table', express.text(), (request, response) => {
@@ -85,7 +85,7 @@ app.post('/modify-table-entry', stringToJSONMiddleware, (request, response) => {
     appdata[modify_index]['appointment_date'] = modify_form_data['appointment_date'];
 
     const new_days_until_apt = addNewDataField(appdata[modify_index])
-    appdata[modify_index]['day-until-appointment'] = new_days_until_apt;
+    appdata[modify_index].day_until_appointment = new_days_until_apt;
 
     console.log("App data after modification");
     console.log(appdata);
