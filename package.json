@@ -1,0 +1,22 @@
+{
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "start": "node server.improved.js"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongodb": "^6.1.0",
+    "passport": "^0.6.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
