@@ -47,10 +47,37 @@ app.use(async (request, response, next) => {
 app.use(express.json());
 
 app.post("/submit-assignment", async (request, response) => {
-    // TODO: Calculate priority and reject bad data
-    await assignmentCollection.insertOne(request.body);
+    let sentData = request.body;
+
+    let className = sentData.className;
+    let assignmentName = sentData.assignmentName;
+    let dueDate = sentData.dueDate;
+    let difficulty = sentData.difficulty;
+    let difficultyNum = parseInt(difficulty);
+
+    let result;
+
+    // send failure if any of the fields are empty
+    if (className === "" || assignmentName === "" || dueDate === "") {
+        result = {result: "Failure", message: "One or more fields are empty!"};
+    } else if (difficulty === "" || isNaN(difficultyNum) || difficultyNum < 0 || difficultyNum > 10) {
+        result = {result: "Failure", message: "Difficulty must be an integer between 1 and 10!"};
+    } else {
+        let priority = calculatePriority(dueDate, difficulty); // calculate derived field
+
+        await assignmentCollection.insertOne(
+            {
+                className: className,
+                assignmentName: assignmentName,
+                dueDate: dueDate,
+                difficulty: difficulty,
+                priority: priority
+            }
+        );
+        result = {result: "success", message: ""};
+    }
     response.writeHead(200,{"Content-Type" : "application/json"});
-    response.end(JSON.stringify({result: "Success", message: ""}));
+    response.end(JSON.stringify(result));
 });
 
 app.put("/edit-assignment", async (request, response) => {
@@ -62,7 +89,7 @@ app.put("/edit-assignment", async (request, response) => {
                 assignmentName: request.body.assignmentName,
                 dueDate: request.body.dueDate,
                 difficulty: request.body.difficulty,
-                priority: ""
+                priority: calculatePriority(request.body.dueDate, request.body.difficulty)
             }
         }
     );
@@ -77,5 +104,16 @@ app.delete("/delete-assignment", async (request, response) => {
     response.writeHead(200, {"Content-Type": "application/json"});
     response.end(JSON.stringify({result: "Success", message: ""}));
 });
+
+const calculatePriority = function (dueDate, difficulty) {
+    let date = new Date(dueDate);
+    if((difficulty > 0 && difficulty <= 3) || date.getDay() >= 14) {
+        return "Low";
+    } else if((difficulty > 3 && difficulty <= 6) || (date.getDay() >= 7 && date.getDay() < 14)) {
+        return "Medium";
+    } else {
+        return "High";
+    }
+}
 
 ViteExpress.listen(app, port);
