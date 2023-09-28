@@ -5,6 +5,7 @@ import './App.css'
 function App() {
     const [assignmentData, setAssignmentData] = React.useState([]);
     const [submitted, setSubmitted] = React.useState(false);
+    const [editButtons, setEditButtons] = React.useState([]);
 
     React.useEffect( () =>{
         async function getData() {
@@ -14,6 +15,7 @@ function App() {
         getData().then(data => {
 
             const rows = [];
+            const editButtons = [];
 
             data.forEach(assignment => {
                 const row = (
@@ -23,10 +25,18 @@ function App() {
                         <td>{assignment.dueDate}</td>
                         <td>{assignment.difficulty}</td>
                         <td>{assignment.priority}</td>
+                        <td><button type={"submit"}>Edit</button></td>
+                        <td><button className={"delete-button"}>Delete</button></td>
                     </tr>
                 );
+                const editButton = (
+                    <button onClick={() => console.log(assignment)}>click me</button>
+                );
+
+                editButtons.push(editButton);
                 rows.push(row);
             });
+            setEditButtons(editButtons);
             setAssignmentData(rows);
             setSubmitted(false);
         })

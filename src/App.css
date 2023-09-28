@@ -24,7 +24,23 @@ th {
 }
 
 td {
-  padding: 5px 15px;
+  padding: 5px;
+}
+
+
+.delete-button {
+  display: inline-block;
+  padding: 8px 15px;
+  color: #f5f5f5;
+  font-weight: bolder;
+  background-color: #A50E0E;
+  border-radius: 5px;
+  border-color: transparent;
+  transition: 0.5s;
+}
+
+.delete-button:hover {
+  background-color: red;
 }
 
 
