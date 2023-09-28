@@ -1,0 +1,67 @@
+/* Global Styles */
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #1D1A39;
+    color: #E8BCB9;
+    list-style-type: inside;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+#web-header{
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  color: #AE445A;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 15px;
+  margin: 5px 0;
+}
+
+table, th, td {
+  border:3px solid black;
+  border-radius: 5px;
+  background-color: #451952;
+  align-items: center;
+}
+
+#create-button {
+  padding: 10px 15px;
+  margin: 7px 0;
+  margin-right: 10px;
+}
+#edit-button{
+    padding: 10px 15px;
+    margin: 7px 0;
+}
+
+#delete-button {
+  padding: 10px 15px;
+  margin: 7px 0;
+}
+
+#begone_toht {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+.button-container {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: center; 
+}

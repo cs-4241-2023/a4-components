@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CS4241 Assignment 2</title>
+    <meta charset="utf-8">
+    <script src="js/main.js"></script>
+    <!-- <script src="js/main.js"></script> -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    
+    <!-- get rid of favicon error -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<!--     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">  -->
+  </head>
+  <body>
+    <h1 id="web-header"> ESports Sign Up</h1>
+    <form>
+      <input type="text" onfocus="this.value=''" id="yourname" placeholder="Your real name here." style="  padding: 7px 15px; margin: 10px 0;" >
+      <input type="text" onfocus="this.value=''" id="username" placeholder="Your gamertag here." style="  padding: 7px 15px; margin: 10px 0;" >
+      <input type="text" onfocus="this.value=''" id="email" placeholder="Your email here." style="  padding: 7px 15px; margin: 10px 0;" >
+      <input type="text" onfocus="this.value=''" id="position" placeholder="What's your position?" style="  padding: 7px 15px; margin: 10px 0;" >
+      <div class = "button-container">
+      <button type="submit" id="create-button" onclick="submit()">Submit Application</button>
+      <!-- Dev note: Struggling to understand how to edit so this is a placeholder. -->
+      <!-- <button type="button" id="edit-button" onclick="editPlayer()">Edit</button> -->
+    </div>
+    </form>
+    <ul id="Players">
+      <table id="player-table">
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Player Name</th>
+          <th>Player GamerTag</th>
+          <th>Player Email</th>
+          <th>Player Position</th>
+        </tr>
+        <tbody id="table-body">
+        </tbody>
+      </table>
+    </ul>
+  </body>
+</html>

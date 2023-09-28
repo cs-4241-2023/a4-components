@@ -1,0 +1,17 @@
+{
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+  "engines": {
+    "node": ">14.17.0"
+  },
+  "scripts": {
+    "start": "node server.improved.js"
+  },
+  "dependencies": {
+    "mime": "^2.4.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
