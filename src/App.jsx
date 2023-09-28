@@ -4,8 +4,7 @@ import './App.css'
 
 function App() {
     const [assignmentData, setAssignmentData] = React.useState([]);
-    const [submitted, setSubmitted] = React.useState(false);
-    const [editButtons, setEditButtons] = React.useState([]);
+    const [dataChanged, setDataChanged] = React.useState(false);
 
     React.useEffect( () =>{
         async function getData() {
@@ -15,7 +14,6 @@ function App() {
         getData().then(data => {
 
             const rows = [];
-            const editButtons = [];
 
             data.forEach(assignment => {
                 const row = (
@@ -25,22 +23,16 @@ function App() {
                         <td>{assignment.dueDate}</td>
                         <td>{assignment.difficulty}</td>
                         <td>{assignment.priority}</td>
-                        <td><button type={"submit"}>Edit</button></td>
-                        <td><button className={"delete-button"}>Delete</button></td>
+                        <td><button type={"submit"} onClick={(e) => editAssignment(e, assignment)}>Edit</button></td>
+                        <td><button className={"delete-button"} onClick={(e) => deleteAssignment(e, assignment)}>Delete</button></td>
                     </tr>
                 );
-                const editButton = (
-                    <button onClick={() => console.log(assignment)}>click me</button>
-                );
-
-                editButtons.push(editButton);
                 rows.push(row);
             });
-            setEditButtons(editButtons);
             setAssignmentData(rows);
-            setSubmitted(false);
+            setDataChanged(false);
         })
-    }, [submitted]);
+    }, [dataChanged]);
 
     async function submitAssignment(e) {
         e.preventDefault();
@@ -60,7 +52,33 @@ function App() {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(assignment)
         })).json();
-        setSubmitted(true);
+
+        setDataChanged(true);
+    }
+
+    async function editAssignment(e, assignment) {
+        e.preventDefault();
+
+        let response = await (await fetch("/edit-assignment", {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(assignment)
+        })).json();
+
+
+        setDataChanged(true);
+    }
+
+    async function deleteAssignment(e, assignment) {
+        e.preventDefault();
+
+        let response = await (await fetch("/delete-assignment", {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(assignment)
+        })).json();
+
+        setDataChanged(true);
     }
 
         return (
