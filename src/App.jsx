@@ -5,6 +5,7 @@ function App() {
     const [assignmentData, setAssignmentData] = React.useState([]);
     const [dataChanged, setDataChanged] = React.useState(false);
     const [actionResult, setActionResult] = React.useState(<p></p>);
+    const [editWindow, setEditWindow] = React.useState(<></>)
 
     React.useEffect( () =>{
         async function getData() {
@@ -23,7 +24,7 @@ function App() {
                         <td>{assignment.dueDate}</td>
                         <td>{assignment.difficulty}</td>
                         <td>{assignment.priority}</td>
-                        <td><button type={"submit"} onClick={(e) => editAssignment(e, assignment)}>Edit</button></td>
+                        <td><button type={"submit"} onClick={(e) => openEditPopUp(e, assignment)}>Edit</button></td>
                         <td><button className={"delete-button"} onClick={(e) => deleteAssignment(e, assignment)}>Delete</button></td>
                     </tr>
                 );
@@ -57,15 +58,44 @@ function App() {
         setDataChanged(true);
     }
 
-    async function editAssignment(e, assignment) {
+    function openEditPopUp(e, assignment) {
         e.preventDefault();
-        let response = await (await fetch("/edit-assignment", {
-            method: "PUT",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(assignment)
+
+        let editWindow = (
+            <form name={"assignment-form"} autoComplete={"off"} onSubmit= { async (e) => {
+                e.preventDefault();
+                await editAssignment(e, assignment);
+            }}>
+                <input name={"className"} placeholder={"Class Name"} defaultValue={assignment.className}/>
+                <input name={"assignmentName"} placeholder={"Assignment Name"} defaultValue={assignment.assignmentName}/>
+                <input type={"date"} name={"dueDate"} defaultValue={assignment.dueDate}/>
+                <input type={"number"} name={"difficulty"} placeholder={"Difficulty (1 to 10)"} defaultValue={assignment.difficulty}/>
+                <button className={"delete-button"} onClick={() => setEditWindow(<></>)}>Cancel Edit</button>
+                <button type={"submit"}>Submit Edit</button>
+            </form>
+        )
+        setEditWindow(editWindow);
+    }
+
+    async function editAssignment(e, assignment) {
+        let form = e.target.elements;
+
+        let editedAssignment = {
+            _id: assignment._id,
+            className: form.className.value,
+            assignmentName: form.assignmentName.value,
+            dueDate: form.dueDate.value,
+            difficulty: form.difficulty.value,
+            priority: ""
+        }
+
+        await (await fetch("/edit-assignment", {
+             method: "PUT",
+             headers: {"Content-Type": "application/json"},
+             body: JSON.stringify(editedAssignment)
         })).json();
 
-        setActionResult(parseServerResult(response));
+        setEditWindow(<></>);
         setDataChanged(true);
     }
 
@@ -76,7 +106,6 @@ function App() {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(assignment)
         })).json();
-
         setDataChanged(true);
     }
 
@@ -116,6 +145,7 @@ function App() {
                 </div>
 
                 <h2>Tracked Assignments Stored on Node.js Server</h2>
+                {editWindow}
                 <table>
                     <thead>
                     <tr>

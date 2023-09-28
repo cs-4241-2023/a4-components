@@ -53,9 +53,20 @@ app.post("/submit-assignment", async (request, response) => {
     response.end(JSON.stringify({result: "Success", message: ""}));
 });
 
-app.put("/edit-assignment", (request, response) => {
-    // TODO: React front-end implementation for edit
-    response.writeHead(200,{"Content-Type" : "application/json"});
+app.put("/edit-assignment", async (request, response) => {
+    await assignmentCollection.updateOne(
+        {_id: new ObjectId(request.body._id)},
+        {
+            $set: {
+                className: request.body.className,
+                assignmentName: request.body.assignmentName,
+                dueDate: request.body.dueDate,
+                difficulty: request.body.difficulty,
+                priority: ""
+            }
+        }
+    );
+    response.writeHead(200, {"Content-Type": "application/json"});
     response.end(JSON.stringify({result: "Success", message: ""}));
 });
 
