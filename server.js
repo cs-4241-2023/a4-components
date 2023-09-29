@@ -38,10 +38,10 @@ app.post( '/update',express.json(), async  function( req,res ) {
 })
 
 app.post( '/delete',express.json(), async  function( req,res ) {
-    let id=JSON.parse(req.body._id);
-    await taskCollection.deleteOne({_id: new ObjectID(id)});
 
-    res.redirect( 'index.html' )
+    await taskCollection.deleteOne({_id: new ObjectID(req.body._id)});
+
+    res.end()
 })
 
 ViteExpress.listen( app, 3000 )

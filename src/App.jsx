@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 class Todo extends React.Component {
     // our .render() method creates a block of HTML using the .jsx format
@@ -8,7 +8,25 @@ class Todo extends React.Component {
             <td><p>{this.props.creation}</p></td>
             <td><p>{this.props.deadline}</p></td>
             <td><p>{this.JudgePriority(this.props.deadline)}</p></td>
+            <td><button>Edit</button></td>
+            <td><button onClick={(e) =>{this.deleteData(e,this.props.id)}}>Delete</button></td>
         </tr>
+    }
+
+    deleteData(e,taskID){
+        e.preventDefault()
+        const body = JSON.stringify({_id:taskID});
+
+        fetch("/delete", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body
+        }).then(r =>{
+            console.log("Deleted")
+            window.location.reload();
+        })
     }
 
     JudgePriority(deadline){
@@ -106,8 +124,10 @@ class App extends React.Component {
                             <th><p>Creation Date</p></th>
                             <th><p>Deadline</p></th>
                             <th><p>Priority</p></th>
+                            <th></th>
+                            <th></th>
                         </tr>
-                        { this.state.todos.map( (todo,i) => <Todo key={i} task={todo.task} creation={todo.creationDate} deadline={todo.deadline} /> ) }
+                        { this.state.todos.map( (todo,i) => <Todo key={i} id={todo._id} task={todo.task} creation={todo.creationDate} deadline={todo.deadline} /> ) }
                         </tbody>
                     </table>
                 </div>
