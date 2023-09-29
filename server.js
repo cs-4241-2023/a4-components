@@ -1,27 +1,47 @@
 const express = require( 'express' ),
     app = express(),
-    ViteExpress = require( 'vite-express' )
+    ViteExpress = require( 'vite-express' ),
+    mongodb = require( 'mongodb' ),
+    ObjectID = mongodb.ObjectId
 
-const todos = [
-    { 'task': 'homework', 'creationDate': '9/01/2023', 'deadline': '9/29/2023'},
-    { 'task': 'taxes', 'creationDate': '9/01/2023', 'deadline': '9/30/2023' },
-    { 'task': 'chores', 'creationDate': '9/01/2023', 'deadline': '10/1/2023' }
-]
+require('dotenv').config();
 
 app.use( express.json() )
+app.use( express.urlencoded({ extended:true }) )
 
-app.get( '/read', ( req, res ) => res.json( todos ) )
 
-app.post( '/add', ( req,res ) => {
-    todos.push( req.body )
-    res.json( todos )
+
+// #region Mongodb
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}`
+const client = new mongodb.MongoClient( uri, { useNewUrlParser: true, useUnifiedTopology:true })
+const db=client.db( process.env.DB );
+let taskCollection=db.collection( process.env.DB_TASKS );
+
+app.get( '/read', ( req, res ) => {
+    taskCollection.find().toArray().then( result => {
+        res.json( result )
+    } )
 })
 
-app.post( '/change', function( req,res ) {
-    const idx = todos.findIndex( v => v.name === req.body.name )
-    todos[ idx ].completed = req.body.completed
+app.post( '/add', express.json(), async ( req,res ) => {
+    let info=req.body;
+    await taskCollection.insertOne(
+        {task:info.task, creationDate: info.creationDate, deadline: info.deadline}
+    )
+    res.end();
+})
 
-    res.sendStatus( 200 )
+app.post( '/update',express.json(), async  function( req,res ) {
+    let id=JSON.parse(req.body._id);
+    await taskCollection.updateOne({_id:new ObjectID(id)},{ $set: { task: req.body.task,creationDate:req.body.creationDate,deadline:req.body.deadline } });
+    res.redirect( 'index.html' )
+})
+
+app.post( '/delete',express.json(), async  function( req,res ) {
+    let id=JSON.parse(req.body._id);
+    await taskCollection.deleteOne({_id: new ObjectID(id)});
+
+    res.redirect( 'index.html' )
 })
 
 ViteExpress.listen( app, 3000 )

@@ -51,23 +51,22 @@ class App extends React.Component {
             })
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
 
-        let task=this.task.value;
-        let creation=this.creationDate.value;
-        let deadline=this.deadline.value;
+        let task = this.task.value;
+        let creation = this.creationDate.value;
+        let deadline = this.deadline.value;
 
-        if(task !== undefined && creation !== undefined && deadline !== undefined){
-            fetch( '/add', {
-                method:'POST',
-                body: JSON.stringify({ task:task, creationDate:creation, deadline:deadline }),
-                headers: { 'Content-Type': 'application/json' }
+        if (task !== undefined && creation !== undefined && deadline !== undefined) {
+            let response = fetch('/add', {
+                method: 'POST',
+                body: JSON.stringify({task: task, creationDate: creation, deadline: deadline}),
+                headers: {'Content-Type': 'application/json'}
             })
-                .then( response => response.json() )
-                .then( json => {
-                    window.location.reload()
-                })
+            await response;
+            console.log("Reload")
+            window.location.reload();
         }
     }
 
