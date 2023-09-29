@@ -8,7 +8,7 @@ class Todo extends React.Component {
             <td><p>{this.props.creation}</p></td>
             <td><p>{this.props.deadline}</p></td>
             <td><p>{this.JudgePriority(this.props.deadline)}</p></td>
-            <td><button>Edit</button></td>
+            <td><button onClick={(e) =>{this.props.app.openEditForm(this.props.id)}}>Edit</button></td>
             <td><button onClick={(e) =>{this.deleteData(e,this.props.id)}}>Delete</button></td>
         </tr>
     }
@@ -57,6 +57,7 @@ class App extends React.Component {
         // initialize our state
         this.state = { todos:[] }
         this.load()
+        this.taskID=-1;
     }
 
 
@@ -88,33 +89,97 @@ class App extends React.Component {
         }
     }
 
+    handleEdit = async (event) => {
+        event.preventDefault();
+
+        if(this.taskID!==-1){
+            let task = this.editTask.value;
+            let creation = this.editCreation.value;
+            let deadline = this.editDeadline.value;
+
+            if (task !== undefined && creation !== undefined && deadline !== undefined) {
+                let response = fetch('/update', {
+                    method: 'POST',
+                    body: JSON.stringify({_id: this.taskID,task: task, creationDate: creation, deadline: deadline}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                await response;
+                this.taskID=-1;
+                console.log("Reload")
+                window.location.reload();
+            }
+        }else{
+            alert("You need to click a task's edit button before you can edit a task")
+        }
+    }
+
     // render component HTML using JSX
+    closeEditForm() {
+        this.editForm.style.display="none";
+        this.taskID=-1;
+    }
+    openEditForm(id){
+        this.editForm.style.display="block";
+        this.taskID=id;
+    }
+
     render() {
         return (
             <div>
                 <div className="header">
-                    <h3>Todo List</h3>
+                    <h1>Todo List</h1>
                 </div>
-                <div className="addTask">
-                    <h4>Add Tasks</h4>
-                    <form id="addItemContainer">
-                        <div className="addItem">
-                            <input type="text" name="Task" placeholder="Task" required="required" ref={node => (this.task = node)}></input>
-                        </div>
-                        <div className="addItem">
-                            <input type="date" name="CreationDate" placeholder="CreationDate" required="required" ref={node => (this.creationDate = node)}></input>
-                        </div>
-                        <div className="addItem">
-                            <input type="date" name="Deadline" placeholder="Deadline" required="required" ref={node => (this.deadline = node)}></input>
-                        </div>
-                        <div className="addItem">
-                            <button className="add-button" onClick={this.handleSubmit}>submit</button>
-                        </div>
-                        <div className="addItem">
-                            <button className="resetForm-button" onClick={this.ClearForm}>reset</button>
-                        </div>
-                    </form>
-                </div>
+                <table>
+                    <tr>
+                        <td><div className="addTask">
+                            <h4>Add Tasks</h4>
+                            <form id="addItemContainer">
+                                <div className="addItem">
+                                    <label htmlFor="Task">Task:</label>
+                                    <input type="text" name="Task" placeholder="Task" required="required" ref={node => (this.task = node)}></input>
+                                </div>
+                                <div className="addItem">
+                                    <label htmlFor="CreationDate">Creation Date:</label>
+                                    <input type="date" name="CreationDate" placeholder="CreationDate" required="required" ref={node => (this.creationDate = node)}></input>
+                                </div>
+                                <div className="addItem">
+                                    <label htmlFor="Deadline">Deadline:</label>
+                                    <input type="date" name="Deadline" placeholder="Deadline" required="required" ref={node => (this.deadline = node)}></input>
+                                </div>
+                                <div className="addItem">
+                                    <button className="add-button" onClick={this.handleSubmit}>submit</button>
+                                </div>
+                                <div className="addItem">
+                                    <button className="resetForm-button" onClick={this.ClearForm}>reset</button>
+                                </div>
+                            </form>
+                        </div></td>
+                        <td><div className="Edit-Task" ref={node => (this.editForm = node)}>
+                            <h4>Edit Task</h4>
+                            <div>
+                                <form id="taskContainer">
+                                    <div className="addItem">
+                                        <label htmlFor="Edit-Task">Task:</label>
+                                        <input type="text" name="Task" id="Edit-Task" placeholder="Task" ref={node => (this.editTask = node)} required="required"></input>
+                                    </div>
+                                    <div className="addItem">
+                                        <label htmlFor="Edit-CreationDate">Creation Date:</label>
+                                        <input type="date" name="CreationDate" id="Edit-CreationDate" label="Creation Date"
+                                               required="required" ref={node => (this.editCreation = node)}></input>
+                                    </div>
+                                    <div className="addItem">
+                                        <label htmlFor="Edit-Deadline">Deadline:</label>
+                                        <input type="date" name="Deadline" id="Edit-Deadline" required="required" ref={node => (this.editDeadline = node)}></input>
+                                    </div>
+                                    <div className="addItem">
+                                        <button className="edit-button" onClick={this.handleEdit}>Update</button>
+                                    </div>
+                                </form>
+                                <button onClick={(e) =>{this.closeEditForm()}} className="close-edit-button">Close Edit Window</button>
+                            </div>
+                        </div></td>
+                    </tr>
+                </table>
                 <div id="task-table">
                     <h1>Tasks</h1>
                     <table>
@@ -127,7 +192,7 @@ class App extends React.Component {
                             <th></th>
                             <th></th>
                         </tr>
-                        { this.state.todos.map( (todo,i) => <Todo key={i} id={todo._id} task={todo.task} creation={todo.creationDate} deadline={todo.deadline} /> ) }
+                        { this.state.todos.map( (todo,i) => <Todo key={i} app={this} id={todo._id} task={todo.task} creation={todo.creationDate} deadline={todo.deadline} /> ) }
                         </tbody>
                     </table>
                 </div>

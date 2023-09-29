@@ -32,7 +32,7 @@ app.post( '/add', express.json(), async ( req,res ) => {
 })
 
 app.post( '/update',express.json(), async  function( req,res ) {
-    let id=JSON.parse(req.body._id);
+    let id=req.body._id;
     await taskCollection.updateOne({_id:new ObjectID(id)},{ $set: { task: req.body.task,creationDate:req.body.creationDate,deadline:req.body.deadline } });
     res.redirect( 'index.html' )
 })
