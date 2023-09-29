@@ -6,7 +6,7 @@ const http = require( 'http' ),
       // file.
       mime = require( 'mime' ),
       dir  = 'public/',
-      port = 3000
+      port = 5173
 
 const appdata = [
   {'yourname': 'Justin', 'username': 'Sombero', 'email': 'jwonoski2@wpi.edu', 'position': 'DPS'},
@@ -95,8 +95,6 @@ const handlePost = function( request, response ) {
   }
 
 }
-
-
 
 const sendFile = function( response, filename ) {
    const type = mime.getType( filename ) 
