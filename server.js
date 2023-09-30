@@ -24,7 +24,7 @@ app.use( (req, res, next) => {
 });
 
 app.get('/getTasks/', async (req, res) => {
-    const tasks = await task_collection.find({ user: "" }).toArray();
+    const tasks = await task_collection.find({}).toArray();
   
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(tasks));
