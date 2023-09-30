@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import TaskEntry from './TaskEntry';
-import TaskDisplay from './TaskDisplay';
+import TaskEntry from './TaskEntry.jsx';
+import TaskDisplay from './TaskDisplay.jsx';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -27,7 +27,7 @@ function App() {
       body: JSON.stringify(json)
     });
 
-    loadTasks();
+    await loadTasks();
   }
 
   const deleteTask = async function(id) {
@@ -38,13 +38,13 @@ function App() {
       body: JSON.stringify(json)
     });
 
-    loadTasks();
+    await loadTasks();
   }
 
   return (
     <>
       <TaskEntry addTask={addTask} />
-      <TaskDisplay tasks={tasks} removeTask={removeTask} />
+      <TaskDisplay tasks={tasks} deleteTask={deleteTask} />
     </>
   )
 }

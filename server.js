@@ -12,7 +12,7 @@ let task_collection = null;
 
 async function run() {
     await client.connect();
-    task_collection = await client.db("todo_db").collection("tasks");
+    task_collection = await client.db("react").collection("tasks");
 }
 
 app.use( (req, res, next) => {
