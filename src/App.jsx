@@ -1,15 +1,6 @@
 
 import React from "react";
-import { Component } from "react";
-import { useState, useEffect, useRef } from "react";
 import './App.css';
-
-// Main Idea
-// Create a new component called VehicleServiceLogList (takes an array of JSON as props)
-// returns all the rows
-
-// App will have a useState on serviceLogs
-// we will pass serviceLogs into component we create to display it onto our page
 
 const VehicleServiceLog = ({ serviceLog, removeEntry, handleModify }) => {
   return (
@@ -43,14 +34,12 @@ class App extends React.Component {
       appointment_date: "",
       serviceLogs: []
     };
-    // this.logState = { serviceLogs: [] };
     this.load();
     this.submit = this.submit.bind(this);
     this.removeEntry = this.removeEntry.bind(this);
     this.handleModify = this.handleModify.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.formRef = React.createRef();
-
   }
 
   load = async () => {
@@ -293,8 +282,8 @@ class App extends React.Component {
                     <strong className="add-instruction">To add an appointment: </strong>Fill out the form completely and click the
                     'Submit' button.
                   </li>
-                  <li className="second-item">
-                    <strong className="modify-instruction">To modify an appointment: </strong> Fill out the form with new info and
+                  <li class="second-item">
+                    <strong class="modify-instruction">To modify an appointment: </strong> Fill out the form with new info and
                     then click the
                     'Modify' button for the
                     vehicle appointment you want to update.
@@ -344,7 +333,9 @@ class App extends React.Component {
           {/* <!-- End of table-container tag --> */}
           <div className="empty-table-text">
             <p id="empty-text">
-              {/* <!-- Appointment list is EMPTY. Go ahead and add an appointment! --> */}
+              {this.state.serviceLogs.length === 0
+                ? "Appointment list is EMPTY. Go ahead and add an appointment!"
+                : ""}
             </p>
           </div>
         </div>
