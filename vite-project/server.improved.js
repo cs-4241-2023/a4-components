@@ -1,12 +1,8 @@
-const http = require( 'http' ),
-      fs   = require( 'fs' ),
-      // IMPORTANT: you must run `npm install` in the directory for this assignment
-      // to install the mime library if you're testing this on your local machine.
-      // However, Glitch will install it automatically by looking in your package.json
-      // file.
-      mime = require( 'mime' ),
-      dir  = 'public/',
-      port = 5173
+import http from 'http';
+import fs from 'fs';
+import mime from 'mime';
+
+let port = 3000
 
 const appdata = [
   {'yourname': 'Justin', 'username': 'Sombero', 'email': 'jwonoski2@wpi.edu', 'position': 'DPS'},
@@ -14,31 +10,37 @@ const appdata = [
   {'yourname': 'Tim', 'username': 'Robo', 'email': 'tRobo@wpi.edu', 'position': 'Tank'} 
 ]
 
+const headers = {
+  'Access-Control-Allow-Origin': '*',  
+  'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, DELETE, SUBMIT, EDIT',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
 const server = http.createServer( function( request,response ) {
+  if (request.method === 'OPTIONS') {
+    response.writeHead(204, headers);
+    response.end();
+    return;
+  }
   if( request.method === 'GET' ) {
     handleGet( request, response )    
   }else if( request.method === 'POST' ){
     handlePost( request, response ) 
-  }
-  else if( request.method === 'DELETE' ){
-    handleDelete( request, response ) 
-  }
+  } else if( request.method === 'DELETE' ){
+  handlePost( request, response )
+} else if (request.method === 'EDIT'){
+  handlePost( request, response )
+}
 })
 
 const handleGet = function( request, response ) {
-  const filename = dir + request.url.slice( 1 ) 
-
-  if( request.url === '/' ) {
-    sendFile( response, 'public/index.html' )
-  }  else if( request.url === '/get' ) {
-    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+  if( request.url === '/get' ) {
+    console.log('fetch data')
+    response.writeHead( 200, "OK", {...headers, 'Content-Type': 'text/plain' })
     response.end(JSON.stringify(appdata))
   }
-  else{
-    sendFile( response, filename )
-  }
-
 }
+
 
 const handlePost = function( request, response ) {
   let dataString = ''
@@ -48,7 +50,7 @@ const handlePost = function( request, response ) {
       dataString += data
       
       console.log(JSON.parse( dataString ))
-      //This deserves to be pee. Don't debate with me.
+      //This deserves to be pee. Don't debate with me‹.
       const pee = JSON.parse( dataString )  
       const num = Number(pee.index)
       console.log(num)
@@ -56,7 +58,7 @@ const handlePost = function( request, response ) {
     })
 
     request.on( 'end', function() {
-      response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+      response.writeHead( 200, "OK", {...headers, 'Content-Type': 'text/plain' })
       response.end('test')
     })
   }  
@@ -74,7 +76,7 @@ const handlePost = function( request, response ) {
     })
 
     request.on( 'end', function() {
-      response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+      response.writeHead( 200, "OK", {...headers, 'Content-Type': 'text/plain' })
       response.end('test')
     })
   }
@@ -89,7 +91,7 @@ const handlePost = function( request, response ) {
 
     // ... do something with the data here!!!
     appdata.push( JSON.parse( dataString ) )
-    response.writeHead( 200, "OK", {'Content-Type': 'text/plain' })
+    response.writeHead( 200, "OK", {...headers, 'Content-Type': 'text/plain' })
     response.end('test')
   })
   }
