@@ -1,4 +1,4 @@
-//import { useState } from "react";
+import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 
@@ -26,7 +26,7 @@ const App = () => {
   function toggle( todo, completed ) {
     fetch( '/change', {
       method:'POST',
-      body: JSON.stringify({ todo, completed, date }),
+      body: JSON.stringify({ todo, completed }),
       headers: { 'Content-Type': 'application/json' }
     })
     .then( response => response.json() )
