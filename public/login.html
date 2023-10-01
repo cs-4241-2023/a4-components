@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css" as="style">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
+    <meta charset="UTF-8">
+    <meta name="description" content="A login page with github authentication.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        main {
+            display: grid;
+            text-align: center;
+            place-items: center;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        header {
+            display: grid;
+            text-align: center;
+            place-items: center;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .github-login-btn {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            outline: 3px solid black;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+            margin: 10px auto;
+        }
+
+        .github-login-btn:hover {
+            background-color: #555;
+        }
+
+        .login-button {
+            display: block;
+            padding: 10px 20px;
+            margin: 20px auto 10px;
+        }
+
+        .form-container {
+            display: grid;
+            text-align: center;
+            place-items: center;
+            padding: 5px;
+    }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Homework Helper</h1>
+    </header>
+    <main style="box-shadow: 10px 10px 10px 10px black;">
+        <header>
+            <h2>Welcome Back!</h2>
+            <p>Please login to continue.</p>
+        </header>
+        <section>
+            <div>
+                <div>
+                    <a href="/auth/github" class="github-login-btn">
+                        Login with GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

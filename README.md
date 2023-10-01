@@ -1,33 +1,16 @@
-Assignment 4 - Components
-===
+## Assignment 3 : Homework Helper
 
-Due: October 4th, by 11:59 AM.
+Colin Mettler : a3colinm1215-m9bh3.ondigitalocean.app
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+The goal of this application is to create a small website that users can use to help organize and plan out their homework. They input the task, the amount of hours they estimate the task has remaining, and the date the task is due. The website then logs the task for that user, automatically counting the amount of days left to the due date, as well as the priority of the task as a function of the estimated time cost and the remaining time to do it in. Among the challenges I had for this application was getting it to work on Digital Ocean with the mongodb database, as well as making sure only the tasks entered by a certain user could be seen by that user. I used github OAuth through the passport.js module for login. The Water.css framework was used. The five express middleware packages I used are 
 
-[Svelte Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.react.md)  
+1. body-parser: Parses incoming request bodies, making it easier to extract parameters.
+2. express-session: Manages user sessions to keep track of user data across requests.
+3. passport: Provides authentication middleware for Express, supporting various strategies.
+4. mongoose: Facilitates MongoDB object modeling for Node.js, simplifying database operations.
+5. Custom Middleware: I made a custom function that detects if the user has been authenticated using the passport.js github OAuth, and if not redirects them to the login page.
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+## Technical Achievements
+- **Tech Achievement 1**: I used OAuth authentication via passport.js's github OAuth system
+- **Tech Achievement 2**: I obtained 100% in all four lighthouse tests required for this assignment. 
+- **Tech Achievement 3**: I hosted the website on DigitalOcean
