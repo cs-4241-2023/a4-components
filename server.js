@@ -1,15 +1,13 @@
 import express from 'express'
 import ViteExpress from 'vite-express'
 import { MongoClient } from "mongodb"
-import dotenv from 'dotenv'
-dotenv.config()
 
-console.log(process.env.MONGODB_URI)
+
 const app = express()
 const port = process.env.PORT || 3000;
 
 app.use(express.json())
-const uri = process.env.MONGODB_URI, client = new MongoClient(uri)
+const uri = "mongodb+srv://amandablanchard48:3gsaN7PcBbr572HG@cluster0.sceddsm.mongodb.net/", client = new MongoClient(uri)
 console.log(uri)
 let collection = null
 
