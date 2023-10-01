@@ -1,33 +1,9 @@
-Assignment 4 - Components
-===
+## Todo Application
 
-Due: October 4th, by 11:59 AM.
+http://a4-nathanwong.glitch.me
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+### Changes
+I used the React framework to modify my A2 assignment. The web application allows users to add task names, due dates, and priorites for tasks, and the user has the option to complete/delete tasks. However, I combined some requirements from A3 into this project. For A4, my web application has persistent data as required for A3 but has no login or modify functionality. After using React components, I was able to modularize my task entry and task display into two distinct components (look at TaskEntry.jsx for the task entry component and TaskDisplay.jsx for the task display component).
 
-[Svelte Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+### Thoughts
+I believe that React framework really helped with accelerating development of my web application. Breaking up the front-end of the application into multiple components helped me understand and organize my code a lot better: I no longer needed to navigate and edit a single front-end file to build my website. Furthermore, I believe that including HTML with JS can reduce the complexity needed to make dynamic elements on a webpage. With the HTML in the JSX file, I could easily map my data to elements without needed to switch between two files. Overall, React helps break down web applications into their core functionalities which I can reuse and more easily edit.
