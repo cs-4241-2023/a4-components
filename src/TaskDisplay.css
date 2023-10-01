@@ -1,0 +1,63 @@
+section {
+    display: grid;
+    place-items: center;
+    flex: 1;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #cbeeec;
+    border: 1px solid lightgray;
+}
+  
+ul {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+  
+ul li:nth-child(odd) {
+    background: #DEF2F1;
+}
+  
+ul li:nth-child(even) {
+    background: #FEFFFF;
+}
+  
+#listBox {
+    background-color: white;
+    width: 50%;
+    height: 400px;
+    overflow: auto;
+}
+  
+#headerItem {
+    font-weight: bolder;
+    color: black;
+}
+  
+li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+  
+.list-label {
+    width: 24%;
+    text-align: center;
+}
+  
+li button {
+    width: 4%;
+    background: transparent;
+    border: none;
+    border-radius: 0 0 0 0;
+    outline: none;
+    text-align: center;
+}
+
+.deleter:hover {
+    background-color: #FF6961;
+}
+  
+#headerItem {
+    background-color: #3AAFA9;
+}
