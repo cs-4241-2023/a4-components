@@ -1,6 +1,6 @@
 ## David's Subway Leaderboard
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+Link: http://66.189.31.92:3001/
 
 I didn't make any signifigant changes to the site, I just implemented my A2 using React.
 

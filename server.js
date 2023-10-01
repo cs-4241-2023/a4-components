@@ -2,7 +2,7 @@ import express from  'express'
 import ViteExpress from 'vite-express'
 
 const app = express(),
-      port = 3000
+      port = 3001
 
 const startDate = new Date()
 //console.log(startDate)
