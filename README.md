@@ -1,33 +1,7 @@
 Assignment 4 - Components
-===
 
-Due: October 4th, by 11:59 AM.
+## Book Log
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+https://a4-amanda-blanchard-2g5zo.ondigitalocean.app/
 
-[Svelte Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+I choice to reimplement A2 with the addition of the MongoDB using Svelte for this assignment. I had prior experience in Software Engineering with React so I wanted to experiment with a new framework. Using Svelte allowed for less lines of code to accomplish the same tasks and easier rendering of updates to the data. The development process was much easier with Svelte and I found converting everything to Svelte pretty straightforward. Learning how to use Svelte was much simplier for me than first learning React. The small size of this application made Svelte a great choice, but I am interested to see how Svelte would work in a larger scale application.

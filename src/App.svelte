@@ -9,7 +9,6 @@
       console.log(json)
       return json 
     })
-
     return p
   }
   let title = '', author = '', started = '', finished = '', rating = '';
@@ -66,7 +65,6 @@ const daysTaken = (startDate, endDate) => {
     })
     .then( response => response.json() )
   }
-
   let promise = getBooks()
 </script>
 
@@ -75,13 +73,10 @@ const daysTaken = (startDate, endDate) => {
       <form>
         <label for="title"> Title:</label>
         <input type="text" bind:value={title}  class ='title' id="title" />
-
         <label for="author"> Author:</label>
         <input type="text"  bind:value={author} class ='author' id="author" />
-
         <label for="started"> Date Started:</label>
         <input type="date"  bind:value={started} class ='started' max="" id="started">
-
         <label for="finished"> Date Finished:</label>
         <input type="date" bind:value={finished} class ='finished' max="" id="finished" >
 <script>
@@ -89,8 +84,6 @@ const daysTaken = (startDate, endDate) => {
           document.getElementById("started").setAttribute("max", today);
           document.getElementById("finished").setAttribute("max", today);
         </script>
-
-        
         <label for="rating"> Rating out of 10:</label>
           <input class='rating' bind:value={rating}
            min="0" max="10" type="number"
@@ -115,5 +108,3 @@ const daysTaken = (startDate, endDate) => {
 
 {/await}
 </table>
-    
-

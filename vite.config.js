@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [svelte()],
   server: {
     proxy: {
-      '/api': 'http://localhost:3000', // Assuming your Express server runs on port 3000
+      '/api': 'https://a4-amanda-blanchard-2g5zo.ondigitalocean.app/', // Assuming your Express server runs on port 3000
     },
   },
 })
