@@ -1,0 +1,93 @@
+h1 {
+  margin-bottom: 7.5%;
+}
+
+h2 {
+  margin-top: 7.5%;
+  margin-left: 1%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+button {
+  margin: 1%;
+  background-color: #a3b18a;
+  border: none;
+}
+
+.submit-button {
+  background-color: #9D585C;
+}
+.submit-button:hover {
+  background-color: #3B7080;
+}
+
+.filters button {
+  background-color: #BB8588;
+}
+.filters button:hover {
+  background-color: #3B7080;
+}
+
+.btn-group button:hover {
+  background-color: #3B7080;
+}
+
+
+ul {
+  list-style-type: none;
+  margin-left: -3%;
+}
+
+.req:after {
+  content: " *";
+  color: red;
+}
+
+.filters {
+  margin-bottom: 5%;
+}
+
+.new-plant-form {
+  margin-bottom: 5%;
+  margin-left: 1%;
+}
+
+.plant-label {
+  font-size: 24px;
+}
+
+.stack-small {
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  margin-bottom: 5%;
+  background: #344e41;
+  border-radius: 25px;
+}
+
+.stack-small label {
+  color: white;
+  margin-left: 1%;
+}
+
+.plant-info {
+    display: flex;
+}
+
+.plant-watered {
+  display: flex;
+  margin-left: auto
+}
+
+footer {
+  display: grid;
+  place-items: center;
+  margin-top: auto;
+  margin-bottom: 5%;
+}

@@ -1,33 +1,12 @@
-Assignment 4 - Components
-===
+## Plant Watering Tracker
 
-Due: October 4th, by 11:59 AM.
+Juliana Porto
+[https://a4-juliana-porto.glitch.me/](https://a4-juliana-porto.glitch.me/)
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+_This iteration of Plant Watering Tracker is a twist on my a2 version. Instead of calculating the next watering date, it uses filter buttons for the user to display certain plants based on whether or not they have been watered recently._
 
-[Svelte Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.react.md)  
+Meet the <b>Plant Watering Tracker</b>! Input your plant's name and select whether or not it has been watered recently, and the Plant Watering Tracker will save that data and allow you to view what plants have already been watered and which plants still need watering.
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+Currently, there are 3 starter plants in the dataset. Feel free to add your own plants, edit or delete new or old plants, and check off plants as you water them.
 
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+To accomplish this iteration of Plant Watering Tracker, I used React. I found that the learning curve of using React made the implementation of this project more difficult than my first version, hindering the overall development experience. I watched and went through multiple React tutorials (examples: [React Tutorial: Tic-Tac-Toe](https://react.dev/learn/tutorial-tic-tac-toe) and [Getting started with React](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_getting_started)) and tried to use various aspects that I learned. Though I did not like trying to use React for this specific project, I do like the concept of React and can see how it would be helpful with future projects. Deploying the React project on Glitch specifically was a challenge as you have to first remix the React project and make sure to follow their specific formatting for the project to work. I also added the sakura CSS class-less framework for the bulk of styling, as I did for a3, but added my own twist by creating and implementing my own color palette.
