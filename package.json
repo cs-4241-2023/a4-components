@@ -28,5 +28,9 @@
     "socket.io": "^4.7.2",
     "svelte-table": "^0.6.1",
     "vite-express": "^0.10.0"
+  },
+  
+  "engines": {
+    "node": "16.x"
   }
 }
