@@ -1,11 +1,10 @@
+import express from  'express'
+import ViteExpress from 'vite-express'
+import {MongoClient, ServerApiVersion, ObjectId } from 'mongodb'
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+//const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
-const express = require("express");
-
-const app = express();
-
-const port = 3000
+const app = express()
 
 const uri = "mongodb+srv://ngheineman:assignment3@fictiontracker.wlfu0nv.mongodb.net/?retryWrites=true&w=majority";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -16,6 +15,7 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
+
 
 async function run() {
   try {
@@ -31,12 +31,6 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-
-
-
-// https://a3-nicholas-heineman.glitch.me/
-
 
 let accountName = ''
 
@@ -415,13 +409,6 @@ app.post('/modifyCharacterData', (request, response) =>{
 
 })
 
-
-
-
-
-
-//passed a json object with date and era, assigns era based on given timeline info, returns new json object
-
 async function RecheckCharacters() {
 
   const cursor = client.db('world_data').collection('characterData').find({user : accountName});
@@ -471,7 +458,4 @@ function AssignEra(timelineData, value) {
   return value.era;
 }
 
-
-
-
-app.listen(process.env.PORT || port, () => console.log("server running"));
+ViteExpress.listen( app, 3000 )
