@@ -29,8 +29,8 @@
     "svelte-table": "^0.6.1",
     "vite-express": "^0.10.0"
   },
-  
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "~1.0.20"
   }
 }
