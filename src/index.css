@@ -1,0 +1,49 @@
+body {
+  background:black;
+  color:white;
+}
+
+th, td {
+  border: 2px solid white;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.grid_container {
+  display: grid;
+  gap: 10px 10px;
+  grid-template-columns: 50% auto;
+}
+
+.title {
+  grid-column: 1 / span 2;
+  background-color: purple;
+  padding: 10px;
+}
+
+.manual_score_text {
+  grid-column: 1;
+}
+
+.manual_score_form {
+  grid-column: 1;
+}
+
+.score_table {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+}
+
+.thick {
+  font-weight: bold;
+}
+
+p, h1 {
+  font-family: Roboto Condensed, Trebuchet MS, Arial
+}
+
+button {
+  margin: 3px 3px 3px 3px
+}
