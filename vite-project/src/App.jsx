@@ -16,6 +16,7 @@ const [players, setPlayers] = useState([]);
 // FRONT-END (CLIENT) JAVASCRIPT HERE all converted from main.js
 
 const submitPlayerData = async function (event) {
+  console.log('Submitting player data to server...');
   event.preventDefault();
 
   const json = { yourname: yourname, username: username, email: email, position: position };
@@ -34,7 +35,7 @@ const submitPlayerData = async function (event) {
     console.log('Input validated.');
   }
 
-  const response = await fetch('http://localhost:3000/submit', {
+  const response = await fetch('/submit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: body,
@@ -60,7 +61,7 @@ const submitPlayerData = async function (event) {
 
 // Function to update the table with data from the server
 const updateTable = async function () {
-  const response = await fetch('http://localhost:3000/get', {
+  const response = await fetch('/get', {
     method: 'GET'
   });
   if (response.ok) {
@@ -76,7 +77,7 @@ const updateTable = async function () {
 // Function to delete a player from the table
 const deletePlayer = async function (index) {
   console.log('Deleting player with index:', index);
-  const response = await fetch('http://localhost:3000/delete', {
+  const response = await fetch('/delete', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ index: index }),
@@ -88,13 +89,14 @@ const deletePlayer = async function (index) {
 const editPlayer = async function (index) {
   console.log('Editing player with index:', index);
   const json = { yourname: yourname, username: username, email: email, position: position };
-  const response = await fetch('http://localhost:3000/edit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ index: index, playerdata: json }),
+  const response = await fetch('/edit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ index: index, playerdata: json }),
   });
   updateTable();
 };
+
 
 useEffect(() => {
   // Load initial data when the component mounts
