@@ -10,32 +10,9 @@ const appdata = [
   {'yourname': 'Tim', 'username': 'Robo', 'email': 'tRobo@wpi.edu', 'position': 'Tank'} 
 ]
 
-// const headers = {
-//   'Access-Control-Allow-Origin': '*',  
-//   'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, DELETE, SUBMIT, EDIT',
-//   'Access-Control-Allow-Headers': 'Content-Type',
-// };
-
-// const server = http.createServer( function( request,response ) {
-//   if (request.method === 'OPTIONS') {
-//     response.writeHead(204, headers);
-//     response.end();
-//     return;
-//   }
-//   if( request.method === 'GET' ) {
-//     handleGet( request, response )    
-//   }else if( request.method === 'POST' ){
-//     handlePost( request, response ) 
-//   } else if( request.method === 'DELETE' ){
-//   handlePost( request, response )
-// } else if (request.method === 'EDIT'){
-//   handlePost( request, response )
-// }
-// })
-
-
 
 app.get( '/get', ( req, res ) => {
+  console.log( 'get request received' )
   res.status( 200 ).json(appdata)
 })
 
