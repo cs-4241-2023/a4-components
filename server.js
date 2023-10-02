@@ -3,8 +3,6 @@ import ViteExpress from "vite-express"
 import env from "dotenv"
 import {MongoClient, ObjectId} from "mongodb"
 
-
-
 const app = express();
 const port = 3000;
 env.config();
@@ -116,4 +114,4 @@ const calculatePriority = function (dueDate, difficulty) {
     }
 }
 
-ViteExpress.listen(app, port);
+ViteExpress.listen(app, port); // listen on port 3000

@@ -118,7 +118,7 @@ function App() {
 
     function parseServerResult(response) {
         let status = response.result + " " +  response.message;
-        let color = "";
+        let color;
 
         if(response.result === "Success") {
             color = "green"
