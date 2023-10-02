@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CS4241 Assignment 3</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- load MUI -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courier+Prime">
+    <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+    <script src="js/edit.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- get rid of favicon error -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <header>
+      <h1>Edit User</h1>
+    </header>
+
+    <div class="mui-container">
+      <p>
+        <label id="editUserLabel"></label>
+        <button class="logoutButton"id="backButton">back</button>
+      </p>  
+      <div class="mui-container">
+        <button class="mui-btn mui-btn--raised"id="deleteButton">Delete User</button>
+      </div>
+      <form class='mui-form'method="post">
+      <p>
+        <div class="mui-textfield">
+          <input type="text" id="passfield" placeholder='password'name="pass" />
+        </div>
+      </p>
+      <p>
+        <label for="type">Type:</label>
+        <select type="text" id="typefield" name="type">
+          <option value="Undergrad Student">Undergrad Student</option>
+          <option value="Graduate Student">Graduate Student</option>
+          <option value="Professor"> Professor</oplition>
+          <option value="Systems Admin">Systems Admin</option>
+        </select>         
+      </p>
+
+      <p>
+        <label for="department">Department:</label>
+        <select type="text" id="deptfield" name="dept">
+          <option value="All">Any/All</option>
+          <option value="CS">Computer Science</option>
+          <option value="IMGD">Interactive Media and Game Design</option>
+          <option value="CHE">Chemical Engineering</option>
+          <option value="ECE">Electrical and Computer Engineering</option>
+          <option value="RBE">Robotics Engineering</option>
+          <option value="CE">Civil Engineering</option>
+          <option value="ME">Mechanical Engineering</option>
+          <option value="CH">Chemistry</option>
+          <option value="PH">Physics</option>
+          <option value="MA">Math</option>
+          <option value="AR">Art</option>
+          <option value="HI">History</option>
+          <option value="HUA">Humanities and Arts</option>
+          <option value="MU">Music</option>
+        </select>          
+      </p>
+        <button class="mui-btn mui-btn--raised"id="submitButton">Confirm Edits</button>
+        </div>
+    </div>
+  </body>
+</html>

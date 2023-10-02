@@ -1,0 +1,112 @@
+body{
+  background:#fffefa;
+  color: #000000;
+}
+
+.mui-container {
+  background:#fffefa;
+  color: #22668D;
+}
+.mui-panel {
+  background:#fffefa;
+  background-color: #22668D;
+}
+.mui-textfield .mui-textfield--float-label{
+  color:#000000
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+.flex-text {
+  display: flex;
+  font-family: "Trirong", serif;
+  justify-content: center;
+}
+
+table, th, td {
+  background-color: #fddea6;
+}
+
+th {
+  height: 70px;
+}
+
+td {
+  text-align: center;
+}
+
+span {
+  width: 50px;
+  height: 50px;
+}
+
+.tablebutton {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.center-flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+header{
+  display: flex;
+  justify-content: center;
+  font-family: "Trirong", serif;
+}
+
+p {
+  font-family: "Trirong", serif;
+}
+
+.tableHeader {
+  color:#FFFADD;
+}
+select, input {
+  color: #FFFADD;
+  background-color: #6bafc0;
+  font-family: "Courier Prime", normal;
+  width: 100%;
+  font-size: 15px;
+}
+
+form {
+  width: 380px;
+}
+
+.button .mui-btn .mui-btn--raised{
+  color: #FFFADD;
+  background-color: #133447;
+  font-family: "Courier Prime", normal;
+  font-size: 25px;
+  width: 100%;
+  font-style: oblique;
+}
+
+
+.logoutButton {
+  color: #FFFADD;
+  background-color: #133447;
+  font-family: "Courier Prime", normal;
+  font-size: 15px;
+  width: 25%;
+  margin-left: 50px;
+  font-style: oblique;
+}
+
+
+.editButton {
+  color: #FFFADD;
+  background-color: #295771;
+  font-family: "Courier Prime", normal;
+  font-size: 15px;
+  font-style: oblique;
+}
