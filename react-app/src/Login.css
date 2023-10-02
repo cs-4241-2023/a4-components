@@ -1,0 +1,49 @@
+/* Login.css */
+main {
+    display: grid;
+    text-align: center;
+    place-items: center;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+header {
+    display: grid;
+    text-align: center;
+    place-items: center;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.github-login-btn {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    outline: 3px solid black;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+    margin: 10px auto;
+}
+
+.github-login-btn:hover {
+    background-color: #555;
+}
+
+.login-button {
+    display: block;
+    padding: 10px 20px;
+    margin: 20px auto 10px;
+}
+
+.form-container {
+    display: grid;
+    text-align: center;
+    place-items: center;
+    padding: 5px;
+}
