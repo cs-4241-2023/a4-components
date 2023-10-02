@@ -1,57 +1,73 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>CS4241 Assignment 3</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- load MUI -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courier+Prime">
-    <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
-    <script src="js/main.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/main.css">
-  </head>
-  <body>
-    <header>
+import React from 'react'
+import { useState } from 'react'
+import UserRow from './UserRow'
+
+class App extends React.Component {
+    constructor( props ) {
+      super( props )
+      this.state = { users:[] }
+      this.getUsers()
+  }
+
+    getUsers() {
+        fetch('/getUsers')
+            .then( response => response.json() )
+            .then( json => {
+                this.setState({ users:json})
+            })
+    }
+
+    submit = async ( event ) => {
+
+      event.preventDefault()
+      
+      const json = { 'name': this.firstname.value, 'lastname': this.lastname.value, 'type': this.type.value, 'dept': this.dept.value, 'pass': "Default Password"} //whatever: "whatever" },
+      console.log(json);
+      const body = JSON.stringify( json )
+      
+      const form = document.querySelector('form')
+
+      fetch( '/newUser', {
+        method:'POST',
+        body
+      }).then(form.reset())
+      .then(window.location.reload());
+      
+    }
+
+    render(){
+      //return <div><UserRow></UserRow><UserRow></UserRow></div>
+      return <div>    
+        <header>
       <h1>User Database</h1>
     </header>
     <div class="mui-container">
       <div>
-        <p>
-          <label id="loggedinuser"></label>
-          <button class="logoutButton", id="logoutButton">Log out</button>
-        </p>
-        <span>
           <form class="mui-form" method="post">
               <p>
                 Create New User:
               </p>
               <div class="mui-textfield mui-textfield--float-label">
-                <input type="text" id="name" name="user_name" />
+              <input type="text" id="name" name="user_name"required="required"ref={node => (this.firstname = node)}/>
                 <label for="name">First Name:</label>
               </div>
               <div class="mui-textfield mui-textfield--float-label">
-                <input type="text" id="email" name="user_email" />
+              <input type="text" id="lastname" name="user_lastname"required="required"ref={node => (this.lastname = node)}/>
                 <label for="email">Last Name:</label>
               </div>
-              <div class="mui-textfield mui-textfield--float-label">
-                <input type="password" id="password" name="user_pass" />
+              {/* <div class="mui-textfield mui-textfield--float-label">
+                <input type="password" id="password" name="user_pass"required="required"ref={node => (this.pass = node)}/>
                 <label for="pass">Password:</label>
-              </div>
-              <span> 
+              </div> */}
                 <label for="type">Type:</label>
-                <select name="text" id="type">
+                <select name="text" id="type"ref={node => (this.type = node)}>
                   <option value="Undergrad Student">Undergrad Student</option>
                   <option value="Graduate Student">Graduate Student</option>
                   <option value="Professor"> Professor</option>
                   <option value="Systems Admin">Systems Admin</option>
                 </select>     
-              </span>
-              <span class="mui--divider-left">&nbsp;
                 <label for="department">Department:</label>
-                <select class="mui-dropdown" name="text" id="department">
+                <select name="text" id="dept"ref={node => (this.dept = node)}>
                   <option value="All">Any/All</option>
                   <option value="CS">Computer Science</option>
                   <option value="IMGD">Interactive Media and Game Design</option>
@@ -67,14 +83,9 @@
                   <option value="HI">History</option>
                   <option value="HUA">Humanities and Arts</option>
                   <option value="MU">Music</option>
-                </select>          
-              </span>
-              </p>
-              <p>
-              </p>
-                <button class="mui-btn mui-btn--raised"id="submitButton">Create new user</button>
+                </select>         
+                <button class="mui-btn mui-btn--raised"id="submitButton"onClick={this.submit}>Create new user</button>
           </form>
-        </span>
           <div class="mui-panel">
             <div class="mui-container">
             <p>----------------------------------------------------------- REGISTERED USERS ----------------------------------------------------------- </p>
@@ -85,16 +96,16 @@
                     <th>Email</th>
                     <th>User Type</th>
                     <th>Dept.</th>
-                    <th>Edit</th>
                   </tr>
+                  { this.state.users.map((user,i) => <UserRow key={i} app={this} user={user} id={user._id} name={user.name} email={user.email} type={user.type} dept={user.dept} /> ) }
                 </thead>
                 <tbody id="usertablebody">
                 </tbody>
               </table>
               </div>
       </div>
-            <!-- <button class="tablebutton" id="clearTableButton">Clear all users</button> -->
-        </div>
-    </div>
-  </body>
-</html>
+        </div></div></div>
+    }
+}
+
+export default App;

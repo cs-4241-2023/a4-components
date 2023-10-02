@@ -1,10 +1,9 @@
-const http = require("http"),
-  express = require('express'),
+const express = require('express'),
   dotenv = require('dotenv');
   app = express(),
+  ViteExpress = require( 'vite-express' ),
   path = require('path'),
   dir = "public/",
-  port = 3000;
 
 dotenv.config();
 
@@ -28,16 +27,9 @@ app.get('/getUsers', (request, response) => {
     client.connect();
     var db = client.db('usersDB');
     var coll = db.collection('users');
-    if (loggedInUser.dept === 'All'){
       coll.find().toArray().then( result => {
         response.json( result )
       } )
-    }else{
-      coll.find({'dept': loggedInUser.dept}).toArray().then( result => {
-        response.json( result )
-      } )
-    }
-
 })
 
 app.get('/getLoggedInUser', (request, response) => {
@@ -147,12 +139,11 @@ app.delete('/clearUsers', (request, response) => {
   response.writeHead(200, "OK", { "Content-Type": "text/json" });
   response.end("deleted all users!");
 })
-const server = http.createServer(app)
 
 const handleGet = function (request, response) {
   const filename = dir + request.url.slice(1);
   if (request.url === "/") {
-    sendFile(response, "public/login.html");
+    sendFile(response, "/index.html");
   }else{
     sendFile(response, filename);
   }
@@ -170,8 +161,8 @@ const handlePost = function (request, response) {
 
   request.on("end", function () {
     const json = JSON.parse(dataString);
-    const email = `${json.name.charAt(0)}${json.email}@wpi.edu`.toLowerCase();
-    json["name"] += ` ${json.email}`;
+    const email = `${json.name.charAt(0)}${json.lastname}@wpi.edu`.toLowerCase();
+    json["name"] += ` ${json.lastname}`;
     json["email"] = email;
     var db = client.db('usersDB');
     var coll = db.collection('users');
@@ -213,6 +204,4 @@ const sendFile = function (response, filename) {
   });
 };
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+ViteExpress.listen( app, 3000 )
