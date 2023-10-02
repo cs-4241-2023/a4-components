@@ -1,4 +1,5 @@
 // FRONT-END (CLIENT) JAVASCRIPT HERE
+import React from 'react'
 
 var loggedInUser = null;
 const submit = async function( event ) {
