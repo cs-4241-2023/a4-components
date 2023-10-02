@@ -4,6 +4,8 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "mongodb": "^6.1.0",
+    "passport": "^0.6.0",
+    "passport-github2": "^0.1.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vite": "^4.4.9",

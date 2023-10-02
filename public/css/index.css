@@ -1,0 +1,75 @@
+
+@import url('https://fonts.googleapis.com/css?family=Trirong&display=swap');
+body {
+  background:gray;
+  color:black;
+  font-family: "Trirong", sans-serif;
+}
+
+.loginPage {
+  position: absolute;
+  border: 3px solid black;
+  padding: 10px;
+}
+
+#loginError {
+  color: red;
+}
+
+
+p{
+  max-width: 800px;
+}
+
+#lotr_map {
+  background-color: transparent;
+  width: 400px;
+  height: 300px;
+}
+
+table {
+  border: 1px solid black;
+  table-layout: fixed;
+  width: 200px;
+}
+
+.timelineContainer{
+  background: black;
+  position: absolute;
+  top: 70px;
+  right:100px;
+  max-width: 550px;
+  margin: 0 right;
+}
+
+.tab{
+  overflow:hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+
+.tabContent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  min-height: 700px;
+  border-top: none;
+}

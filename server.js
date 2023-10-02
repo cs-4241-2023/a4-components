@@ -32,14 +32,16 @@ async function run() {
 }
 run().catch(console.dir);
 
-let accountName = ''
+let accountName = 'ngheineman'
 
+import session from 'express-session'
+//const session = require('express-session');
 
-const session = require('express-session');
+import passport from 'passport'
+//const passport = require('passport');
 
-const passport = require('passport');
-
-const GitHubStrategy = require('passport-github2').Strategy;
+import GitHubStrategy from 'passport-github2' // might now be broken
+//const GitHubStrategy = require('passport-github2').Strategy;
 
 
 /*
@@ -124,12 +126,12 @@ app.get('/profile', (req, res) => {
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/login.html');
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/views/login.html');
+// });
 
 app.get('/index', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html');
+  res.sendFile('/index.html');
 });
 
 app.post('/assignActiveUser', async (req, res) => {
@@ -212,6 +214,7 @@ app.post('/signup', async (request, response) => {
 //get functions
 
  app.get('/timelineData', async (req, res) => {
+  
 
   const cursor = client.db('world_data').collection('timelineData').find({user : accountName}).sort({date: 1});
   const timelineData = await cursor.toArray()
@@ -234,7 +237,7 @@ app.get('/characterData', async (req, res) => {
 
 //add functions
 
-app.post('/timelineData', (request, response) => {
+app.post('/timelineData', async (request, response) => {
   let dataString = ''
 
   request.on('data', function (data) {
@@ -242,6 +245,8 @@ app.post('/timelineData', (request, response) => {
   })
 
   request.on('end', async function () {
+
+    console.log('hello');
 
     let value = JSON.parse(dataString);
     value.user = accountName;
@@ -326,10 +331,10 @@ app.delete('/characterData', (request, response) => {
     console.log(dataString);
 
     request.on('end', async function () {
-      let data = dataString;
+      let data = JSON.parse(dataString);
 
 
-      const x = await client.db('world_data').collection('characterData').deleteOne({user : accountName, name: data});
+      const x = await client.db('world_data').collection('characterData').deleteOne({user : accountName, name: data.name});
 
       const cursor = client.db('world_data').collection('characterData').find({user : accountName}).sort({start : 1});
       const characterData = await cursor.toArray();
