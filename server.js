@@ -62,8 +62,7 @@ passport.use(new GitHubStrategy({
 }
 ));
 
-
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(__dirname + "/build"));
 
 // Add your API routes here
 app.get('/api/getData', async (req, res) => { /* ... */ });
@@ -75,7 +74,7 @@ app.delete('/api/data', async (req, res) => { /* ... */ });
 // It tells Express to serve up the `index.html` if it doesn't recognize the route
 // This ensures React's BrowserRouter works correctly
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+  res.sendFile(__dirname + "/build/index.html");
 });
 
 
