@@ -54,6 +54,13 @@ function App() {
             body: JSON.stringify(assignment)
         })).json();
 
+        if(response.result !== "Failure") {
+            form.className.value = "";
+            form.assignmentName.value = "";
+            form.dueDate.value = "";
+            form.difficulty.value = "";
+        }
+
         setActionResult(parseServerResult(response));
         setDataChanged(true);
     }
@@ -132,7 +139,7 @@ function App() {
                     </p>
                 </header>
 
-                <form name={"assignment-form"} autoComplete={"off"} onSubmit={submitAssignment}>
+                <form name={"assignment-form"} autoComplete={"off"} onSubmit={(e) => submitAssignment(e)}>
                     <input name={"className"} placeholder={"Class Name"}/>
                     <input name={"assignmentName"} placeholder={"Assignment Name"}/>
                     <input type={"date"} name={"dueDate"} />
