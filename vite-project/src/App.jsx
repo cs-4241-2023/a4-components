@@ -16,6 +16,7 @@ const [players, setPlayers] = useState([]);
 // FRONT-END (CLIENT) JAVASCRIPT HERE all converted from main.js
 
 const submitPlayerData = async function (event) {
+  console.log('Submitting player data to server...');
   event.preventDefault();
 
   const json = { yourname: yourname, username: username, email: email, position: position };
@@ -89,12 +90,13 @@ const editPlayer = async function (index) {
   console.log('Editing player with index:', index);
   const json = { yourname: yourname, username: username, email: email, position: position };
   const response = await fetch('/edit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ index: index, playerdata: json }),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ index: index, playerdata: json }),
   });
   updateTable();
 };
+
 
 useEffect(() => {
   // Load initial data when the component mounts
