@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function TableRow({ item, modifyData, deleteData }) {
   const formatDate = (fullDate) => {
     return fullDate.split("T")[0];
   };
 
+  // Convert item values into local state
+  const [task, setTask] = useState(item.task);
+  const [hours, setHours] = useState(item.hours);
+  const [dueDate, setDueDate] = useState(formatDate(item.dueDate));
+  const [timeLeft, setTimeLeft] = useState(item.timeLeft);
+  const [priority, setPriority] = useState(item.priority);
+
   return (
     <tr>
-      <td><input value={item.task} /></td>
-      <td><input type="number" value={item.hours} /></td>
-      <td><input type="date" value={formatDate(item.dueDate)} /></td>
-      <td><input value={item.timeLeft} /></td>
-      <td><input value={item.priority} /></td>
+      <td><input value={task} onChange={(e) => setTask(e.target.value)} /></td>
+      <td><input type="number" value={hours} onChange={(e) => setHours(e.target.value)} /></td>
+      <td><input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} /></td>
+      <td><input value={timeLeft} onChange={(e) => setTimeLeft(e.target.value)} /></td>
+      <td><input value={priority} onChange={(e) => setPriority(e.target.value)} /></td>
       <td><button onClick={() => deleteData(item.task)}>Delete</button></td>
       <td>
         <button onClick={() => modifyData(
           item._id,
-          /* ... Other input references. Maybe use useRef or pass the values directly */
+          { 
+            task,
+            hours: parseFloat(hours),
+            dueDate: new Date(dueDate),
+            timeLeft,
+            priority 
+          }
         )}>Modify</button>
       </td>
     </tr>

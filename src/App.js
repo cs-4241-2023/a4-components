@@ -20,7 +20,7 @@ function App() {
 
   const populateTable = async () => {
     try {
-      const response = await fetch("/getData");
+      const response = await fetch("/api/getData");
       const fetchedData = await response.json();
       setData(fetchedData);
     } catch (error) {
@@ -30,7 +30,7 @@ function App() {
 
   const modifyData = async (id, updatedData) => {
     try {
-      const response = await fetch(`/modifyData/${id}`, {
+      const response = await fetch(`/api/modifyData/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +50,7 @@ function App() {
 
   const deleteData = async (taskToDelete) => {
     try {
-      const response = await fetch('/data', {
+      const response = await fetch('/api/data', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ function App() {
     const body = JSON.stringify(json);
 
     try {
-      const response = await fetch("/submit", {
+      const response = await fetch("/api/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ function App() {
   };
 
   const signOut = async () => {
-    fetch('/logout', {
+    fetch('/api/logout', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -123,7 +123,7 @@ function App() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <Header signOut={signOut} />
       <section style={{ width: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <form style={{ marginBottom: '100px' }} onSubmit={handleSubmit}>
@@ -163,21 +163,32 @@ function App() {
         </form>
 
       </section>
-      <section className="table-container" style={{ width: '80%', marginTop: '20px' }}>
-        <table id="data-table">
-          {/* ... table headers ... */}
-          <tbody>
+      <section className="table-container" style={{ width: '100%', marginTop: '20px' }}>
+    <table id="data-table">
+        <thead>
+            <tr>
+            <th>Task</th>
+            <th>Hours</th>
+            <th class="due-date-header">Due Date</th>
+            <th>Time Left</th>
+            <th>Priority</th>
+            <th class="no-header"></th>
+            <th class="no-header"></th>
+            </tr>
+        </thead>
+        <tbody>
             {data.map((item) => (
-              <TableRow
-                key={item._id}
-                item={item}
-                modifyData={modifyData}
-                deleteData={deleteData}
-              />
+                <TableRow
+                    key={item._id}
+                    item={item}
+                    modifyData={modifyData}
+                    deleteData={deleteData}
+                />
             ))}
-          </tbody>
-        </table>
-      </section>
+        </tbody>
+    </table>
+</section>
+
     </div>
   );
 }
