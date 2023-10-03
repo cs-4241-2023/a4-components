@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#todoList {
+  list-style: none;
+  width: 80%;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.todo {
+  flex: 3;
+  text-align: center;
+  margin: 1px;
+}
+
+.date,
+.delete,
+.check,
+.urgency {
+  padding: 5px;
+  flex: 1;
+  text-align: center;
+  margin: 1px;
+}
+
+label[for="inputUsername"], label[for="inputPassword"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+img{
+  width: 150px;
+}
