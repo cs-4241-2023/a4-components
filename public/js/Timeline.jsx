@@ -161,9 +161,14 @@ const App = () => {
         <label className="timelineSubmission" htmlFor="description">Description:</label>
         <input type="text" id="description" /> <br />
         
-        <label id="timelineErrorMessage">Please enter a numerical year</label>
+        
       </form>
-      <button onClick={e => addTimelineItem()}>add</button>
+
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <button onClick={e => addTimelineItem()}>add</button>
+        <label id="timelineErrorMessage">Please enter a numerical year</label>
+      </div>
+      
     <div className="timeline">
       
      

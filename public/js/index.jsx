@@ -7,6 +7,8 @@ import '../css/timeline.css'
 import '../css/characterSheet.css'
 
 ReactDOM.createRoot( document.getElementById( 'root' ) ).render(
+
+  
   <React.StrictMode>
     
   <div className="tab">
