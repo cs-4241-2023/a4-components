@@ -1,69 +1,42 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+div[data-theme='light'] {
+  --text: #2d1101;
+  --background: #fef0e7;
+  --primary: #fdbf9b;
+  --secondary: #fdc9aa;
+  --accent: #d75204;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+div[data-theme='dark'] {
+  --text: #fee2d2;
+  --background: #180a01;
+  --primary: #642602;
+  --secondary: #552002;
+  --accent: #fb7528;
 }
 
+html,
 body {
+  height: 100%;
+}
+
+* {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.app-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--background);
+  color: var(--text);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.theme-toggle {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Optional: Customize the icon size */
+.theme-toggle .MuiSvgIcon-root {
+  font-size: 2rem !important;
 }
