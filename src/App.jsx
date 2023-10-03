@@ -1,35 +1,104 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
+import BlogPostForm from './BlogForm';
+import axios from 'axios';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const BASE_URL = import.meta.env.VITE_BASE_URL
+    console.log(BASE_URL)
+    const [currentlyEditingPostId, setCurrentlyEditingPostId] = useState(null);
+    const [blogPosts, setBlogPosts] = useState([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    useEffect(() => {
+        displayPosts();
+    }, []); // Fetch blog posts on component mount
+
+    const displayPosts = function () {
+        axios
+            .get(`${BASE_URL}/api/blogs`)
+            .then((response) => {
+                const data = response.data;
+                setBlogPosts(data);
+            })
+            .catch((error) => {
+                console.error('Failed to fetch blog posts', error);
+            });
+    };
+
+    const editPost = function (postId) {
+        setCurrentlyEditingPostId(postId);
+    };
+
+    const updatePost = function (postId) {
+        const editedContent = document.querySelector(`#content-${postId}`).value;
+
+        const updatedBlogPost = {
+            content: editedContent,
+        };
+
+        axios
+            .put(`http://localhost:3000/api/blogs/${postId}`, updatedBlogPost, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(() => {
+                console.log('Blog post updated successfully');
+                displayPosts();
+                setCurrentlyEditingPostId(null); // Reset the currentlyEditingPostId
+            })
+            .catch((error) => {
+                console.error('Failed to update blog post', error);
+            });
+    };
+
+    const deletePost = function (postId) {
+        axios
+            .delete(`http://localhost:3000/api/blogs/${postId}`)
+            .then(() => {
+                console.log(`Blog post id:${postId} deleted successfully`);
+                displayPosts();
+            })
+            .catch((error) => {
+                console.error('Failed to delete blog post', error);
+            });
+    };
+
+    return (
+        <div className="bg-gray-100 font-roboto">
+            <header className="flex justify-between items-center py-4">
+                <h1 className="mx-auto text-3xl md:text-4xl lg:text-5xl font-bold">My Blog</h1>
+            </header>
+
+            <BlogPostForm displayPosts={displayPosts} />
+
+            <div id="blog-posts">
+                {blogPosts.map((blogPost) => (
+                    <div
+                        key={blogPost._id}
+                        className={`blog-post ${currentlyEditingPostId === blogPost._id ? 'editing' : ''}`}
+                    >
+                        <h3>{blogPost.title}</h3>
+                        <p>id: {blogPost._id}</p>
+                        <p>Reading Time: {blogPost.readingTime} min</p>
+                        {currentlyEditingPostId === blogPost._id ? (
+                            <textarea id={`content-${blogPost._id}`}>{blogPost.content}</textarea>
+                        ) : (
+                            <p>{blogPost.content}</p>
+                        )}
+                        {currentlyEditingPostId === blogPost._id ? (
+                            <button onClick={() => updatePost(blogPost._id)}>Save</button>
+                        ) : (
+                            <>
+                                <button onClick={() => editPost(blogPost._id)}>Edit</button>
+                                <button onClick={() => deletePost(blogPost._id)}>Delete</button>
+                            </>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
 }
 
-export default App
+export default App;
