@@ -1,9 +1,13 @@
 Readme 
 ---
 Adelynn Martin 
-abmartin 25
+
+abmartin25
+
 A4 Components 
+
 Due Oct 4 12pm
+
 ## Recipe Tracker
 
 Glitch: https://a4-abmartin25.glitch.me
