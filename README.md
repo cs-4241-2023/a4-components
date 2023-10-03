@@ -1,8 +1,19 @@
-# React + Vite
+Assignment 4 - Components
+===
+Deliverables
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Do the following to complete this assignment:
 
-Currently, two official plugins are available:
+1. Implement your project with the above requirements.
+3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
+4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
+5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
+6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+Blogging App
+
+http://a4-randy-huang.glitch.me
+
+This project is an updated version of A2 using React that allows users to create, edit, and delete blog posts. The app uses React for the front-end and Express for the back-end. The app uses a MongoDB database to store blog posts and comments. For this assignment's use case, porting it to use React frustrating since half the code broke and I spent a ton of time debugging, mainly due to ES6 module syntax instead of CommonJS. If there was more development involved or additional features that I would need to add, setting up React for the functionality would be great.
