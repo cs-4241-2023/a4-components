@@ -1,0 +1,29 @@
+body {
+  background-attachment: fixed;
+  background-image: linear-gradient(to bottom, #7697a0, #c2c8c5);
+}
+
+*{
+  font-family: 'Oswald', sans-serif;
+}
+
+#submit {
+  background-color: #4a707a;
+}
+
+#submit:hover {
+  background-color: #7697a0;
+}
+
+tr {
+  background-color: #94b0b7;
+}
+
+tr:first-child {
+  background-color: #4a707a;
+}
+
+th, td {
+  padding: 15px 50px;
+  border-bottom: 1px solid #4a707a;
+}
