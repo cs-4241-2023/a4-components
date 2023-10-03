@@ -15,6 +15,10 @@ app.use((request, response, next) => {
 });
 app.use(express.static('public'));
 
+app.get('/', (request, response) => {
+  response.render('index');
+});
+
 app.get('/getTable', (request, response) => {
   response.json(appdata);
 });
