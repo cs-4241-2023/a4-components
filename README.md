@@ -1,33 +1,11 @@
-Assignment 4 - Components
-===
+## Counter-Strike: Global Offensive Statistics Tracker
+Thomas Pianka
 
-Due: October 4th, by 11:59 AM.
+Hosting link: http://a4-thomas-pianka.glitch.me
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+My project allows a user to track their statistics from each Counter-Strike: Global Offensive match. I changed my assignment 2 to use a Vite and Express server with a Svelte frontend. The application looks and behaves exactly the same as my assignment 2, it just runs using different tools and libraries. I believe that the new technology improved the development experience. Using Vite and Express for the server instead of the default HTTP library significantly reduced the length and complexity of my server file. Although there was a learning curve for me in terms of implementing Svelte since I have never used it before, I believe that it also made the code simpler and easier to read in addition to making certain features easier to implement. It also halved the amount of JavaScript code I needed compared to assignment 2.
 
-[Svelte Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+### Resources Used
+- https://github.com/sveltejs/svelte/issues/4289
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+- https://svelte.dev/examples/else-if-blocks
