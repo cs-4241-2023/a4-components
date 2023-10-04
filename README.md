@@ -1,33 +1,15 @@
-Assignment 4 - Components
-===
+**WPI Badminton Attendance Tracker**
 
-Due: October 4th, by 11:59 AM.
+Sarah Olson
+A4 Components
+link: https://stackblitz.com/edit/a4-sarah-olson?embed=1&file=index.html&hideExplorer=1&hideNavigation=1&view=preview
+Note: if clicking the link above results in the page saying "Cannot GET /", clicking "Editor" then "Preview" in the bottom right corner of the browser should allow the page to load.
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+I created a web app for Badminton Club members who are using their participation in this course as a gym credit to track their progress toward their grade goal. First the user either enters or creates account information, so that they can only see their progress, and login in. The user then enters their target grade and the dates + amount of hours they attended on each day to keep track of the user's progress toward their grading goal. 
 
-[Svelte Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.react.md)  
+The user can also edit their grading goal and delete entries they make. 
 
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
+The most obvious change compared to A3 and A2 is that this iteration uses Svelte rather than pure HTML and JS. I also reverted back to locally storing in the server rather than using MongoDB (like A2), but kept the accesibility, server, and style benefits from A3.
 
-Deliverables
----
+ Initially, adding the new technology proved to be quite useful, being able to split up the pages with all the JS, HTML, and CSS for certain sections and having it all in one place and being able to edit it all at once proved to be helpful. But I ran into big issues with having those seperate components functioning as one, with still some features from A3 (mainly seperate pages) missing. If I was more farmiliar with Svelte from the begining, I think I would have had A3 structured differently to work better.
 
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
