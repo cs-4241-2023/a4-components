@@ -20,12 +20,12 @@ const Auth: React.FC = () => {
           {isLogin ? (
             <div>
               <Login />
-              <button onClick={toggleForm}>Switch to Register</button>
+              <button className='form-toggle-button' onClick={toggleForm}>Switch to Register</button>
             </div>
           ) : (
             <div>
               <Register />
-              <button onClick={toggleForm}>Switch to Login</button>
+              <button className='form-toggle-button' onClick={toggleForm}>Switch to Login</button>
             </div>
           )}
         </div>
