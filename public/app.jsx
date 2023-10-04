@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from 'react'
-
-const Todo = props => (
-  <tr> 
-    <td>{props.course}</td>
-    <td>{props.assignment}</td>
-    <td>{props.duedate}</td>
-    <td>{props.duetime}</td>
-    <td><input type="checkbox" defaultChecked={props.completed} onChange={ e => props.onclick( props.name, e.target.checked ) }/></td>
-  </tr>
-)
+import { useState, useEffect } from 'react'
 
 const App = () => {
   const [todos, setTodos] = useState([ ]) 
-
+/*
   function toggle( course, assignment, dueDate, dueTime, completed ) {
     fetch( '/change', {
       method:'POST',
@@ -51,55 +41,52 @@ const App = () => {
     })
     .then( response => response.json() )
     .then( json => {
-      setEntries( json )
+      setTodos( json )
     })
   }
-  
-  app.post( '/delete', function( req,res ) {
-  appdata.splice(req.body.index, 1)
-  
-  res.json( appdata )
-})
-  
+*/
   // make sure to only do this once
-  if( todos.length === 0 ) {
-    fetch( '/read' )
-      .then( response => response.json() )
-      .then( json => {
-        setTodos( json ) 
-      })
-  }
+ const getData = async function() {
+  await fetch( '/read' )
+            .then( response => response.json() )
+            .then( json => {
+              setTodos( json ) 
+  }) 
+ }
     
   useEffect( ()=> {
-    document.title = `${todos.length} todo(s)`
-  })
+    document.title = `${todos.length} assignment(s)`
+    getData();
+  }, [])
 
   return (
     <div className="App">
-    <h1 class="center">Homework Tracker</h1>
-    <p>add your upcoming assignment:<p>
+    <h1 className="center">Homework Tracker</h1>
+    <p>add your upcoming assignment:</p>
     <form id="homework">
       <input type="text" id="course" placeholder="course"/>
       <input type="text" id="assignment" placeholder="assignment details"/>
       <input type="date" id="duedate"/>
-      <input type="time" id="duetime" value="23:59"/>
+      <input type="time" id="duetime" value="23:59" onChange={(e) => {}} />
       <button type="submit">submit</button>
     </form>
       <br/>
 
-      <table>
+      <table id="homework-table">
         <tbody>
           <tr>
+            <th>#</th>
             <th>Course</th>
             <th>Assignment</th>
             <th>Due Date</th>
             <th>Due Time</th>
+            <th>Done?</th>
           </tr>
-          { entries.map( (entry,i) => <Entry key={i} course={entry.course} assignment={entry.assignment} duedate={ entry.duedate } duetime={ entry.duetime }/> ) }
+          { todos.map( (todo,i) => <tr> <td>key={i}</td> <td>{todo.course}</td> <td>{todo.assignment}</td> <td>{ todo.duedate }</td> <td>{ todo.duetime }</td> <td><input type="checkbox" defaultChecked={props.completed} onChange={ e => props.onclick( props.name, e.target.checked ) }/></td></tr> ) }
         </tbody>
       </table> 
     </div>
-  )
+  )}
 
 
-export default App
+export default App;

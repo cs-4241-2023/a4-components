@@ -8,11 +8,18 @@ const todos = []
 
 app.use( express.json() )
 
-app.get( '/read', ( req, res ) => res.json( todos ) )
+//Change this to send the array - res.json( todos )
+app.get( '/read', ( req, res ) => res.send( "It works!" ) )
 
 app.post( '/submit', ( req,res ) => {
   todos.push( req.body )
   res.json( todos )
+})
+
+app.post( '/delete', function( req,res ) {
+  appdata.splice(req.body.index, 1)
+  
+  res.json( appdata )
 })
 
 app.post( '/change', function( req,res ) {
