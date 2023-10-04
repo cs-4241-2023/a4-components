@@ -1,3 +1,4 @@
+/* default app.css */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +41,127 @@
 .read-the-docs {
   color: #888;
 }
+
+/* from A2 */
+
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+#table tr:nth-child(odd){background-color: #d7d7d7;}
+
+
+#table tr:hover {background-color: #9F91CC;}
+
+body {
+
+  background-color:#CEC2FA;
+}
+
+input[type=text], select {
+  width: 22%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  display: inline-block;
+
+
+
+  /* border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family:'Poppins', sans-serif; */
+
+}
+
+/* 
+input[type=text], select {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family:'Poppins', sans-serif;
+
+}
+
+button{
+  width: 6%;
+  background-color: #3D246C;
+  color: white;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family:'Poppins', sans-serif;
+
+}
+
+
+#table {
+  font-family:'Poppins', sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+#table td, #customers th {
+  font-family:'Poppins', sans-serif;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+#table tr:nth-child(odd){background-color: #d7d7d7;}
+
+
+#table tr:hover {background-color: #9F91CC;}
+
+#table th {
+  font-family:'Poppins', sans-serif;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #3D246C;
+  color: white;
+}
+
+
+header{
+  background-color:#CEC2FA;
+  font-family:'Poppins', sans-serif;
+}
+
+body {
+  background-color:#CEC2FA;
+  color: black;
+  font-family:'Poppins', sans-serif;
+
+}
+
+
+h1 {
+  color: #3D246C;
+  font-family:'Poppins', sans-serif;
+}
+
+h1 span {
+  background-color: #7965DB;
+}
+
+
+
+h3{
+  color: #3D246C;
+  font-family:'Poppins', sans-serif;
+}
+
+
+
+
+p {
+  margin-top: -10px;
+  color: black;
+  font-family:'Poppins', sans-serif;
+
+} */
+
