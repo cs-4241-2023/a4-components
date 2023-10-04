@@ -6,6 +6,7 @@
     height: 100vh;
     background-color: var(--background);
     color: var(--text);
+    transition: all 0.3s ease;
 }
 
 .auth-form-container {
@@ -15,6 +16,7 @@
     border: 2px solid var(--secondary);
     padding: 2rem;
     border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 .auth-form {

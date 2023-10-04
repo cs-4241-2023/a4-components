@@ -13,7 +13,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       await authService.login({ username, password });
-      navigate('/')
+      navigate('/dashboard')
     } catch (err) {
       setError((err as Error).message);
     }

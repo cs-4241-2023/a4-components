@@ -53,6 +53,18 @@ class StorageService {
         await this.disconnect();
         return user;
     }
+
+    async createTask(user, task) {
+        
+    }
+
+    async getTasks(user) {
+        await this.connect();
+        const db = this.client.db(db_name);
+        const tasks = await db.collection('tasks').find().filter({ user: user })
+        await this.disconnect();
+        return tasks;
+    }
 }
 
 module.exports = { storageService: new StorageService() };

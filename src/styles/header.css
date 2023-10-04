@@ -1,0 +1,21 @@
+/* header.css */
+.header-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo svg {
+    /* Default color if none of the themes are applied */
+    fill: black;
+}
+
+div[data-theme='light'] .logo svg {
+    fill: var(--text);
+    /* Color for light theme */
+}
+
+div[data-theme='dark'] .logo svg {
+    fill: var(--text);
+    /* Color for dark theme */
+}

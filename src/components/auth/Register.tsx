@@ -14,7 +14,7 @@ const Register: React.FC = () => {
     e.preventDefault();
     try {
       await authService.register({ username, password, confirmPassword });
-      navigate('/')
+      navigate('/dashboard')
     } catch (err) {
       setError((err as Error).message);
     }
