@@ -9,3 +9,14 @@ export const PriorityColor = {
     [Priority.MEDIUM]: 'orange',
     [Priority.HIGH]: 'red',
 };
+
+export const TaskMode = {
+    EDIT: 'Edit',
+    SHOW: 'Show',
+}
+
+export const TaskStatus = {
+    NOT_STARTED: 'Not Started',
+    IN_PROGRESS: 'In Progress',
+    COMPLETE: 'COMPLETE',
+}

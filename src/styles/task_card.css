@@ -1,51 +1,41 @@
 .task-card {
-    background-color: var(--background);
-    color: var(--text);
-    border: 2px solid var(--primary);
-    border-radius: 8px;
+    width: 300px;
     padding: 8px;
-    margin: 8px;
-    width: 400px;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 16px;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    background-color: var(--secondary);
+    font-family: Arial, sans-serif;
+    box-shadow: 0px 2px 4px var(--accent);
 }
 
-.header,
-.footer {
-    grid-column: span 2;
-    padding: 8px;
-    border: 2px solid var(--secondary);
-    border-radius: 8px;
-    background-color: var(--primary);
+h2,
+h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
-.header {
+.task-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: left;
+    flex-direction: column;
 }
-
 
 input,
 textarea,
 select {
-    width: calc(100% - 16px);
-    /* Adjust width */
+    width: 100%;
     box-sizing: border-box;
-    /* Include padding and border in element's total width and height */
 }
 
 input,
 textarea {
-    width: 100%;
     padding: 8px;
     border: 1px solid var(--secondary);
     border-radius: 4px;
     background-color: var(--background);
     color: var(--text);
     font-size: 1em;
-    max-width: calc(100% - 16px);
 }
 
 input::placeholder,
@@ -53,29 +43,27 @@ textarea::placeholder {
     color: var(--secondary);
 }
 
-.priority-group {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    /* Prevent wrapping within the priority group */
+.task-progress {
+    margin: 8px;
 }
 
-.footer .info,
-.footer .edit-info {
+.task-status {
     display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    flex-wrap: wrap;
-    font-size: small;
+    width: 100%;
+    align-content: space-between;
 }
 
-.footer .info span,
-.footer .edit-info input {
+.task-status div {
     flex: 1;
 }
 
-.task-card button {
-    grid-column: span 2;
+.task-status-current {
+    text-align: right;
+}
+
+
+.subtask-add-button {
+    width: 100%;
     background-color: var(--primary);
     border: none;
     padding: 8px 16px;
@@ -84,6 +72,26 @@ textarea::placeholder {
     transition: background-color 0.3s;
 }
 
-.task-card button:hover {
+.subtask-add-button:hover {
     background-color: var(--accent);
+}
+
+hr {
+    margin: 8px 0px;
+}
+
+.task-footer {
+    display: flex;
+    flex-direction: row;
+}
+
+.task-footer button {
+    border: 1px solid var(--accent);
+    border-radius: 100px;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.task-footer button:hover {
+    flex: 2;
 }

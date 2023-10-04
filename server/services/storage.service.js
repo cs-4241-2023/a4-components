@@ -13,21 +13,14 @@ const uri = `mongodb+srv://${user}:${password}@${host}/test?retryWrites=true&w=m
 class StorageService {
     constructor() {
         this.client = new MongoClient(uri);
-    }
-
-    async connect() {
-        await this.client.connect();
-    }
-
-    async disconnect() {
-        await this.client.close();
+        this.client.connect().catch(err => {
+            console.error('Failed to connect to MongoDB', err);
+        });
     }
 
     async createUser(username, hashedPassword) {
-        await this.connect();
         const db = this.client.db(db_name);
         const result = await db.collection('users').insertOne({ username, hashedPassword });
-        await this.disconnect();
         if (!result.insertedId) {
             throw new Error('User creation failed');
         }
@@ -39,31 +32,42 @@ class StorageService {
     }
 
     async findUserByUsername(username) {
-        await this.connect();
         const db = this.client.db(db_name);
         const user = await db.collection('users').findOne({ username });
-        await this.disconnect();
         return user;
     }
 
     async findUserById(id) {
-        await this.connect();
         const db = this.client.db(db_name);
         const user = await db.collection('users').findOne({ _id: new ObjectId(id) });
-        await this.disconnect();
         return user;
     }
 
-    async createTask(user, task) {
-        
+    async createTask(taskData) {
+        const db = this.client.db(db_name);
+        const result = await db.collection('tasks').insertOne(taskData);
+
+        const newTask = await db.collection('tasks').findOne({ _id: result.insertedId });
+        return newTask
     }
 
-    async getTasks(user) {
-        await this.connect();
+    async getTasks(userId) {
         const db = this.client.db(db_name);
-        const tasks = await db.collection('tasks').find().filter({ user: user })
-        await this.disconnect();
+        const tasks = await db.collection('tasks').find({ userId: new ObjectId(userId) }).toArray();
         return tasks;
+    }
+
+    async updateTask(taskId, taskData) {
+        const db = this.client.db(db_name);
+        await db.collection('tasks').updateOne({ _id: new ObjectId(taskId) }, { $set: taskData });
+        const updatedTask = await db.collection('tasks').findOne({ _id: new ObjectId(taskId) });
+        return updatedTask;
+    }
+
+    async deleteTask(taskId) {
+        const db = this.client.db(db_name);
+        const result = await db.collection('tasks').deleteOne({ _id: new ObjectId(taskId) });
+        return result.deletedCount; // This will be 1 if the deletion was successful, and 0 otherwise.
     }
 }
 

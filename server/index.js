@@ -66,6 +66,85 @@ app.post('/register', async (req, res) => {
   });
 });
 
+app.post('/tasks', async (req, res) => {
+  if (req.isAuthenticated()) {
+    console.log("Creating a task")
+    const { title, details, subTasks } = req.body;
+    const newTaskData = {
+      userId: req.user._id,
+      title: title || '',
+      details: details || '',
+      subTasks: subTasks || []
+    }
+    try {
+      const newTask = await storageService.createTask(newTaskData);
+      res.status(201).json(newTask);
+    } catch (error) {
+      res.status(500).send("Failed to create new task");
+      console.error("Error:", error);
+    }
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+});
+
+
+app.get('/user-info', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({ userId: req.user._id, username: req.user.username });
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+});
+
+app.get('/user-tasks', async (req, res) => {
+  if (req.isAuthenticated()) {
+    try {
+      const tasks = await storageService.getTasks(req.user._id);
+      res.json(tasks);
+    } catch (error) {
+      console.error("Failed to fetch user tasks:", error);
+      res.status(500).send("Error fetching tasks");
+    }
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+});
+
+app.put('/task/:taskId', async (req, res) => {
+  console.log("Updating task")
+  try {
+    const taskId = req.params.taskId;
+    const updatedTask = await storageService.updateTask(taskId, req.body);
+    res.json(updatedTask);
+  } catch (error) {
+    res.status(500).send('Failed to update task');
+  }
+});
+
+
+app.delete('/task/:taskId', async (req, res) => {
+  console.log("Deleting a task")
+  const { taskId } = req.params;
+
+  try {
+    const deletedCount = await storageService.deleteTask(taskId);
+    if (deletedCount && deletedCount > 0) {
+      res.status(200).send({ message: 'Task deleted successfully' });
+    } else {
+      res.status(404).send({ message: 'Task not found' });
+    }
+  } catch (err) {
+    console.error('Error deleting task:', err);
+    res.status(500).send({ message: 'Internal server error' });
+  }
+});
+
+process.on('SIGINT', async () => {
+  await storageService.client.close();
+  process.exit();
+});
+
 async function createViteServerMiddleware() {
   const vite = await createViteServer({
     server: { middlewareMode: 'true' },

@@ -1,4 +1,3 @@
-/* SplashPage.css */
 .splash-container {
     display: flex;
     flex-direction: column;
@@ -9,7 +8,6 @@
 }
 
 .logo svg {
-    /* Change color */
     border-color: var(--primary);
     fill: var(--secondary);
 }

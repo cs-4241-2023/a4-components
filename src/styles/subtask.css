@@ -1,0 +1,29 @@
+.subtask {
+    background-color: var(--background);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    height: fit-content;
+    padding: 8px;
+    border-radius: 8px;
+    margin: 4px 0px;
+}
+
+.subtask-title {
+    flex: 1;
+    font-size: 20px;
+}
+
+.subtask-icon{
+    height: fit-content;
+}
+
+input {
+    max-height: 24px;
+}
+
+button{
+    padding: 0px;
+}

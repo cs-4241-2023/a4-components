@@ -1,64 +1,142 @@
 import React, { useState } from 'react';
-import { Priority, PriorityColor } from '../../types/dashboard.types';
-import { ArrowDownward, Remove, ArrowUpward } from '@mui/icons-material';  // Corrected icon imports
+import EditIcon from '@mui/icons-material/Edit';
+import { TaskMode, TaskStatus } from "../../types/dashboard.types"
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
 
 import "../../styles/task_card.css"
+import ProgressBar from './ProgressBar';
+import SubTask from './SubTask';
+import { ObjectId } from 'mongodb';
 
-const TaskCard: React.FC = () => {
-    const [mode, setMode] = useState('edit');
-    const [priority, setPriority] = useState(Priority.MEDIUM);
-    const [category, setCategory] = useState('');
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [assignedTo, setAssignedTo] = useState('');
-    const [createdBy, setCreatedBy] = useState('');
-    const [dueDate, setDueDate] = useState('');
+type TaskCardProps = {
+    task: {
+        _id: string;
+        title: string;
+        details: string;
+        subTasks: { title: string; completed: boolean }[];
+        userId?: ObjectId;
+    };
+    onTaskDelete: (taskId: string) => void;
+    onTaskUpdate: (taskId: string, updatedTask: any) => void;
+};
 
-    const priorityColor = PriorityColor[priority];
-    const priorityIcons = {
-        [Priority.LOW]: <ArrowDownward style={{ color: priorityColor }} />,
-        [Priority.MEDIUM]: <Remove style={{ color: priorityColor }} />,
-        [Priority.HIGH]: <ArrowUpward style={{ color: priorityColor }} />,
+
+const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate }) => {
+    const [mode, setMode] = useState(task.title ? TaskMode.SHOW : TaskMode.EDIT)
+    const [title, setTitle] = useState(task.title);
+    const [details, setDetails] = useState(task.details);
+    const [subTasks, setSubTasks] = useState(task.subTasks);
+
+    const completedSubTasks = subTasks.filter(subTask => subTask.completed).length;
+    const progress = (completedSubTasks / subTasks.length) * 100;
+
+    let status = TaskStatus.NOT_STARTED;
+    if (progress === 100) status = TaskStatus.COMPLETE;
+    else if (progress > 0) status = TaskStatus.IN_PROGRESS;
+
+
+    const toggleSubTaskCompletion = (index: number) => {
+        const newSubTasks = [...subTasks];
+        newSubTasks[index].completed = !newSubTasks[index].completed;
+
+        setSubTasks(newSubTasks);
+        onTaskUpdate(task._id, { subTasks: newSubTasks });
+    };
+
+    const setSubTaskTitle = (index: number, title: string) => {
+        const newSubTasks = [...subTasks];
+        newSubTasks[index].title = title;
+        setSubTasks(newSubTasks);
+        onTaskUpdate(task._id, { subTasks: newSubTasks });
+    };
+
+    const addSubTask = () => {
+        const newSubTasks = [...subTasks, { title: "", completed: false }];
+        setSubTasks(newSubTasks);
+        onTaskUpdate(task._id, { subTasks: newSubTasks });
+    }
+
+    const deleteSubTask = (index: number) => {
+        const newSubTasks = [...subTasks];
+        newSubTasks.splice(index, 1)
+        setSubTasks(newSubTasks);
+        onTaskUpdate(task._id, { subTasks: newSubTasks });
+    }
+
+    const deleteTask = () => {
+        onTaskDelete(task._id);
+    }
+
+    const handleTitleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newTitle = e.target.value;
+        setTitle(newTitle);
+
+        // Update task in the database
+        onTaskUpdate(task._id, { title: newTitle })
+    };
+
+    const handleDetailChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const newDetail = e.target.value;
+        setDetails(newDetail);
+
+        // Update task in the database
+        onTaskUpdate(task._id, { detail: newDetail });
     };
 
     return (
         <div className={`task-card ${mode}`}>
-            <div className="header">
-                {mode === 'show' ? <h2>{title}</h2> : <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />}bun 
-                <div className="priority-group">
-                    {priorityIcons[priority]}
-                    {mode === 'edit' && (
-                        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-                            {Object.values(Priority).map(p => (
-                                <option key={p} value={p}>{p}</option>
-                            ))}
-                        </select>
-                    )}
+            <div className="task-header">
+                {mode === TaskMode.SHOW ? <h2>{title}</h2> : <input type="text" value={title} onChange={(e) => handleTitleChange(e)} placeholder="Title" />}
+                {mode === TaskMode.SHOW ? <p>{details}</p> : <textarea value={details} onChange={(e) => handleDetailChange(e)} placeholder='Details' />}
+            </div>
+            <hr />
+            <div className="task-progress">
+                <div className='task-status'>
+                    <div>
+                        <h2>Task Progress</h2>
+                    </div>
+                    <div className='task-status-current'>
+                        <h3>{status}</h3>
+                    </div>
+                </div>
+                <ProgressBar progress={progress} />
+            </div>
+            <hr />
+            <div className='task-subtasks'>
+                <h2>SUB-TASKS: {subTasks.length}</h2>
+                <div className='subtask-container'>
+                    {subTasks.map((task, index) => (
+                        <SubTask
+                            mode={mode}
+                            title={task.title}
+                            setTitle={(e) => setSubTaskTitle(index, e)}
+                            isComplete={task.completed}
+                            toggleIsComplete={() => toggleSubTaskCompletion(index)}
+                            delete={() => deleteSubTask(index)}
+                        />
+                    ))}
+                    {mode === TaskMode.SHOW ? null :
+                        <button className='subtask-add-button' onClick={() => addSubTask()}>
+                            <AddTaskIcon />
+                        </button>
+                    }
                 </div>
             </div>
-            <div className="Description">
-                <label>Description</label>
-                {mode === 'show' ? <div>{description}</div> : <textarea value={description} onChange={(e) => setDescription(e.target.value)} />}
+            <hr />
+            <div className='task-footer'>
+                <button onClick={() => deleteTask()}>
+                    <HighlightOffTwoToneIcon />
+                </button>
+                <button onClick={() => setMode(mode === TaskMode.SHOW ? TaskMode.EDIT : TaskMode.SHOW)}>
+                    <EditIcon />
+                </button>
+                {/* <button onClick={() => { () => toggleComplete() }}>
+                    <CheckCircleTwoToneIcon />
+                </button> */}
             </div>
-            <div className="footer">
-                {mode === 'show' && (
-                    <div className="info">
-                        <span>Created By: {createdBy}</span>
-                        <span>Assigned To: {assignedTo}</span>
-                        <span>Due: {dueDate}</span>
-                    </div>
-                )}
-                {mode === 'edit' && (
-                    <div className="edit-info">
-                        <input type="text" value={createdBy} onChange={(e) => setCreatedBy(e.target.value)} placeholder="Created By" />
-                        <input type="text" value={assignedTo} onChange={(e) => setAssignedTo(e.target.value)} placeholder="Assigned To" />
-                        <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
-                    </div>
-                )}
-            </div>
-            <button onClick={() => setMode(mode === 'show' ? 'edit' : 'show')}>{mode === 'show' ? 'Edit' : 'Save'}</button>
         </div>
-    );
-};
+    )
+}
 
 export default TaskCard;
