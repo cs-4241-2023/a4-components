@@ -1,6 +1,9 @@
-const express = require("express");
-const ViteExpress = require("vite-express");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+import express from 'express'
+import ViteExpress from 'vite-express'
+import { MongoClient, ServerApiVersion } from 'mongodb';
+import cors from 'cors';
+import dotenv from 'dotenv'
+
 const app = express();
 const logdata = []
 
@@ -8,7 +11,8 @@ let userdata = null;
 let userid = "admin";
 
 app.use( express.json() )
-require("dotenv").config()
+app.use(cors())
+dotenv.config()
 
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}`
 
@@ -25,25 +29,14 @@ let collection = null
 async function run() {
   await client.connect()
   collection = await client.db("workoutlogdb").collection("workoutlog")
-
-  app.get("/fetchData", async (req, res) => {
-    const docs = await collection.find({"userid":userid}).toArray()
-    if (docs.length !== 0) {
-      userdata = docs
-    } else {
-      userdata = {"userid": userid, "workoutdata": []}
-      let response = await collection.insertOne(userdata)
-    }
-    res.json(userdata)
-  })
 }
 
-app.use( (req,res,next) => {
-  if( collection !== null ) {
-    next()
-  }else{
-    res.status( 503 ).send()
-  }
+app.get("/fetchData", async (_, res) => {
+  const docs = await collection.find({}).toArray()
+  if (docs.length !== 0) {
+    userdata = docs
+  } 
+  res.json(userdata)
 })
 
 app.post( '/submit', async (req,res) => {

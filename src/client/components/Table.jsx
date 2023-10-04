@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from "react";
 import '/src/client/App.css'
 
-function Table({name}) {
+function Table({props}) {
     return (
-    <table className="justify-content-center d-flex mb-5">
+    <div className="container justify-content-center d-flex">
+    <table className="justify-content-center mb-5">
         <thead>
             <tr className="text-white h4 text-left">
                 <th>Date</th>
@@ -16,8 +16,19 @@ function Table({name}) {
             </tr>   
         </thead>
         <tbody>
+            {props.map((row, index) => (
+                <tr key={index}>
+                    <td>{row.date}</td>
+                    <td>{row.exercise}</td>
+                    <td>{row.sets}</td>
+                    <td>{row.reps}</td>
+                    <td>{row.weight}</td>
+                    <td><button>Delete</button></td>
+                </tr>
+            ))}
         </tbody>
     </table>
+    </div>
     );
   }
   
