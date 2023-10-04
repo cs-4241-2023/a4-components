@@ -1,9 +1,20 @@
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
 
+Issues:
+Since the program needs two ports, I was not able to host it on Glitch or StackBlitz. There are ways to make the server and client  use the same port. I could have used the Svelte Kit and routed it to send every request through the server, but it would take more time than I have available as an overloading student. I could have also used reverse proxies, which are difficult to make work. As a result, please use the instructions to run it locally instead.
+
+1. Download the source (zip) for the GitHub <https://github.com/gribsyrup/gribsyrup-a4>
+2. Create a directory and Copy the zip file <gribsyrup-a4-main.zip> to that directory
+3. Unzip the file
+4. Cd to the directory gribsyrup-a4-main on the terminal
+5a. If you are running windows, please run the command ".\start.bat" at the top directory.
+5b. If you are running macosx or linux, please run the command "sh start.sh" at the top directory. 
+6. The localhost link will be http://localhost:3000
+
 ## Your Web Application Title
 
-your hosting link e.g. http://a4-gribsyrup.glitch.me
+your hosting link e.g. localhost:3000 
 
 Readme:
 

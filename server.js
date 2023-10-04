@@ -42,10 +42,7 @@ app.get('/results', (request, response) => {
 });
 
 app.post('/submit', (request, response ) => {
-    console.log("Post")
-
     const myData = request.body
-    console.log( myData )
     if (myData.action === 'create') {
         //addToMemory()
         let Element = {}
