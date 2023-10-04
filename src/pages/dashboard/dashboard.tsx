@@ -84,10 +84,9 @@ const Dashboard: React.FC = () => {
         <>
             <Header />
             <div className="dashboard-container" >
-                {user && <h1>{user.username}'s Todo Tasks:</h1>}
-                {!user && <h1>Todo Tasks:</h1>}
-                <div className="dashboard-tasks-container" style={{ display: 'flex', flexDirection: 'column' }}>
-                    <button onClick={handleAddTask}>Add New Task</button>
+                {user && <h1>{user.username}s' todo tasks:</h1>}
+                {!user && <h1>todo tasks:</h1>}
+                <div className="dashboard-tasks-container" >
                     {tasks.map(task => (
                         <TaskCard
                             key={task._id}
@@ -98,6 +97,9 @@ const Dashboard: React.FC = () => {
                                 handleUpdateTask(task._id, updatedTaskData)}
                         />
                     ))}
+                    <div className="add-task-button">
+                        <button onClick={handleAddTask} title='Add New Task'>Add New Task</button>
+                    </div>
                 </div>
             </div>
         </>

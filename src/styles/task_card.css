@@ -1,5 +1,6 @@
 .task-card {
-    width: 300px;
+    width: calc(300px - 16px);
+    /* margin: 8px; */
     padding: 8px;
     border: 1px solid var(--primary);
     border-radius: 5px;
