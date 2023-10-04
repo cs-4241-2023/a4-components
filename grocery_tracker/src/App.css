@@ -1,0 +1,43 @@
+#root {
+  padding-left: 2rem;
+}
+.prices-container >label {
+  padding: 1.25rem;
+}
+#list-container{
+  display: flex;
+  justify-content: flex-start;
+  padding-left:6rem
+
+}
+#groceryList{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding-left: 0;
+
+}
+li{
+  position:static;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+}
+li > button{
+  position:static;
+  display: flex;
+  flex-direction: row;
+  padding-left: 2rem;
+  padding-inline: 2rem;
+}
+
+#cartList{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding-left: 0;
+}
+#cartLab{
+  padding-left: 6rem;
+}
