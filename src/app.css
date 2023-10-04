@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+  background-color: #6495ed;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  align-content: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.border-element {
+  box-sizing: border-box;
+  width: fit-content;
+  padding: 5px;
+}
+
+h1 {
+  color: black;
+  background-color: yellow;
+  border: 2px red solid;
+}
+
+input:invalid {
+  border: 1px red solid;
+}
+
+::placeholder {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Added for Microsoft Edge functionality */
+::-ms-input-placeholder {
+  font-family: 'Poppins', sans-serif;
+}
+
+button {
+  font-family: inherit;
+}
+
+#stat-table {
+  width: 60% !important;
+  border: 2px #9b6a12 solid;
+  background-color: white;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th, td {
+  text-align: center;
+  border: 1px black solid;
+}
+
+.table-input {
+  box-sizing: border-box;
+  width: 90%;
+}
