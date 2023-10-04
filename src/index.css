@@ -1,0 +1,101 @@
+.body {
+  background: white;
+  color: black;
+}
+
+select {
+  display: flex;
+  border: 0;
+  border-radius: 10px;
+  padding: 1%;
+  margin-bottom: 1.5%;
+  background-color: rgb(234, 158, 183);
+}
+
+button {
+  width: 100px;
+  height: 30px;
+  position: static;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Abril Fatface", serif;
+  background-color: white;
+}
+
+.header-container {
+  display: flex;
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #A0C1DE;
+  font-family: "Merriweather", sans-serif;
+  width: 25%;
+  height: 10%;
+}
+
+label {
+  float: left;
+  width: 11em;
+}
+
+ul {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+p {
+  line-height: 45px;
+  background-color: rgb(234, 158, 183);
+  font-family: "Merriweather", sans-serif;
+  width: 20%;
+  height: 20%;
+  margin-right:5 %;
+  margin-bottom:1%;
+  color: black;
+}
+
+.form-container {
+  background-color: #d3eaf5;
+  color: black;
+  margin: 10px;
+  text-align: justify;
+  line-height: 45px;
+  width: 300px;
+  font-size: 15px;
+  font-family: "Roboto", sans-serif;
+  flex-direction: row;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 60%;
+}
+
+.input-flex {
+  max-width: 60px;
+}
+
+input, textarea {
+  border: 0;
+  border-radius: 10px;
+  padding: 2%;
+  background-color: rgb(255, 231, 251);
+  margin-right:5%;
+  margin-bottom: 10%;
+  flex: 1 10 100%;
+  font-family: "Merriweather", sans-serif;
+}
