@@ -1,0 +1,140 @@
+body {
+    background-color: #d2cfca;
+    display: flex;
+    margin: 0;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  footer {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+  }
+  
+  /* 
+  =====================================
+    Water.css overrides               |
+  =====================================
+   */
+  #save {
+    background-color: #5e738c;
+  }
+  
+  #save:hover {
+    background-color: #51657b;
+  }
+  
+  /* 
+  =====================================
+    Form Styling                      |
+  =====================================
+  */
+  form {
+    background-color: #202b38;
+    width: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+    box-sizing: border-box;
+    gap: 20px;
+    max-width: none;
+  }
+  
+  input, label {
+    display: block;
+  }
+  
+  label { 
+    margin-right: 5px;
+  }
+  
+  .task-info--input {
+    display: block;
+    width: 90%;
+    justify-content: center;
+  }
+  
+  .task-title, .task-date {
+    margin-right: 10px;
+  }
+  
+  .task-title, .task-date {
+    margin-right: 10px;
+  }
+  
+  textarea {
+    resize: none;
+    width: 90%;
+    height: 50%;
+  }
+  
+  .input-buttons {
+    display:flex;
+    gap: 10px;
+  }
+  
+  /* 
+  =====================================
+    Sidebar Styling                   |
+  =====================================
+  */
+  .tasks-list--sidebar {
+    background-color: #202b38;
+    width: 215px;
+    overflow-y: auto;
+    border-right: 10px solid #978e7e;
+  }
+  
+  .tasks-list--container {
+    max-height: 50%;
+    width: 215px;
+    overflow-y: auto;
+    float: left;
+    position: relative;
+  }
+  
+  .tasks-list--task {  
+    padding: 10px;
+    margin: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    max-height: 22px;
+    word-wrap: normal;
+    background-color: #161f27;
+  }
+  
+  .tasks-list--task:hover, .tasks-list--new:hover {
+    cursor: pointer;
+    background-color: cornflowerblue;
+  }
+  
+  .tasks-list--task:focus {
+    background-color: #202b38;
+  }
+  
+  .tasks-list--task.selected {
+    background-color: #0c151c;
+    color: white;
+  }
+  
+  .tasks-list--new {
+    background-color: #161f27;
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  form, .tasks-list--container {
+    height: 85vh;
+  }
