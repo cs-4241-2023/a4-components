@@ -2,22 +2,32 @@
   "name": "a4-sean-arackal",
   "version": "0.0.0",
   "description": "webapp that uses react",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "a4-sean-arackal"
+  "engines": {
+    "node": "16.x"
   },
-  "keywords": [
-    "What",
-    "do",
-    "I",
-    "have",
-    "to",
-    "do"
-  ],
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite-express": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "vite": "^4.4.5"
+  },
   "author": "Sean Arackal",
   "license": "ISC"
 }
