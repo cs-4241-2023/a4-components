@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import TaskCard from '../../components/dashboard/TaskCard';
 import axios from 'axios';
+import Masonry from 'react-masonry-css';
 
 import "../../styles/dashboard.css"
 import { useNavigate } from 'react-router-dom';
@@ -34,6 +35,15 @@ const Dashboard: React.FC = () => {
                 console.error("Failed to fetch tasks:", error);
             });
     }, []);
+
+    let defaultColumns = tasks.length + 1;
+    if (defaultColumns > 4) defaultColumns = 4;
+    const breakpointColumnsObj = {
+        default: defaultColumns,  // number of columns for largest breakpoint
+        1100: 3,
+        700: 2,
+        500: 1      // only one column when viewport <= 500px
+    };
 
     const handleAddTask = async () => {
         const response = await axios.post('/tasks', {
@@ -86,7 +96,12 @@ const Dashboard: React.FC = () => {
             <div className="dashboard-container" >
                 {user && <h1>{user.username}s' todo tasks:</h1>}
                 {!user && <h1>todo tasks:</h1>}
-                <div className="dashboard-tasks-container" >
+
+                <Masonry
+                    breakpointCols={breakpointColumnsObj}
+                    className="my-masonry-grid"
+                    columnClassName="my-masonry-grid_column"
+                >
                     {tasks.map(task => (
                         <TaskCard
                             key={task._id}
@@ -100,7 +115,7 @@ const Dashboard: React.FC = () => {
                     <div className="add-task-button">
                         <button onClick={handleAddTask} title='Add New Task'>Add New Task</button>
                     </div>
-                </div>
+                </Masonry>
             </div>
         </>
     );
