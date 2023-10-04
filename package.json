@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "nodemon server/index.js -w server",
-    "vite-dev": "bunx --bun vite",
-    "start": "node server/index.js",
+    "dev": "nodemon server/index.dev.js -w server",
+    "build": "tsc && vite build",
+    "start": "node server/index.prod.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
