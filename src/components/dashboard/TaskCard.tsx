@@ -3,8 +3,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Task, TaskMode, TaskStatus } from "../../types/dashboard.types"
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
-// import RemoveDoneIcon from '@mui/icons-material/RemoveDone';
-// import DoneAllIcon from '@mui/icons-material/DoneAll';
+import RemoveDoneIcon from '@mui/icons-material/RemoveDone';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 import "../../styles/task_card.css"
 import ProgressBar from './ProgressBar';
@@ -56,8 +56,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate })
     const deleteSubTask = (index: number) => {
         const newSubTasks = [...subTasks];
         newSubTasks.splice(index, 1)
+        if (newSubTasks.length === 0) {
+            newSubTasks.splice(0, 0, { title: "", completed: false })
+        }
         setSubTasks(newSubTasks);
         onTaskUpdate({ subTasks: newSubTasks });
+
     }
 
     const deleteTask = () => {
@@ -80,19 +84,18 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate })
         onTaskUpdate({ details: newDetails });
     };
 
-    // const markComplete = () => {
-    //     if (subTasks.length === 0) {
+    const markComplete = () => {
+        const newSubTasks = subTasks.map(subTask => ({ ...subTask, completed: true }));
+        setSubTasks(newSubTasks);
+        onTaskUpdate({ subTasks: newSubTasks });
+    };
 
-    //     }
-    //     else {
+    const markNotStarted = () => {
+        const newSubTasks = subTasks.map(subTask => ({ ...subTask, completed: false }));
+        setSubTasks(newSubTasks);
+        onTaskUpdate({ subTasks: newSubTasks });
+    };
 
-    //     }
-    //     throw new Error('Function not implemented.');
-    // }
-
-    // const markNotStarted = () => {
-    //     throw new Error('Function not implemented.');
-    // }
 
     return (
         <div className={`task-card ${mode}`}>
@@ -113,32 +116,27 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate })
                 <ProgressBar progress={progress} />
             </div>
             <hr />
-            {subTasks.length === 0 ?
-                <></> :
-                <>
-                    <div className='task-subtasks'>
-                        <h2>SUB-TASKS: {subTasks.length}</h2>
-                        <div className='subtask-container'>
-                            {subTasks.map((task, index) => (
-                                <SubTask
-                                    mode={mode}
-                                    title={task.title}
-                                    setTitle={(e) => setSubTaskTitle(index, e)}
-                                    isComplete={task.completed}
-                                    toggleIsComplete={() => toggleSubTaskCompletion(index)}
-                                    delete={() => deleteSubTask(index)}
-                                />
-                            ))}
-                            {mode === TaskMode.SHOW ? null :
-                                <button className='subtask-add-button' onClick={() => addSubTask()}>
-                                    <AddTaskIcon />
-                                </button>
-                            }
-                        </div>
-                    </div>
-                    <hr />
-                </>
-            }
+            <div className='task-subtasks'>
+                <h2>SUB-TASKS: {subTasks.length}</h2>
+                <div className='subtask-container'>
+                    {subTasks.map((task, index) => (
+                        <SubTask
+                            mode={mode}
+                            title={task.title}
+                            setTitle={(e) => setSubTaskTitle(index, e)}
+                            isComplete={task.completed}
+                            toggleIsComplete={() => toggleSubTaskCompletion(index)}
+                            delete={() => deleteSubTask(index)}
+                        />
+                    ))}
+                    {mode === TaskMode.SHOW ? null :
+                        <button className='subtask-add-button' onClick={() => addSubTask()}>
+                            <AddTaskIcon />
+                        </button>
+                    }
+                </div>
+            </div>
+            <hr />
             <div className='task-footer'>
                 <button onClick={() => deleteTask()}>
                     <HighlightOffTwoToneIcon />
@@ -146,13 +144,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate })
                 <button onClick={() => setMode(mode === TaskMode.SHOW ? TaskMode.EDIT : TaskMode.SHOW)}>
                     <EditIcon />
                 </button>
-
-                {/* <button onClick={() => { () => markNotStarted() }}>
+                <button onClick={() => markNotStarted()}>
                     <RemoveDoneIcon />
                 </button>
-                <button onClick={() => { () => markComplete() }}>
+                <button onClick={() => markComplete()}>
                     <DoneAllIcon />
-                </button> */}
+                </button>
             </div>
         </div>
     )
