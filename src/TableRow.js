@@ -5,7 +5,6 @@ function TableRow({ item, modifyData, deleteData }) {
     return fullDate.split("T")[0];
   };
 
-  // Convert item values into local state
   const [task, setTask] = useState(item.task);
   const [hours, setHours] = useState(item.hours);
   const [dueDate, setDueDate] = useState(formatDate(item.dueDate));
