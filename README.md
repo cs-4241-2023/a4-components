@@ -9,8 +9,10 @@ For this assignment you will re-implement the client side portion of *either* A2
 
 ## Your Web Application Title
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me 
+your hosting link e.g. https://a4.glyph.lol/
 
-I MADE REACT AND VITE-EXPRESS RAAAAAAAÁ
+I MADE REACT AND VITE-EXPRESS 
+
+AND ITS SELF HOSTED RAAAAAAAAAAAAAAASAASASASBADHJKGSFKJHDGKFSHDFKHJSFGJLSFJHF.
 
 
