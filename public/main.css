@@ -1,0 +1,18 @@
+body {
+  background:rgb(201, 140, 221);
+  color:white;
+  font-family: 'Dosis', sans-serif;
+  font-family: 'Oswald', sans-serif;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+#homework-table {
+  width: 100%;
+  padding-top: 5%;
+}
+

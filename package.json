@@ -1,0 +1,23 @@
+{
+  "name": "",
+  "version": "",
+  "type": "module",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mime": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite-express": "^0.10.0",
+    "@vitejs/plugin-react": "^4.0.4"
+  }
+}
