@@ -5,7 +5,6 @@ import axios from 'axios';
 
 function App() {
     const BASE_URL = import.meta.env.VITE_BASE_URL
-    console.log(BASE_URL)
     const [currentlyEditingPostId, setCurrentlyEditingPostId] = useState(null);
     const [blogPosts, setBlogPosts] = useState([]);
 
@@ -37,7 +36,7 @@ function App() {
         };
 
         axios
-            .put(`http://localhost:3000/api/blogs/${postId}`, updatedBlogPost, {
+            .put(`${BASE_URL}/api/blogs/${postId}`, updatedBlogPost, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -54,7 +53,7 @@ function App() {
 
     const deletePost = function (postId) {
         axios
-            .delete(`http://localhost:3000/api/blogs/${postId}`)
+            .delete(`${BASE_URL}/api/blogs/${postId}`)
             .then(() => {
                 console.log(`Blog post id:${postId} deleted successfully`);
                 displayPosts();

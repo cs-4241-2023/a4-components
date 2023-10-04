@@ -12,9 +12,11 @@ import cors from 'cors';
 // Then use the properties you need as follows:
 import session from 'express-session';
 const app = express();
-const port = 3000;
+const port = 3001;
 import dotenv from 'dotenv';
 dotenv.config();
+
+app.use(express.static('dist'));
 
 // Connect to MongoDB
 connect(process.env.MONGO_URI, {
