@@ -1,0 +1,20 @@
+:root {
+  --primary-color: #a23535;
+  --secondary-color: #ffdf50;
+  --accent-color: #000;
+}
+
+body {
+  margin-left: 380px;
+  font-family: "Ubuntu", Georgia, "Times New Roman", Times, serif;
+  background-color: white;
+}
+
+.primary-color {
+  background-color: unset;
+  background-color: var(--primary-color);
+}
+
+.editable td.edit {
+  background: #f8ff88;
+}
