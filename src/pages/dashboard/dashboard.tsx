@@ -46,6 +46,7 @@ const Dashboard: React.FC = () => {
     }
 
     const handleUpdateTask = async (taskId: string, updatedTaskData: any) => {
+        console.log("Entered handleUpdateTask with data:", updatedTaskData);
         try {
             const response = await axios.put(`/task/${taskId}`, updatedTaskData);
 

@@ -115,6 +115,7 @@ app.put('/task/:taskId', async (req, res) => {
   console.log("Updating task")
   try {
     const taskId = req.params.taskId;
+    console.log("Updating task", taskId, "with content", req.body)
     const updatedTask = await storageService.updateTask(taskId, req.body);
     res.json(updatedTask);
   } catch (error) {

@@ -23,6 +23,8 @@ type TaskCardProps = {
 
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate }) => {
+    console.log("Is onTaskUpdate defined?", !!onTaskUpdate);
+
     const [mode, setMode] = useState(task.title ? TaskMode.SHOW : TaskMode.EDIT)
     const [title, setTitle] = useState(task.title);
     const [details, setDetails] = useState(task.details);
@@ -68,7 +70,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate })
         onTaskDelete(task._id);
     }
 
-    const handleTitleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newTitle = e.target.value;
         setTitle(newTitle);
 
@@ -76,11 +78,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate })
         onTaskUpdate(task._id, { title: newTitle })
     };
 
-    const handleDetailChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleDetailChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newDetail = e.target.value;
         setDetails(newDetail);
 
         // Update task in the database
+        console.log("updating detail", newDetail)
         onTaskUpdate(task._id, { detail: newDetail });
     };
 
