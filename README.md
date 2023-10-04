@@ -2,7 +2,8 @@
 
 Sarah Olson
 A4 Components
-link: test.me
+link: https://stackblitz.com/edit/a4-sarah-olson?embed=1&file=index.html&hideExplorer=1&hideNavigation=1&view=preview
+Note: if clicking the link above results in the page saying "Cannot GET /", clicking "Editor" then "Preview" in the bottom right corner of the browser should allow the page to load.
 
 I created a web app for Badminton Club members who are using their participation in this course as a gym credit to track their progress toward their grade goal. First the user either enters or creates account information, so that they can only see their progress, and login in. The user then enters their target grade and the dates + amount of hours they attended on each day to keep track of the user's progress toward their grading goal. 
 
