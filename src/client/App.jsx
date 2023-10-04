@@ -6,11 +6,6 @@ import Form from './components/Form';
 import Table from './components/Table';
 
 function App() {
-  const [date, setDate] = useState('');
-  const [exercise, setExercise] = useState('');
-  const [sets, setSets] = useState(0);
-  const [reps, setReps] = useState(0);
-  const [weight, setWeight] = useState(0);
   const [serverData, setData] = useState([]);
 
   useEffect(() => {
@@ -22,11 +17,16 @@ function App() {
       console.log(json[0].workoutdata)
       setData(json[0].workoutdata)
     })}, [])
+    
+  const handleFormSubmit = (formData) => {
+    console.log(formData);
+  };
+
 
   return (
     <div>
       <Title name = "Log Your Workout"/>
-      <Form />
+      <Form onFormSubmit={handleFormSubmit}/>
       <Title name = "Past Workout Logs"/>
       <Table props = {serverData}/>
     </div>
