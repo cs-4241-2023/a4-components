@@ -13,7 +13,7 @@ dotenv.config();
 
 const app = express();
 
-const server_port = Number(process.env.SERVER_PORT) || 3000;
+const server_port = process.env.PORT || 3000;
 const express_session_token = process.env.EXPRESS_SESSION_TOKEN;
 
 app.use(express.json());
