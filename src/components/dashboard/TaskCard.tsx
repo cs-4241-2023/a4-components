@@ -10,13 +10,12 @@ import SubTask from './SubTask';
 
 type TaskCardProps = {
     task: Task;
-    onTaskDelete: (taskId: string) => void;
-    onTaskUpdate: (taskId: string, updatedTask: any) => void;
+    onTaskDelete: () => void;
+    onTaskUpdate: (updatedTask: any) => void;
 };
 
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate }) => {
-    console.log("Is onTaskUpdate defined?", !!onTaskUpdate);
 
     const [mode, setMode] = useState(task.title ? TaskMode.SHOW : TaskMode.EDIT)
     const [title, setTitle] = useState(task.title);
@@ -36,31 +35,31 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate })
         newSubTasks[index].completed = !newSubTasks[index].completed;
 
         setSubTasks(newSubTasks);
-        onTaskUpdate(task._id, { subTasks: newSubTasks });
+        onTaskUpdate({ subTasks: newSubTasks });
     };
 
     const setSubTaskTitle = (index: number, title: string) => {
         const newSubTasks = [...subTasks];
         newSubTasks[index].title = title;
         setSubTasks(newSubTasks);
-        onTaskUpdate(task._id, { subTasks: newSubTasks });
+        onTaskUpdate({ subTasks: newSubTasks });
     };
 
     const addSubTask = () => {
         const newSubTasks = [...subTasks, { title: "", completed: false }];
         setSubTasks(newSubTasks);
-        onTaskUpdate(task._id, { subTasks: newSubTasks });
+        onTaskUpdate({ subTasks: newSubTasks });
     }
 
     const deleteSubTask = (index: number) => {
         const newSubTasks = [...subTasks];
         newSubTasks.splice(index, 1)
         setSubTasks(newSubTasks);
-        onTaskUpdate(task._id, { subTasks: newSubTasks });
+        onTaskUpdate({ subTasks: newSubTasks });
     }
 
     const deleteTask = () => {
-        onTaskDelete(task._id);
+        onTaskDelete();
     }
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,16 +67,15 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onTaskDelete, onTaskUpdate })
         setTitle(newTitle);
 
         // Update task in the database
-        onTaskUpdate(task._id, { title: newTitle })
+        onTaskUpdate({ title: newTitle })
     };
 
     const handleDetailChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const newDetail = e.target.value;
-        setDetails(newDetail);
+        const newDetails = e.target.value;
+        setDetails(newDetails);
 
         // Update task in the database
-        console.log("updating detail", newDetail)
-        onTaskUpdate(task._id, { detail: newDetail });
+        onTaskUpdate({ details: newDetails });
     };
 
     return (

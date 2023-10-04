@@ -92,8 +92,10 @@ const Dashboard: React.FC = () => {
                         <TaskCard
                             key={task._id}
                             task={task}
-                            onTaskDelete={(taskId) => handleDeleteTask(taskId)}
-                            onTaskUpdate={(updatedTaskData) => handleUpdateTask(task._id, updatedTaskData)}
+                            onTaskDelete={() =>
+                                handleDeleteTask(task._id)}
+                            onTaskUpdate={(updatedTaskData) =>
+                                handleUpdateTask(task._id, updatedTaskData)}
                         />
                     ))}
                 </div>
