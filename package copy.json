@@ -1,0 +1,39 @@
+{
+  "name": "hw4-new",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start-client": "sirv public --no-clear --port 3000",
+    "start-server": "node server.js",
+    "start": "npm-run-all --parallel start-server start-client"
+  },
+  "watch": {
+    "chokidar": false
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@types/node": "^20.8.0",
+    "rollup": "^3.15.0",
+    "rollup-plugin-css-only": "^4.3.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.1.2",
+    "svelte": "^3.55.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "mime": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "sirv-cli": "^2.0.0"
+  },
+  "description": "---",
+  "main": "rollup.config.js",
+  "author": "",
+  "license": "ISC"
+}

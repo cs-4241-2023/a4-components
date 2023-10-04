@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Lato:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Gelasio:wght@500&family=Lato:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Alfa+Slab+One&family=Gelasio:wght@500&family=Lato:ital@0;1&display=swap');
+
+body {
+  background:#435334;
+  color:#FAF1E4;
+  text-align: center;
+}
+
+.header {
+  font-family: 'Gelasio', serif;
+}
+
+form {
+  font-family: 'Alfa Slab One', cursive;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+label {
+  display: inline-block;
+  height: 20px;
+  width: 75px;
+  border:5px;
+  color: black;
+  font-size: 13pt;
+}
+
+img {
+  filter: invert(75)
+}
+
+input {
+  display: inline-block;
+  height: 20px;
+  width: 150px;
+  text-align: left;
+}
+
+.leftimg {
+  border-radius: 0%;
+  float: left;
+}
+
+.rightimg {
+  border-radius: 0%;
+  float: right;
+}
+
+table {
+  display: grid;
+  border-collapse: collapse;
+  min-width: 100%;
+  grid-template-columns: 
+    minmax(150px, 1fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr)
+    minmax(150px, 1.67fr);
+  font-family: 'Abhaya Libre', serif;
+}
+
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background-color: #9EB384;
+  text-align: left;
+  font-weight: normal;
+  font-size: 1.1rem;
+  color: white;
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0;
+  width: 3px;
+  cursor: col-resize;
+}
+
+.resize-handle:hover,
+/* The following selector is needed so the handle is visible during resize even if the mouse isn't over the handle anymore */
+.header--being-resized .resize-handle {
+  opacity: 0.5;
+}
+
+th:hover .resize-handle {
+  opacity: 0.3;
+}
+
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #CEDEBD;
+  color: black;
+}
