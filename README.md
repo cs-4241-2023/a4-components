@@ -1,33 +1,31 @@
 Assignment 4 - Components
 ===
 
-Due: October 4th, by 11:59 AM.
+## Grocery List
 
-For this assignment you will re-implement the client side portion of *either* A2 or A3 using either React or Svelte components. If you choose A3 you only need to use components for the data display / updating; you can leave your login UI as is.
+hosting link: https://a4-julie-vieira.glitch.me/
 
-[Svelte Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.svelte.md)  
-[React Tutorial](https://github.com/cs-4241-23/cs-4241-23.github.io/blob/main/using.react.md)  
-
-This project can be implemented on any hosting service (Glitch, DigitalOcean, Heroku etc.), however, you must include all files in your GitHub repo so that the course staff can view them.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-firstname-lastname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. Be sure to add *all* project files.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here and what you changed / added to assignment #3. Briefly (3–4 sentences) answer the following question: did the new technology improve or hinder the development experience?
-
-Unlike previous assignments, this assignment will be solely graded on whether or not you successfully complete it. Partial credit will be generously given.
+I used React to implement the features of A2 in an alternative manner.
+Using snowpack as the build tool, I implemented my React code in App.jsx.
+Most of the HTML was just copied over from my A2 index.html. Now,
+the index.html file serves as a pointer of where to start and
+references index.jsx as a script. Some of the functions that were
+in the main.js and server.improved.js were also copied into App.jsx
+in order to access elements with more ease, such as formatting the
+table or strings for prices. A new feature that I was able to implement
+with React was a counter. Now, in the Add Item button, there is a counter
+that keeps track of how many items a user has put into their shopping list.
+This was more difficult to figure out prior to using React. However, it
+has proven to be very useful as I was able to simplify how to remove
+elements by including a single Remove button, as opposed to before
+where I had a button in every row for different elements. React
+has also made it much quicker to update the budget and cost labels
+especially since these values are updated on a regular basis.
+I believe this technology did both improve and hinder the developement
+experience. Some syntax that I used in A2, like my old remove button,
+was written in a way that was not very conducive for implementing React.
+However, once an alternative solution was discovered, the new approach
+was actually much easier to understand and more visually appealing.
+Although there was certainly a learning curve, these elements can
+absolutely be beneficial in development if utilized properly, like
+indexing.
