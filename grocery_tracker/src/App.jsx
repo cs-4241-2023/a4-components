@@ -142,7 +142,7 @@ useEffect( ()=> {
     <>
       <h1>Grocery List</h1>
       <div className="card">
-      <input type='text' id="item" placeholder="Item Name" /> <input type="text" id="price" placeholder="$X.XX"/><button onClick={ e => submit()}>submit</button>
+      <input type='text' id="item" placeholder="Item Name" /> $<input type="text" id="price" placeholder="X.XX"/><button onClick={ e => submit()}>submit</button>
       <button onClick={ e => reset()}>reset</button>
       <div className="prices-container">
       <label>Total Price: ${(isNaN(totalPrice))?0.00:(totalPrice.toFixed(2))}</label>
