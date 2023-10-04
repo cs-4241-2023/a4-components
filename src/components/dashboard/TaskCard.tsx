@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
-import { TaskMode, TaskStatus } from "../../types/dashboard.types"
+import { Task, TaskMode, TaskStatus } from "../../types/dashboard.types"
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
 
 import "../../styles/task_card.css"
 import ProgressBar from './ProgressBar';
 import SubTask from './SubTask';
-import { ObjectId } from 'mongodb';
 
 type TaskCardProps = {
-    task: {
-        _id: string;
-        title: string;
-        details: string;
-        subTasks: { title: string; completed: boolean }[];
-        userId?: ObjectId;
-    };
+    task: Task;
     onTaskDelete: (taskId: string) => void;
     onTaskUpdate: (taskId: string, updatedTask: any) => void;
 };

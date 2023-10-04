@@ -6,11 +6,13 @@ import axios from 'axios';
 
 import "../../styles/dashboard.css"
 import { useNavigate } from 'react-router-dom';
+import { Task } from '../../types/dashboard.types';
+import { User } from '../../types/auth.types';
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
-    const [tasks, setTasks] = useState([]);
+    const [user, setUser] = useState<User | null>(null);
+    const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
         axios.get('/user-info')
@@ -68,7 +70,7 @@ const Dashboard: React.FC = () => {
 
     const handleDeleteTask = (taskId: string) => {
         axios.delete(`/task/${taskId}`)
-            .then(response => {
+            .then(_ => {
                 // After successfully deleting from the backend, remove from the state
                 setTasks(prevTasks => prevTasks.filter(task => task._id !== taskId));
             })

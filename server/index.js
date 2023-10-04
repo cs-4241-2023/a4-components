@@ -158,7 +158,7 @@ async function createViteServerMiddleware() {
   app.use('*', async (req, res) => {
     try {
       // Serve index.html - Vite transforms it on-the-fly!
-      const { render } = await vite.ssrLoadModule('/src/index.tsx');  // Adjust path if necessary
+      const { render } = await vite.ssrLoadModule('./src/index.tsx');  // Adjust path if necessary
       const html = await render({ url: req.originalUrl });
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
@@ -169,7 +169,7 @@ async function createViteServerMiddleware() {
   });
 
   app.listen(server_port, () => {
-    console.log('Server is running on http://localhost:${server_port}');
+    console.log(`Server is running on http://localhost:${server_port}`);
   });
 }
 

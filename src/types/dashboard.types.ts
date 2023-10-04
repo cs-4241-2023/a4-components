@@ -1,14 +1,4 @@
-export const Priority = {
-    LOW: 'Low',
-    MEDIUM: 'Medium',
-    HIGH: 'High',
-};
-
-export const PriorityColor = {
-    [Priority.LOW]: 'green',
-    [Priority.MEDIUM]: 'orange',
-    [Priority.HIGH]: 'red',
-};
+import { ObjectId } from "mongodb";
 
 export const TaskMode = {
     EDIT: 'Edit',
@@ -19,4 +9,17 @@ export const TaskStatus = {
     NOT_STARTED: 'Not Started',
     IN_PROGRESS: 'In Progress',
     COMPLETE: 'COMPLETE',
+}
+
+export type SubTask = {
+    title: string;
+    completed: boolean;
+}
+
+export type Task = {
+    _id: string;
+    title: string;
+    details: string;
+    subTasks: SubTask[];
+    userId?: ObjectId;
 }
