@@ -1,8 +1,16 @@
-# React + Vite
+# a4-components Isabella Pabon (github: isabellapabon)
+https://a4-isabella-pabon.glitch.me/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I combined my a2 and a3 projects and remade my project
+using react. I found this project to be slightly harder then 
+the two previous ones, since the new edition of states really
+confused me at first. For example I had trouble figuring out how to pass a
+function to a child component (for delete) but I found out you can
+do it through props. Even with these issues though, I would say that
+using react improved my development experience over all. 
+At the end of the project I felt I had a better understanding of how
+every aspect of my applicaiton connected.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I mostly copied my a2 format, but added in my a3 component of loading
+songs when you change the season. I also changed my server to use express like
+we did in a3.
