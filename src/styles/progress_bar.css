@@ -1,0 +1,13 @@
+.progress-container {
+    height: 10px;
+    width: 100%;
+    background-color: var(--background);
+    border-radius: 5px;
+}
+
+.progress-bar-container {
+    height: inherit;
+    background-color: var(--accent);
+    border-radius: inherit;
+    text-align: right;
+}

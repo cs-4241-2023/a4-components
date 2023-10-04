@@ -1,0 +1,56 @@
+div[data-theme='light'] {
+  --text: #2d1101;
+  --background: #fef0e7;
+  --primary: #fdbf9b;
+  --secondary: #fdc9aa;
+  --accent: #d75204;
+}
+
+div[data-theme='dark'] {
+  --text: #fee2d2;
+  --background: #180a01;
+  --primary: #642602;
+  --secondary: #552002;
+  --accent: #fb7528;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+* {
+  margin: 0;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--background);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+}
+
+/* Optional: Customize the icon size */
+.theme-toggle .MuiSvgIcon-root {
+  font-size: 2rem !important;
+}
+
+button {
+  border: 1px solid var(--secondary);
+  background-color: var(--primary);
+  color: var(--text);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
