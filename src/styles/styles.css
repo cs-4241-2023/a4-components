@@ -1,0 +1,62 @@
+/* a minimalist set of CSS resets */
+
+/* default to border-box */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* adjust typography defaults */
+body {
+  margin: 1rem;
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+/* images and videos max out at full width */
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #f9f2fc;
+  padding: 0.75em;
+  font-family: "Satisfy", cursive;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+input:invalid {
+  background-color: #d15a66;
+  opacity: 0.3;
+}
+
+input:valid {
+  opacity: 1;
+}
+
+button{
+  width: 150px;
+  padding: 5px;
+  margin: 10px;
+  border: 1.5px solid;
+  font-size: 15px;
+  font-family: "Satisfy", cursive;
+}
