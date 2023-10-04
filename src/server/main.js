@@ -2,6 +2,9 @@
 import express from "express";
 import ViteExpress from "vite-express";
 
+import path from "path";
+import { fileURLToPath } from 'url';
+
 // require('dotenv').config()
 import bcrypt from "bcrypt"
 // const bcrypt = require('bcrypt');
@@ -16,8 +19,10 @@ const app        = express()
 let currentUser = 'test'
 const saltRounds = 10;
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const rootFolder = path.resolve(__dirname, "../.."); // Assuming your root folder is two levels up
 
-app.use( express.static( 'public' ) )
+app.use( express.static( rootFolder ) )
 app.use( express.static( 'views'  ) )
 app.use( express.json() )
 app.use(express.urlencoded());
@@ -28,6 +33,11 @@ app.use( (req,res,next) => {
     res.status( 503 ).send()
   }
 })
+
+app.get("*.jsx", (req, res) => {
+  res.type("application/javascript");
+  res.sendFile(path.join(__dirname, "../..", req.url));
+});
 
 // const port = process.env.PORT || 3000;
 // app.listen(port, () => {
