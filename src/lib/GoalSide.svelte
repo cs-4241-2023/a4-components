@@ -199,6 +199,7 @@
         border-style: solid;
         border-color: #beffa6;
         text-align: center;
+        color: white
     }
 
     .B {
@@ -206,6 +207,7 @@
         border-style: solid;
         border-color: #e3ffa6;
         text-align: center;
+        color: white
     }
 
     .C {
@@ -213,6 +215,7 @@
         border-style: solid;
         border-color: #fbf3a3;
         text-align: center;
+        color: white
     }
 
     .NR {
@@ -220,6 +223,7 @@
         border-style: solid;
         border-color: #fbb7a3;
         text-align: center;
+        color: white
     }
 
     .contrast:focus-visible {
@@ -232,5 +236,6 @@
 
     p {
         text-align: center;
+        color: white;
     }
 </style>

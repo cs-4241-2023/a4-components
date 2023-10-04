@@ -63,6 +63,7 @@ const tableHeaders = ['Date', 'Hours', 'Time Remaining Until Goal', 'Delete']
 
   p {
     text-align: center;
+    color: white
   }
 
   /* h1 {

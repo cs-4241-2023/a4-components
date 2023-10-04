@@ -109,11 +109,20 @@
         padding: 4px;
     }
 
+    th,td{
+        color: white
+    }
+
+    form{
+        color: white
+    }
+
     button {
         text-decoration: underline;
     }
 
     p {
         text-align: center;
+        color: white
     }
 </style>
