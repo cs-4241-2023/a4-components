@@ -1,0 +1,225 @@
+:root{
+  --paleGray: #DBE4F5;
+  --navy: #00388A;
+  --royal: #004D9E;
+  --lightBlue: #AEC5F5;
+  --cream: #FEFBF0;
+  --fontSizeTitle: 45px;
+  --fontSizeLabels: 20px;
+  --fontSizeInput: 15px;
+}
+
+body{
+  background-color: var(--lightBlue);
+}
+
+#title{
+  font-family: 'Cinzel Decorative', cursive;
+  font-Size: var(--fontSizeTitle);
+  text-align: center;
+  color: var(--lightBlue);
+  background-color: var(--navy);
+  padding: 20px;
+  border:10px solid var(--cream);
+  text-shadow: 2px 2px 2px black;
+  margin: 20px;
+}
+
+/*
+Encapsulates budgetBox and labelsBox
+*/
+.budgetCost{
+  display: flex;
+  justify-content: center;
+  margin-left: 40px;
+  margin-right: 40px;
+  color: var(--navy);
+  background-color: var(--paleGray);
+  padding: 20px;
+  border:10px solid var(--cream);
+  margin-top: 40px;
+  margin-bottom: 40px;
+  justify-content: space-evenly;
+  font-size: var(--fontSizeLabels);
+  font-family: 'Comfortaa', cursive;
+}
+
+.budgetBox{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--forest);
+}
+
+.labelsBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: var(--bright);
+  font-weight: bold;
+}
+
+/*
+Encapsulates numbersInput
+*/
+.itemBox{
+  display: flex;
+  justify-content: center;
+  margin-left: 40px;
+  margin-right: 40px;
+  color: var(--navy);
+  background-color: var(--paleGray);
+  padding: 20px;
+  border:10px solid var(--cream);
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: var(--fontSizeLabels);
+  font-family: 'Comfortaa', cursive;
+}
+
+/*
+Encapsulates priceInput and quantity Input
+*/
+.numbersInput{
+  display: flex;
+  background-color: var(--deep);
+  justify-content: space-evenly;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.quantityInput{
+  display: flex;
+  background-color: var(--light);
+  flex-direction: column;
+  width: 100%;
+  margin-left: 20px;
+}
+
+.priceInput{
+  display: flex;
+  background-color: var(--light);
+  flex-direction: column;
+  width: 100%;
+  margin-right: 20px;
+}
+
+.removeBox{
+  display: flex;
+  justify-content: center;
+  margin-left: 40px;
+  margin-right: 40px;
+  color: var(--navy);
+  background-color: var(--paleGray);
+  padding: 20px;
+  border:10px solid var(--cream);
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: var(--fontSizeLabels);
+  font-family: 'Comfortaa', cursive;
+}
+
+.removeItem{
+  display: flex;
+  background-color: var(--light);
+  flex-direction: column;
+  width: 100%;
+  margin-right: 20px;
+}
+
+/*
+Table box
+*/
+.itemTable{
+  display: flex;
+  font-size: var(--fontSizeLabels);
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+fieldset {
+  width: 100%;
+  border: 1px solid #333333;
+  box-sizing: border-box;
+  font-size: var(--fontSizeInput);
+}
+
+/*
+red outline on required field boxes
+*/
+input:invalid {
+  box-shadow: 0 0 5px 1px red;
+}
+
+input:focus:invalid {
+  box-shadow: none;
+}
+
+/*
+table rules
+*/
+table, th, td {
+  border: 1px solid black;
+  color: black;
+  font-size: var(--fontSizeLabels);
+}
+/*
+table header
+*/
+th{
+  background-color: var(--navy);
+  color: white;
+  font-family: 'Changa', sans-serif;
+}
+/*
+table rows
+*/
+td{
+  font-family: 'Changa', sans-serif;
+}
+table{
+  width: 100%;
+  table-layout: fixed;
+  background-color: var(--cream);
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+/*
+button rules
+*/
+#removeButton{
+  width: 100%;
+  height: 100%;
+  font-size: var(--fontSizeInput);
+  background-color: var(--navy);
+  color: white;
+  font-family: 'Changa', sans-serif;
+}
+
+#add{
+  width: 100%;
+  font-size: var(--fontSizeInput);
+  background-color: var(--navy);
+  color: white;
+  font-family: 'Comfortaa', cursive;
+}
+
+#addBudget{
+  width: 100%;
+  font-size: var(--fontSizeInput);
+  margin-top: 5px;
+  background-color: var(--navy);
+  color: white;
+  font-family: 'Comfortaa', cursive;
+}
+
+#remove{
+  width: 100%;
+  font-size: var(--fontSizeInput);
+  margin-top: 5px;
+  background-color: var(--navy);
+  color: white;
+  font-family: 'Comfortaa', cursive;
+}
