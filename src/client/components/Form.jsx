@@ -30,7 +30,7 @@ function Form({ onFormSubmit }) {
     setWeight(parseFloat(e.target.value));
     };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = {
           date,
@@ -40,16 +40,22 @@ function Form({ onFormSubmit }) {
           weight,
         };
         onFormSubmit(formData);
+        
+        const response = await fetch("/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
     }
 
     return (
         <div className="container" style={{width:"35%"}}>
             <form onSubmit={handleSubmit}>
-                <FormInput type = "date" name="Date" value={date} onChange={handleDateChange} />
-                <FormInput type = "text" name="Excercise" value={exercise} onChange={handleExerciseChange}/>
-                <FormInput type = "text" name="Sets" value={sets} onChange={handleSetsChange}/>
-                <FormInput type = "text" name="Reps" value={reps} onChange={handleRepsChange}/>
-                <FormInput type = "text" name="Weight" value={weight} onChange={handleWeightChange}/>
+                <FormInput type = "date" name="Date" onChange={handleDateChange} />
+                <FormInput type = "text" name="Exercise" onChange={handleExerciseChange}/>
+                <FormInput type = "text" name="Sets" onChange={handleSetsChange}/>
+                <FormInput type = "text" name="Reps" onChange={handleRepsChange}/>
+                <FormInput type = "text" name="Weight" onChange={handleWeightChange}/>
                 <div className="mb-3">
                     <button className="w-100 text-white btn shadow-none py-3" id="submit">Submit</button>
                 </div>

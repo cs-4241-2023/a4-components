@@ -20,6 +20,9 @@ function App() {
     
   const handleFormSubmit = (formData) => {
     console.log(formData);
+    const updatedData = [...serverData, formData];
+    setData(updatedData);
+    console.log(updatedData)
   };
 
 
