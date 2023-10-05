@@ -352,4 +352,4 @@ function calculateOverallRating(outsideScoring, insideScoring, athleticism, play
 
 
 
-ViteExpress.listen(app, 3000, () => console.log("Server is listening..."));
+ViteExpress.listen(app, 3000, () => console.log('Server is listening on 3000'));

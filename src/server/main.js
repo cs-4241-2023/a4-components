@@ -2,9 +2,6 @@
 import express from "express";
 import ViteExpress from "vite-express";
 
-import path from "path";
-import { fileURLToPath } from 'url';
-
 // require('dotenv').config()
 import bcrypt from "bcrypt"
 // const bcrypt = require('bcrypt');
@@ -19,10 +16,8 @@ const app        = express()
 let currentUser = 'test'
 const saltRounds = 10;
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rootFolder = path.resolve(__dirname, "../.."); // Assuming your root folder is two levels up
 
-app.use( express.static( rootFolder ) )
+app.use( express.static( 'public' ) )
 app.use( express.static( 'views'  ) )
 app.use( express.json() )
 app.use(express.urlencoded());
@@ -33,11 +28,6 @@ app.use( (req,res,next) => {
     res.status( 503 ).send()
   }
 })
-
-app.get("*.jsx", (req, res) => {
-  res.type("application/javascript");
-  res.sendFile(path.join(__dirname, "../..", req.url));
-});
 
 // const port = process.env.PORT || 3000;
 // app.listen(port, () => {
@@ -103,18 +93,22 @@ app.post('/playerRating.html', async (req, res) => {
   }
 });
   // route to get all docs
-  app.get("/get", async (req, res) => {
-    if (PlayerCollection !== null) {
-      const docs = await PlayerCollection.find(
-        {user: currentUser}
-      ).toArray()
-      console.log(docs)
-      // res.json( docs )
-      res.json({test: "test"})
-    }
+  app.get("/players", async (req, res) => {
+    console.log('in player request')
+    // if (PlayerCollection !== null) {
+    //   const docs = await PlayerCollection.find(
+    //     {user: currentUser}
+    //   ).toArray()
+    //   console.log('docs: ',docs)
+    //   // res.json( docs )
+    //   // res.json(docs)
+
+    // }
+    res.json(nbaPlayerData);
    })
    // add player to database
    app.post( '/add', async (req,res) => {
+    console.log('in add request')
     const reqPlayer = req.body.newPlayer;
     reqPlayer.rating = calculateOverallRating(reqPlayer.outside,reqPlayer.inside,reqPlayer.athleticism,reqPlayer.playmaking,reqPlayer.defense)
     reqPlayer.user = currentUser
@@ -314,15 +308,6 @@ let nbaPlayerData = [
     "rating": 81
   },
   {
-    "name": "Rudy Gobert",
-    "outside": 45,
-    "inside": 88,
-    "athleticism": 80,
-    "playmaking": 55,
-    "defense": 96,
-    "rating": 73
-  },
-  {
     "name": "Chris Paul",
     "outside": 87,
     "inside": 70,
@@ -330,6 +315,15 @@ let nbaPlayerData = [
     "playmaking": 95,
     "defense": 76,
     "rating": 82
+  },
+  {
+    "name": "Rudy Gobert",
+    "outside": 45,
+    "inside": 88,
+    "athleticism": 80,
+    "playmaking": 55,
+    "defense": 96,
+    "rating": 73
   },
  
 
@@ -362,4 +356,4 @@ function calculateOverallRating(outsideScoring, insideScoring, athleticism, play
 
 
 
-ViteExpress.listen(app, 3000, () => console.log("Server is listening..."));
+ViteExpress.listen(app, 3000, () => console.log('Server is listening on 3000'));
