@@ -71,25 +71,24 @@ input[type=text], select {
 
 }
 
-/* 
 input[type=text], select {
   width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: 12px 20px 10px 10px;
+  margin: 14px 4px;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   box-sizing: border-box;
   font-family:'Poppins', sans-serif;
 
 }
 
 button{
-  width: 6%;
-  background-color: #3D246C;
-  color: white;
-  padding: 12px 20px;
-  margin: 8px 0;
+  /* width: 6%; */
+  /* background-color: #3D246C; */
+  /* color: white; */
+  /* padding: 12px 20px; */
+  margin: 10px 10px 50px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -98,10 +97,18 @@ button{
 }
 
 
+
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #table {
   font-family:'Poppins', sans-serif;
   border-collapse: collapse;
-  width: 80%;
+  width: 70%;
+  /* margin: 20px 20px; */
 }
 
 #table td, #customers th {
@@ -118,12 +125,23 @@ button{
 
 #table th {
   font-family:'Poppins', sans-serif;
+
+
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #3D246C;
+  background-color: #845fca;
   color: white;
 }
+
+
+
+
+
+/* 
+
+
+
 
 
 header{
