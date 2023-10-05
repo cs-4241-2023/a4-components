@@ -27,7 +27,7 @@ const App = () => {
        setTodos( json )
     })
   }
-  
+  */
   function submit() {
     const input1 = document.querySelector('#course').value
     const input2 = document.querySelector('#assignment').value
@@ -44,7 +44,7 @@ const App = () => {
       setTodos( json )
     })
   }
-*/
+
   // make sure to only do this once
  const getData = async function() {
   await fetch( '/read' )
@@ -75,14 +75,13 @@ const App = () => {
       <table id="homework-table">
         <tbody>
           <tr>
-            <th>#</th>
             <th>Course</th>
             <th>Assignment</th>
             <th>Due Date</th>
             <th>Due Time</th>
             <th>Done?</th>
           </tr>
-          { todos.map( (todo,i) => <tr> <td>key={i}</td> <td>{todo.course}</td> <td>{todo.assignment}</td> <td>{ todo.duedate }</td> <td>{ todo.duetime }</td> <td><input type="checkbox" defaultChecked={props.completed} onChange={ e => props.onclick( props.name, e.target.checked ) }/></td></tr> ) }
+          { todos.map( (todo,i) => <tr><td>{todo.course}</td> <td>{todo.assignment}</td> <td>{ todo.duedate }</td> <td>{ todo.duetime }</td> <td><input type="checkbox" defaultChecked={props.completed} onChange={ e => props.onclick( props.name, e.target.checked ) }/></td></tr> ) }
         </tbody>
       </table> 
     </div>

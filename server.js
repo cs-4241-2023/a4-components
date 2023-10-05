@@ -9,7 +9,9 @@ const todos = []
 app.use( express.json() )
 
 //Change this to send the array - res.json( todos )
-app.get( '/read', ( req, res ) => res.send( "It works!" ) )
+app.get( '/read', ( req, res ) => {
+  res.json( todos )
+})
 
 app.post( '/submit', ( req,res ) => {
   todos.push( req.body )
