@@ -14,24 +14,33 @@ function App() {
   })
     .then((response) => response.json())
     .then(function (json) {  
-      console.log(json[0].workoutdata)
       setData(json[0].workoutdata)
     })}, [])
     
   const handleFormSubmit = (formData) => {
-    console.log(formData);
     const updatedData = [...serverData, formData];
     setData(updatedData);
-    console.log(updatedData)
   };
 
+  const handleDelete = async (index) => {
+    const updatedData = serverData.filter((_, i) => i !== index);
+    setData(updatedData);
+
+    const json = { deleteResponse:index }
+
+    const response = await fetch("/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(json),
+  });
+  }
 
   return (
     <div>
       <Title name = "Log Your Workout"/>
       <Form onFormSubmit={handleFormSubmit}/>
       <Title name = "Past Workout Logs"/>
-      <Table props = {serverData}/>
+      <Table props = {serverData} deleteLog={handleDelete}/>
     </div>
   );
 }

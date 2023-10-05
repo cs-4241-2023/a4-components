@@ -5,7 +5,6 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 
 const app = express();
-//const logdata = []
 
 let userdata = null;
 let userid = "admin";
@@ -40,11 +39,7 @@ app.get("/fetchData", async (_, res) => {
 })
 
 app.post( '/submit', async (req,res) => {
-  console.log("submitting")
-  console.log(userdata)
   userdata[0]['workoutdata'].push(req.body)
-
-  console.log(userdata)
   const result = await collection.replaceOne({"userid": userid }, userdata[0])
   res.json( result )
 })

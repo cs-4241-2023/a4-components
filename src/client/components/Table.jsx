@@ -1,7 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '/src/client/App.css'
 
-function Table({props}) {
+function Table({props, deleteLog}) {
+    
+    const handleDelete = (index) => {
+        deleteLog(index);
+    }
+
     return (
     <div className="container justify-content-center d-flex">
     <table className="justify-content-center mb-5">
@@ -23,7 +28,7 @@ function Table({props}) {
                     <td>{row.sets}</td>
                     <td>{row.reps}</td>
                     <td>{row.weight}</td>
-                    <td><button>Delete</button></td>
+                    <td><button onClick={() => handleDelete(index)}>Delete</button></td>
                 </tr>
             ))}
         </tbody>
