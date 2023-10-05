@@ -2,7 +2,7 @@
 
 ## Membership Portal
 
-your hosting link e.g. http://a4-nikeshwalling.glitch.me
+your hosting link e.g. https://a4-nikeshwalling.glitch.me/
 
 This is a reimplementation of my A3 assignment using React-Bootstrap rather than
 Bootstrap and JQuery. The app uses Vite-Express as the middleware and still
