@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+}
+
+body {
+  background: #EACDC2;
+  color: #1A1423;
+  font-family: Arial, sans-serif; 
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top:15px;
+  border: 2px inset #1A1423;
+}
+
+th, td, tr {
+  padding: 5px;
+  text-align: center;
+  border: 2px solid #1A1423;
+}
+
+th {
+  background: #B75D69; 
+}
+
+button {
+  background: #372549;
+  color: #f2f2f2;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #774C60;
+}
+
+#action {
+  width: 35%;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+}
