@@ -7,7 +7,7 @@ import session from "express-session";
 import ViteExpress from "vite-express";
 import passport from "passport";
 import GitHubStrategy from "passport-github2";
-import "crypto";
+import Crypto from "crypto";
 
 // const cookieParser = require("cookie-parser");
 const app = express();
@@ -123,7 +123,7 @@ app.post("/findUser", async function (req, res) {
       }
     } else {
       console.log("creating a new user");
-      let randNum = crypto.randomBytes(8).toString("hex");
+      let randNum = Crypto.randomBytes(8).toString("hex");
       const newUser = new User({
         email: data.username,
         name: data.username,
@@ -141,6 +141,14 @@ app.post("/findUser", async function (req, res) {
     res.send(JSON.stringify("false"));
     console.log("Something went wrong");
     console.log(error);
+  }
+});
+
+app.get("/login", function (req, res) {
+  if (req.session.login == true) {
+    console.log("Signing in normally");
+    console.log(req.session);
+    res.redirect("/homepage");
   }
 });
 

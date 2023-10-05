@@ -5,15 +5,29 @@ import { useState } from "react";
 import { Image, Form, Button, Navbar } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 
-// const githubLogin = async function githubOAuth();
-
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(username);
+    const user = {
+      username: username,
+      password: password,
+    };
+    const response = await fetch("/findUser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    });
+    const text = await response.text();
+    const validation = JSON.parse(text);
+    if (validation == "true") {
+      console.log("Normal login");
+      window.location.href = "/login";
+    } else {
+      console.log("failed to log in");
+    }
   };
   const githubOAuth = (event) => {
     console.log("githubbing");
@@ -73,6 +87,7 @@ function Login() {
                 name="sign_in_button"
                 className="w-100 mb-2 rounded-3"
                 size="lg"
+                onClick={handleSubmit}
               >
                 Sign In
               </Button>
