@@ -148,6 +148,12 @@ import "./index.css";
       </div>
     );
   }
+
   
 
   export default BmiCalculator;
+
+
+
+
+  
