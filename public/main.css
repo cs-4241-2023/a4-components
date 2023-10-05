@@ -3,6 +3,9 @@ body {
   color:white;
   font-family: 'Dosis', sans-serif;
   font-family: 'Oswald', sans-serif;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
 }
 
 .center {
