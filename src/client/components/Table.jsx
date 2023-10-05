@@ -3,28 +3,42 @@ import { useState } from "react";
 import "/src/client/App.css";
 
 
-function Table() {
+function Table(props) {
 
     return (
         <div>
-            
-            <table class="center" id="table">
-                <th> Name</th>
-                <th>Cat Age</th>
-                <th>Cat Age Category</th>
-                <th>Cat Breed</th>
-                <th>Favorite Activity</th>
 
+            <table className="center" id="table">
+                <thead>
+
+                    <tr>
+                        <th> Name</th>
+                        <th>Cat Age</th>
+                        <th>Cat Breed</th>
+                        <th>Favorite Activity</th>
+
+
+                    </tr>
+
+
+                </thead>
+
+                <tbody>
+
+                {props.data.map((row, index) => (
+                <tr key={index}>
+                    <td>{row.name}</td>
+                    <td>{row.age}</td>
+                    <td>{row.breed}</td>
+                    <td>{row.favAct}</td>
+                </tr>
+                ))}
+                </tbody>
             </table>
-            
-
         </div>
-
-
-
     );
 
 }
 
-export default Table
+export default Table;
 
