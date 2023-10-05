@@ -171,6 +171,14 @@ app.post("/add", async (req, res) => {
   console.log("saved an entry");
 });
 
+app.post("/delete", async (req, res) => {
+  let data = req.body;
+  debugger;
+  console.log("deletion data: ", data);
+  await Submission.findByIdAndDelete(data.hourID);
+  res.redirect("/getData");
+});
+
 app.post("/update", async (req, res) => {
   let data = req.body;
   console.log("edited data: ", data);

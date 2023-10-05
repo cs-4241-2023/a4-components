@@ -2,6 +2,21 @@ import React from "react";
 import { Button, Table } from "react-bootstrap";
 
 function TableData({ entries }) {
+  const deleteEntry = async (event) => {
+    const elemID =
+      event.currentTarget.parentElement.parentElement.dataset.internal_id;
+    console.log("target to delete id: ", elemID);
+    const response = await fetch("/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ hourID: elemID }),
+    });
+    const text = await response.text();
+    const newData = JSON.parse(text);
+    entries = newData;
+    console.log("gonna print data:", data);
+  };
+
   const data = Array.isArray(entries) ? entries : [];
   if (data == []) {
     return <div> </div>;
@@ -16,19 +31,29 @@ function TableData({ entries }) {
             <th style={{ width: "200px" }}>Date</th>
             <th style={{ width: "200px" }}>Reason</th>
             <th style={{ width: "100px" }}>Delete</th>
+            <th style={{ width: "100px" }}>Edit</th>
           </tr>
         </thead>
         <tbody className="editable" id="dataRepresentation">
           {data.map((entry) => {
             totalHours += entry.numHours;
             return (
-              <tr>
+              <tr data-internal_id={entry._id}>
                 <td>{entry.numHours}</td>
                 <td>{entry.date}</td>
                 <td>{entry.reason}</td>
                 <td>
-                  <Button className="btn-dark" style={{ marginLeft: "25px" }}>
+                  <Button
+                    className="btn-dark"
+                    style={{ marginLeft: "25px" }}
+                    onClick={deleteEntry}
+                  >
                     X
+                  </Button>
+                </td>
+                <td>
+                  <Button className="btn-dark" style={{ marginLeft: "25px" }}>
+                    E
                   </Button>
                 </td>
               </tr>

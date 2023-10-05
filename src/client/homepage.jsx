@@ -43,8 +43,7 @@ function Homepage() {
   const [hours, setHours] = useState("");
   const [date, setDate] = useState("");
   const [reason, setReason] = useState("");
-  const [submissions, setSubmissions] = useState({});
-  let tableData = null;
+  const [submissions, setSubmissions] = useState([]);
 
   //gets data from the server on load
   useEffect(() => {
@@ -59,13 +58,13 @@ function Homepage() {
       });
   }, []);
 
-  const submitData = async function () {
+  const submitData = async function (event) {
     event.preventDefault();
     let newSubmission = new hourEntry(date, hours, reason);
     const body = JSON.stringify(newSubmission);
     console.log("New submission: ", body);
-    const response = await fetch("/getData", {
-      method: "GET",
+    const response = await fetch("/add", {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: body,
     });
@@ -76,6 +75,22 @@ function Homepage() {
     console.log("gonna print data:", data);
   };
 
+  const deleteEntry = async (event) => {
+    const elemID =
+      event.currentTarget.parentElement.parentElement.dataset.internal_id;
+    console.log("target to delete id: ", elemID);
+    const response = await fetch("/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ hourID: elemID }),
+    });
+    const text = await response.text();
+    const newData = JSON.parse(text);
+    setSubmissions(newData);
+    console.log("gonna print data:", data);
+  };
+
+  let totalHours = 0;
   return (
     <Container fluid>
       <Row>
@@ -172,7 +187,62 @@ function Homepage() {
             </Button>
           </Form>
           <hr />
-          <TableData entries={submissions} />
+          <div>
+            <Table striped hover bordered id="submissionTable">
+              <thead>
+                <tr>
+                  <th style={{ width: "200px" }}>Number of Hours</th>
+                  <th style={{ width: "200px" }}>Date</th>
+                  <th style={{ width: "200px" }}>Reason</th>
+                  <th style={{ width: "100px" }}>Delete</th>
+                  <th style={{ width: "100px" }}>Edit</th>
+                </tr>
+              </thead>
+              <tbody className="editable" id="dataRepresentation">
+                {submissions.map((entry) => {
+                  totalHours += entry.numHours;
+                  return (
+                    <tr data-internal_id={entry._id}>
+                      <td>{entry.numHours}</td>
+                      <td>{entry.date}</td>
+                      <td>{entry.reason}</td>
+                      <td>
+                        <Button
+                          className="btn-dark"
+                          style={{ marginLeft: "25px" }}
+                          onClick={deleteEntry}
+                        >
+                          X
+                        </Button>
+                      </td>
+                      <td>
+                        <Button
+                          className="btn-dark"
+                          style={{ marginLeft: "25px" }}
+                        >
+                          E
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+            <hr />
+            <Table
+              striped
+              bordered
+              id="totalHoursTable"
+              style={{ width: "250px" }}
+            >
+              <thead>
+                <tr>
+                  <th style={{ width: "150px" }}>Total Hours:</th>
+                  <th>{totalHours}</th>
+                </tr>
+              </thead>
+            </Table>
+          </div>
         </Col>
       </Row>
     </Container>
