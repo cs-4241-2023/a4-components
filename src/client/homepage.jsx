@@ -44,7 +44,8 @@ function Homepage() {
   const [date, setDate] = useState("");
   const [reason, setReason] = useState("");
   const [submissions, setSubmissions] = useState([]);
-
+  const [editable, setEditable] = useState(false);
+  const [content, setContent] = useState("Edit");
   //gets data from the server on load
   useEffect(() => {
     fetch("/getData", {
@@ -82,12 +83,52 @@ function Homepage() {
     const response = await fetch("/delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ hourID: elemID }),
+      body: JSON.stringify({ submissionID: elemID }),
     });
     const text = await response.text();
     const newData = JSON.parse(text);
     setSubmissions(newData);
-    console.log("gonna print data:", data);
+  };
+
+  const controlEdit = async () => {
+    console.log(editable);
+    if (editable) {
+      const response = await fetch("/getData", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const text = await response.text();
+      const newData = JSON.parse(text);
+      setSubmissions(newData);
+
+      setContent("Submit Edits");
+    } else {
+      console.log("Gonna update");
+      const response = await fetch("/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submissions),
+      });
+      const text = await response.text();
+      const newData = JSON.parse(text);
+      setSubmissions(newData);
+
+      setContent("Edit");
+    }
+    setEditable(!editable);
+    console.log(editable);
+  };
+
+  const onChangeInput = (e, entryID) => {
+    e.preventDefault();
+    let evt = e.currentTarget;
+    const name = evt.name;
+    const value = evt.value;
+    const rowID = evt.parentElement.parentElement.dataset.internal_id;
+    const edited = submissions.map((item) =>
+      item._id === entryID && name ? { ...item, [name]: value } : item
+    );
+    setSubmissions(edited);
   };
 
   let totalHours = 0;
@@ -168,6 +209,7 @@ function Homepage() {
                 Reason for Hours
               </Form.Label>
               <Form.Control
+                required
                 as="textarea"
                 id="reasonSubmission"
                 rows={5}
@@ -195,17 +237,61 @@ function Homepage() {
                   <th style={{ width: "200px" }}>Date</th>
                   <th style={{ width: "200px" }}>Reason</th>
                   <th style={{ width: "100px" }}>Delete</th>
-                  <th style={{ width: "100px" }}>Edit</th>
                 </tr>
               </thead>
-              <tbody className="editable" id="dataRepresentation">
+              <tbody id="dataRepresentation">
                 {submissions.map((entry) => {
-                  totalHours += entry.numHours;
+                  totalHours += parseInt(entry.numHours);
                   return (
-                    <tr data-internal_id={entry._id}>
-                      <td>{entry.numHours}</td>
-                      <td>{entry.date}</td>
-                      <td>{entry.reason}</td>
+                    <tr key={entry._id} data-internal_id={entry._id}>
+                      <td key="numHours">
+                        <input
+                          name="numHours"
+                          required
+                          value={entry.numHours}
+                          type="text"
+                          plaintext="true"
+                          readOnly={editable}
+                          style={{
+                            border: "none", // Remove border
+                            boxShadow: "none", // Remove box shadow
+                            background: "transparent", // Make background transparent
+                          }}
+                          onChange={(e) => onChangeInput(e, entry._id)}
+                        ></input>
+                      </td>
+                      <td key="date">
+                        <input
+                          name="date"
+                          required
+                          value={entry.date.split("T")[0]}
+                          type="date"
+                          plaintext={!editable}
+                          readOnly={editable}
+                          style={{
+                            border: "none", // Remove border
+                            boxShadow: "none", // Remove box shadow
+                            background: "transparent", // Make background transparent
+                          }}
+                          onChange={(e) => onChangeInput(e, entry._id)}
+                        ></input>
+                      </td>
+                      <td key="reason">
+                        <input
+                          name="reason"
+                          required
+                          value={entry.reason}
+                          type="text"
+                          plaintext="true"
+                          readOnly={editable}
+                          style={{
+                            border: "none", // Remove border
+                            boxShadow: "none", // Remove box shadow
+                            background: "transparent", // Make background transparent
+                          }}
+                          onChange={(e) => onChangeInput(e, entry._id)}
+                        ></input>
+                      </td>
                       <td>
                         <Button
                           className="btn-dark"
@@ -215,19 +301,14 @@ function Homepage() {
                           X
                         </Button>
                       </td>
-                      <td>
-                        <Button
-                          className="btn-dark"
-                          style={{ marginLeft: "25px" }}
-                        >
-                          E
-                        </Button>
-                      </td>
                     </tr>
                   );
                 })}
               </tbody>
             </Table>
+            <Button className="btn-primary" onClick={controlEdit}>
+              {content}
+            </Button>
             <hr />
             <Table
               striped

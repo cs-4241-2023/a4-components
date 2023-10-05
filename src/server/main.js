@@ -152,7 +152,7 @@ app.get("/signout", function (req, res) {
 app.get("/getData", async (req, res) => {
   const result = await Submission.find({ person: req.session.user._id });
   let body = JSON.stringify(result);
-  // console.log("data: ", body);
+  console.log("gotten data: ", result);
   res.send(body);
 });
 
@@ -173,18 +173,27 @@ app.post("/add", async (req, res) => {
 
 app.post("/delete", async (req, res) => {
   let data = req.body;
-  debugger;
   console.log("deletion data: ", data);
-  await Submission.findByIdAndDelete(data.hourID);
+  await Submission.findByIdAndDelete(data.submissionID);
   res.redirect("/getData");
 });
 
 app.post("/update", async (req, res) => {
   let data = req.body;
   console.log("edited data: ", data);
-  debugger;
-  const query = { [`${data.updatedCell}`]: data.newVal };
-  await Submission.updateOne({ _id: data.hourID }, query);
+  data.map(async (item) => {
+    const result = await Submission.updateOne(
+      { _id: item._id },
+      {
+        $set: {
+          numHours: item.numHours,
+          date: item.date,
+          reason: item.reason,
+        },
+      }
+    );
+    console.log("result:", result);
+  });
   console.log("should have updated");
   res.redirect("/getData");
 });
