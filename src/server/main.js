@@ -12,6 +12,8 @@ import Crypto from "crypto";
 // const cookieParser = require("cookie-parser");
 const app = express();
 
+ViteExpress.config({ mode: process.env.NODE_ENV });
+
 app.use(express.static("src/"));
 // app.use(ViteExpress.static("/"));
 app.use(express.static("./index.html"));
