@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "nodemon src/server/main.js",
-    "start": "NODE_ENV=production node src/server/main.js",
+    "start": "node src/server/main.js",
     "build": "vite build"
   },
   "dependencies": {

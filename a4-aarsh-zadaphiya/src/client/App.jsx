@@ -1,26 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./index.css";
   
   function BmiCalculator() {
-    const [height, setHeight] = useState("");
-    const [weight, setWeight] = useState("");
-    const [age, setAge] = useState("");
-    const [gender, setGender] = useState("male");
-    const [bmi, setBmi] = useState("");
-  
-    const calculateBMI = () => {
-      const heightInMeters = height / 100;
-      const bmiValue = (weight / (heightInMeters * heightInMeters)).toFixed(2);
-      setBmi(bmiValue);
+    let [height, setHeight] = useState("");
+    let [weight, setWeight] = useState("");
+    let [age, setAge] = useState("");
+    let [gender, setGender] = useState("male");
+    let [serverData, setServerData] = useState([]);
+    
+    const submit = async () => {
+      let json = { height:height, weight:weight , age:age, gender:gender} //construct your json 
+    
+      await fetch("/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(json),
+      }).then(async function (response) {
+        setServerData(await response.json());
+      });
     };
-  
+    
+    async function fetchData() {
+      await fetch("/docs", {
+        method: "GET",
+      }).then(async function (response) {
+        setServerData(await response.json());
+      });
+    }
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+
     return (
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-6">
             <div className="box">
-              <form id="bmiForm">
+              <form id="bmiForm" onSubmit={submit}>
                 <div className="mb-3 text-start">
                   <label className="form-label" htmlFor="height">
                     Height (cm)
@@ -97,9 +117,8 @@ import "./index.css";
                 <div className="mb-3">
                   <button
                     className="btn btn-success w-100"
-                    type="button"
+                    type="submit"
                     id="Calculate"
-                    onClick={calculateBMI}
                   >
                     Calculate BMI
                   </button>
@@ -113,7 +132,7 @@ import "./index.css";
               <div className="py-5 px-5">
                 <p>Your calculated BMI</p>
                 <div className="alert alert-success">
-                  <strong></strong> <span id="bmi">{bmi}</span>
+                  <strong></strong> <span id="bmi">{}</span>
                 </div>
               </div>
   
@@ -131,16 +150,33 @@ import "./index.css";
               <table className="table my-table">
                 <thead>
                   <tr>
-                    <th>Date</th>
                     <th>Height (cm)</th>
                     <th>Weight (kg)</th>
                     <th>Age</th>
                     <th>Gender</th>
                     <th>BMI</th>
-                    <th>Options</th>
                   </tr>
                 </thead>
-                <tbody id="entryTable"></tbody>
+                <tbody id="entryTable">
+                  {
+                  Array.isArray(serverData) && serverData.length > 0 ? (
+                    serverData.map(function (data, index) {
+                      return (
+                        <tr key={index}>
+                          <td>{data.height}</td>
+                          <td>{data.weight}</td>
+                          <td>{data.age}</td>
+                          <td>{data.gender}</td>
+                          <td>{data.bmi}</td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan="5">No data available</td>
+                    </tr>
+                  )}
+              </tbody>
               </table>
             </div>
           </div>
@@ -149,9 +185,7 @@ import "./index.css";
     );
   }
 
-  
-
-  export default BmiCalculator;
+export default BmiCalculator;
 
 
 
