@@ -1,5 +1,3 @@
-## BMI Calculator Using React
-
 # BMI Calculator Web Application
 
 **Glitch Link:** [BMI Calculator](https://a4-aarsh-zadaphiya.glitch.me/)
