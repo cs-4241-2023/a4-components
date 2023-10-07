@@ -1,6 +1,7 @@
 import React from "react";
+import TableRow from "./TableRow";
 
-function ResultsTable() {
+function ResultsTable({ listOfTasks }) {
   return (
     <>
       <table id="tasksTable">
@@ -16,6 +17,21 @@ function ResultsTable() {
             <th>Delete?</th>
           </tr>
         </thead>
+        <tbody>
+          {listOfTasks.length > 0 ? (
+            listOfTasks.map((task) => <TableRow key={task.id} task={task} />)
+          ) : (
+            <tr>
+              <td
+                colSpan={8}
+                style={{ textAlign: "center", verticalAlign: "middle" }}
+              >
+                No tasks in your list at the current moment. Feel free to add
+                some.
+              </td>
+            </tr>
+          )}
+        </tbody>
       </table>
     </>
   );

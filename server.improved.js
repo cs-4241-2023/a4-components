@@ -16,6 +16,58 @@ app.use((req, res, next) => {
 // parses JSON bodies
 app.use(express.json());
 
+// declare variables to hold the data
+let currentId = 3;
+let tasksList = [
+  {
+    id: 0,
+    taskName: "Clean the garage",
+    taskDescription:
+      "Throw away old junk in the trash. Reorganize items to clear up more floor space.",
+    taskDeadline: "2023-09-22",
+    taskPriority: "Medium",
+    taskCreated: "2023-09-05",
+  },
+  {
+    id: 1,
+    taskName: "Wash the dishes",
+    taskDescription:
+      "Wash the dishes in the sink. Put them away in the cabinets.",
+    taskDeadline: "2023-09-10",
+    taskPriority: "High",
+    taskCreated: "2023-09-03",
+  },
+  {
+    id: 2,
+    taskName: "Do the laundry",
+    taskDescription:
+      "Wash the clothes in the washing machine. Dry them in the dryer. Fold them and put them away.",
+    taskDeadline: "2023-09-20",
+    taskPriority: "Low",
+    taskCreated: "2023-09-02",
+  },
+];
+
+const tasksPreprocessingMiddleware = (req, res, next) => {
+  for (let i = 0; i < tasksList.length; i++) {
+    tasksList[i].totalTime = duration(
+      new Date(tasksList[i].taskCreated),
+      new Date(tasksList[i].taskDeadline)
+    );
+    tasksList[i].timeRemaining = duration(
+      new Date(),
+      new Date(tasksList[i].taskDeadline)
+    );
+  }
+  // move on to the next middleware
+  next();
+};
+
+// get all tasks
+app.get("/api/tasks", tasksPreprocessingMiddleware, (req, res) => {
+  res.json(tasksList);
+});
+
 ViteExpress.listen(app, 3000, () => {
   console.log(`Server is running on http://localhost:3000`);
 });
