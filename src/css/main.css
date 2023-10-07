@@ -1,0 +1,113 @@
+:root {
+  --global-padding-left: 1vw;
+}
+html {
+  /* font-family: 'Orbitron', sans-serif; */
+  font-family: 'Roboto Condensed', sans-serif;
+  /* font-family: 'Ubuntu', sans-serif; */
+  box-sizing: border-box;
+}
+#flex-container {
+  background:rgb(210, 186, 186);
+  color:white;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+header{
+  background: #cb2828;
+  padding: var(--global-padding-left);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  min-width: 100vw;
+  box-sizing: border-box;
+}
+#header-title {
+  /* outline: 1px solid white; */
+  text-align: center;
+}
+main {
+  box-sizing: border-box;
+  flex-grow: 1;
+  padding-top: 0;
+  padding-left: var(--global-padding-left);
+}
+footer {
+  box-sizing: border-box;
+  background: #cb2828;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  min-width: 100vw;
+  padding: 0 var(--global-padding-left);
+}
+/* p {
+  outline: 1px solid white;
+} */
+form {
+  /* box-sizing: border-box; */
+  background-color: #5995a4;
+  border-radius: 10px;
+  padding: var(--global-padding-left);
+  max-width: 60vw;
+  min-width: 50vw;
+  margin-bottom: 3vh;
+  min-height: auto;
+  max-height: auto;
+}
+
+textarea {
+  max-width: inherit;
+  min-width: inherit;
+  min-height: 15vh;
+  max-height: 40vh;
+}
+
+#taskName {
+  min-width: inherit;
+}
+button[form="addTaskForm"] {
+  background-color: #1e8c22;
+    color: white;
+    /* border: none; */
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th {
+  padding: var(--global-padding-left);
+}
+
+table{
+  box-sizing: border-box;
+  max-width: 80vw;
+  min-width: auto;
+  max-height: auto;
+  margin-bottom: 2vh;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.delete-btn{
+  background-color: #cb2828;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 0 auto;
+}
