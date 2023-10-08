@@ -21,7 +21,23 @@ function App() {
 
   // need to finish this function
   const addTask = (task) => {
-    setListOfTasks([...listOfTasks, task]);
+    fetch("/api/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok" + response.statusText);
+        }
+        return response.json();
+      })
+      .then((newTasksList) => {
+        setListOfTasks(newTasksList);
+      })
+      .catch((error) => console.log(error));
   };
 
   const deleteTask = (id) => {
@@ -44,7 +60,11 @@ function App() {
     <>
       <div id="flex-container">
         <Header />
-        <Main listOfTasks={listOfTasks} deleteTask={deleteTask} />
+        <Main
+          listOfTasks={listOfTasks}
+          deleteTask={deleteTask}
+          addTask={addTask}
+        />
         <Footer />
       </div>
     </>

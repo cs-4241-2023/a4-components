@@ -69,11 +69,32 @@ app.get("/api/tasks", tasksPreprocessingMiddleware, (req, res) => {
 });
 
 // delete a task
-app.delete("/api/tasks/:id", (req, res) => {
+app.delete("/api/tasks/:id", tasksPreprocessingMiddleware, (req, res) => {
   const id = Number(req.params.id);
   tasksList = tasksList.filter((task) => task.id !== id);
   res.json(tasksList);
 });
+
+//add a task
+app.post(
+  "/api/tasks",
+  (req, res, next) => {
+    const newTask = {
+      id: currentId++,
+      taskName: req.body.taskName,
+      taskDescription: req.body.taskDescription,
+      taskDeadline: req.body.taskDeadline,
+      taskPriority: req.body.taskPriority,
+      taskCreated: new Date().toISOString().slice(0, 10),
+    };
+    tasksList.push(newTask);
+    next();
+  },
+  tasksPreprocessingMiddleware,
+  (req, res) => {
+    res.json(tasksList);
+  }
+);
 
 ViteExpress.listen(app, 3000, () => {
   console.log(`Server is running on http://localhost:3000`);
