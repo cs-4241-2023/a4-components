@@ -24,7 +24,7 @@ let tasksList = [
     taskName: "Clean the garage",
     taskDescription:
       "Throw away old junk in the trash. Reorganize items to clear up more floor space.",
-    taskDeadline: "2023-09-22",
+    taskDeadline: "2023-10-22",
     taskPriority: "Medium",
     taskCreated: "2023-09-05",
   },
@@ -33,7 +33,7 @@ let tasksList = [
     taskName: "Wash the dishes",
     taskDescription:
       "Wash the dishes in the sink. Put them away in the cabinets.",
-    taskDeadline: "2023-09-10",
+    taskDeadline: "2023-10-10",
     taskPriority: "High",
     taskCreated: "2023-09-03",
   },
@@ -42,7 +42,7 @@ let tasksList = [
     taskName: "Do the laundry",
     taskDescription:
       "Wash the clothes in the washing machine. Dry them in the dryer. Fold them and put them away.",
-    taskDeadline: "2023-09-20",
+    taskDeadline: "2023-10-20",
     taskPriority: "Low",
     taskCreated: "2023-09-02",
   },
