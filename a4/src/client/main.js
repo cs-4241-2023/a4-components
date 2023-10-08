@@ -3,22 +3,53 @@ import "./style.css";
 import { setupCounter } from "./counter.js";
 import javascriptLogo from "./javascript.svg";
 
-document.querySelector("#app").innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
+document.querySelector("#bod").innerHTML = `
+<form>
+<table id="itemt">
+  <tr>
+    <td>
+      <label>Email:</label>
+      <input
+        type="email"
+        id="Email"
+        placeholder="your email here"
+        required
+      />
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <label>Name:</label>
+      <input
+        type="text"
+        id="Name"
+        placeholder="your full name here"
+        required
+      />
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <label>Birth date:</label>
+      <input type="date" id="Birth" placeholder="select date" required />
+    </td>
+  </tr>
+</table>
+</form>
+<div id="btn">
+<button id="submit">Submit</button>
+<button id="display">Display info</button>
+<button id="edit"> Edit submit</button>
+<button id="delete">Delete</button>
+<button id="clear">Clear</button>
+</div>
+<p id="fade">Submission Successful</p>
+<p id="dell">Deletion Successful: clear the table</p>
+<p id="uD">Table has been updated</p>
+
+<table id="data"></table>
 `;
 
 setupCounter(document.querySelector("#counter"));

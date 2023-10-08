@@ -2,9 +2,10 @@ import express from "express";
 import ViteExpress from "vite-express";
 
 const app = express();
+let appdata=[]
 
-app.get("/hello", (req, res) => {
-  res.send("Hello Vite!");
+app.get("/display", (req, res) => {
+  res.json(appdata);
 });
 
 ViteExpress.listen(app, 3000, () =>
