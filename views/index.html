@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>WDIHTD</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-vader.css" type="text/css">
+	<meta name="viewport" content="width=device-width" >
+	<meta name="description" content="task,duedate,deadline,planning,todo,todolist,productivity,homework,organier">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://media.discordapp.net/attachments/641632207634432010/1150954369202802778/apple-touch-icon.png">
+	<script src="other.js" defer></script>
+	<title>Login</title>
+</head>
+<body>
+<div class="login">
+	<h1>Login</h1>
+	<form name="loginaction" action='/login' method='POST'>
+		<input type='text' placeholder="Username" name='Username' required="required" autocomplete="username" id='Username'>
+		<input type='password' placeholder="Password" name='Password' required="required" id="Password" autocomplete="current-password">
+		<button class="login-button">Login</button>
+	</form>
+	<label for="pw">Show Password<input type="checkbox" onclick="showPassword()" id='toggle'></label>
+	<h2>New User? Sign Up to WDIHTD!</h2>
+	<button class="sign-up" onclick="navigateTo('signup.html')">Sign Up</button>
+</div>
+</body>
+</html>
