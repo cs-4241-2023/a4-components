@@ -2,7 +2,12 @@
   "name": "a4-mahirsowad3",
   "private": true,
   "version": "0.0.0",
+  "engines": {
+    "node": "16.x"
+  },
   "type": "module",
+  "description": "TODO List App Made with React and Express",
+  "author": "Mahir Sowad",
   "scripts": {
     "start": "node server.improved.js",
     "dev": "vite",
