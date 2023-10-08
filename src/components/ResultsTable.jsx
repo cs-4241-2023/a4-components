@@ -1,7 +1,7 @@
 import React from "react";
 import TableRow from "./TableRow";
 
-function ResultsTable({ listOfTasks }) {
+function ResultsTable({ listOfTasks, deleteTask }) {
   return (
     <>
       <table id="tasksTable">
@@ -19,7 +19,9 @@ function ResultsTable({ listOfTasks }) {
         </thead>
         <tbody>
           {listOfTasks.length > 0 ? (
-            listOfTasks.map((task) => <TableRow key={task.id} task={task} />)
+            listOfTasks.map((task) => (
+              <TableRow key={task.id} task={task} deleteTask={deleteTask} />
+            ))
           ) : (
             <tr>
               <td

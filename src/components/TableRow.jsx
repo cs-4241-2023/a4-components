@@ -1,6 +1,6 @@
 import React from "react";
 
-function TableRow({ task }) {
+function TableRow({ task, deleteTask }) {
   return (
     <tr>
       {/* Table structure for each task: 
@@ -20,7 +20,9 @@ function TableRow({ task }) {
       <td>{task.totalTime}</td>
       <td>{task.timeRemaining < 0 ? "OVERDUE" : task.timeRemaining}</td>
       <td>
-        <button className="delete-btn"> X </button>
+        <button onClick={() => deleteTask(task.id)} className="delete-btn">
+          X
+        </button>
       </td>
     </tr>
   );

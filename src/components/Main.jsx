@@ -2,7 +2,7 @@ import React from "react";
 import Form from "./Form";
 import ResultsTable from "./ResultsTable";
 
-function Main({ listOfTasks }) {
+function Main({ listOfTasks, deleteTask }) {
   return (
     <>
       <main>
@@ -11,7 +11,7 @@ function Main({ listOfTasks }) {
         <Form />
         {/* table of results below */}
         <h2>Tasks currently in your todo list: </h2>
-        <ResultsTable listOfTasks={listOfTasks} />
+        <ResultsTable listOfTasks={listOfTasks} deleteTask={deleteTask} />
       </main>
     </>
   );

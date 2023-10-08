@@ -68,6 +68,13 @@ app.get("/api/tasks", tasksPreprocessingMiddleware, (req, res) => {
   res.json(tasksList);
 });
 
+// delete a task
+app.delete("/api/tasks/:id", (req, res) => {
+  const id = Number(req.params.id);
+  tasksList = tasksList.filter((task) => task.id !== id);
+  res.json(tasksList);
+});
+
 ViteExpress.listen(app, 3000, () => {
   console.log(`Server is running on http://localhost:3000`);
 });

@@ -19,11 +19,32 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
+  // need to finish this function
+  const addTask = (task) => {
+    setListOfTasks([...listOfTasks, task]);
+  };
+
+  const deleteTask = (id) => {
+    fetch(`/api/tasks/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok" + response.statusText);
+        }
+        return response.json();
+      })
+      .then((newTasksList) => {
+        setListOfTasks(newTasksList);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <div id="flex-container">
         <Header />
-        <Main listOfTasks={listOfTasks} />
+        <Main listOfTasks={listOfTasks} deleteTask={deleteTask} />
         <Footer />
       </div>
     </>
