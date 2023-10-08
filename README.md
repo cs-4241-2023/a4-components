@@ -4,8 +4,7 @@ https://a4-sean-arackal.glitch.me/
 
 ## What do I have to do?
 
-I chose to implement the web-application that I created for A3 to use React.js for the front-end. The front-end functionality is now specified. Overall, React made the development process much easier. There was a slight learning curve initially since I had to learn React's syntax and features. However, once I learned what I
-could do with React, things got easier.
+This web application uses React as it's front-end and Express as the backend. Data like user info and tasks is stored in a MongoDB cluster. React was initially hard to understand but once it clicked the functions and components made it easy to use.
 
 ## Note to Grader
 
