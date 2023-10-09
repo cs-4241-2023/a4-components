@@ -2,10 +2,11 @@ import express from "express";
 import ViteExpress from "vite-express";
 const app = express();
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 dotenv.config();
 app.use( express.json() );
 
-const contacts = [
+var contacts = [
   {
     "firstName": "Nick",
     "lastName": "Borrello",
@@ -19,11 +20,11 @@ const contacts = [
     "lastEdited": {
       "$date": "2023-09-28T08:43:57.442Z"
     },
-    "_id": {
-      "$oid": "6514db7d8876d7768b718bc1"
-    }
+    "id": 0
   }
 ]
+
+var idCounter = 0
 
 async function run() {
 
@@ -34,14 +35,16 @@ async function run() {
   app.post( "/add", (req,res) => {
     // get the userContacts for a specific user id
     req.body.lastEdited = new Date()
-    req.body._id = new ObjectId()
+    idCounter++
+    req.body.id = idCounter
     contacts.push(req.body)
     res.json(contacts)
   })
 
   app.post('/remove', (req, res) => {
     // Remove the req.body._id from the contacts list
-    contacts = contacts.filter( contact => contact._id != req.body._id )
+    console.log("Remove: ", req.body.index)
+    contacts = contacts.splice(req.body.index, 1)
     res.json( contacts )
   })
 

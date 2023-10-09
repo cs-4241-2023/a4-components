@@ -5,6 +5,43 @@ export class Contact extends React.Component {
     super(props);
   }
 
+  async removeContact() {
+    // hide the component
+    const contact = document.getElementById(this.props.id);
+    contact.classList.add("hidden");
+    contact.remove();
+    const response = await fetch("/remove", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: this.props.id }),
+    })
+  }
+
+  async editContact() {
+    // Hide the create contact button
+    const button = document.getElementById("createButton");
+    button.classList.add("hidden");
+    // Show the form
+    const form = document.getElementById("contactForm");
+    form.classList.remove("hidden");
+    // Update the form inputs
+    document.getElementById("firstName").value = this.props.firstName;
+    document.getElementById("lastName").value = this.props.lastName;
+    document.getElementById("phone").value = this.props.phone;
+    document.getElementById("email").value = this.props.email;
+    document.getElementById("dateOfBirth").value = this.props.dateOfBirth;
+    document.getElementById("streetAddress").value = this.props.streetAddress;
+    document.getElementById("city").value = this.props.city;
+    document.getElementById("state").value = this.props.state;
+    document.getElementById("zipCode").value = this.props.zipCode;
+    document.getElementById("id").value = this.props.id;
+
+    // send the edit request
+    fetch
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -53,7 +90,7 @@ export class Contact extends React.Component {
             <button className="btn" id="editButton">
               <i className="fa-solid fa-pen-to-square"></i>
             </button>
-            <button className="btn" id="deleteButton">
+            <button className="btn" id="deleteButton" onClick={(e) => this.removeContact()}>
               <i className="fa fa-trash"></i>
             </button>
           </div>
