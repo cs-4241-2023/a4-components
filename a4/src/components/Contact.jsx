@@ -26,6 +26,22 @@ export class Contact extends React.Component {
 
   }
 
+  submitForm() {
+    const json = JSON.stringify({
+      id: this.props.id,
+      firstName: document.getElementById("editFirstName").value,
+      lastName: document.getElementById("editLastName").value,
+      phone: document.getElementById("editPhone").value,
+      email: document.getElementById("editEmail").value,
+      dateOfBirth: document.getElementById("editDateOfBirth").value,
+      streetAddress: document.getElementById("editStreetAddress").value,
+      city: document.getElementById("editCity").value,
+      state: document.getElementById("editState").value,
+      zipCode: document.getElementById("editZipCode").value,
+    });
+    this.props.onSubmitEdit(json);
+  }
+
   render() {
     return (
       <div>
@@ -102,7 +118,7 @@ export class Contact extends React.Component {
               <button
                 id="editSubmitButton"
                 className="createButton"
-                onClick={(e) => this.props.onSubmitEdit()}
+                onClick={(e) => this.submitForm()}
               >
                 Save
               </button>

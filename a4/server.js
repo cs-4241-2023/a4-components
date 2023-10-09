@@ -68,7 +68,8 @@ async function run() {
     // Update the contacts based on teh req.body._id
   app.post('/edit', (req, res) => {
     // Replace the contact with the req.body._id with the req.body
-    const index = contacts.findIndex( contact => contact._id == req.body._id )
+    const index = contacts.findIndex( contact => contact.id == req.body.id )
+    console.log(contacts)
     contacts[index] = req.body
     res.json( contacts )
   })

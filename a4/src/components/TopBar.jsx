@@ -14,6 +14,10 @@ export class TopBar extends React.Component {
     form.classList.remove("hidden");
   };
 
+  submitForm () {
+    
+  }
+
   render() {
     return (
       <div id="contactHeader" className="top-bar">

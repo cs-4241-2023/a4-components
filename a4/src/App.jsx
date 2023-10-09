@@ -5,24 +5,13 @@ import { Contact } from "./components/Contact";
 const App = () => {
   const [contacts, setContacts] = useState([ ]);
 
-  async function editContact(id) {
+  async function editContact(json) {
     fetch("/edit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        _id: id,
-        editFirstName: document.getElementById("editFirstName").value,
-        editLastName: document.getElementById("editLastName").value,
-        editPhone: document.getElementById("editPhone").value,
-        editEmail: document.getElementById("editEmail").value,
-        editDateOfBirth: document.getElementById("editDateOfBirth").value,
-        editStreetAddress: document.getElementById("editStreetAddress").value,
-        editCity: document.getElementById("editCity").value,
-        editState: document.getElementById("editState").value,
-        editZipCode: document.getElementById("editZipCode").value,
-      }),
+      body: json,
     }).then((res) => res.json()).then((data) => {
       setContacts( data );
     });
