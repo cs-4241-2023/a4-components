@@ -53,6 +53,7 @@ async function run() {
     idCounter++
     req.body.id = idCounter
     contacts.push(req.body)
+    console.log("Add: ", req.body)
     res.json(contacts)
   })
 

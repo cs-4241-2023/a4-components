@@ -5,46 +5,117 @@ export class Contact extends React.Component {
     super(props);
   }
 
-
-  async removeContact() {
-    // hide the component
-    const response = await fetch("/remove", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: this.props.id }),
-    }).then((response) => response.json()).then((data) => {
-      this.setState({ contacts: data });
-    });
-  }
-
-  async editContact() {
-    // Hide the create contact button
-    const button = document.getElementById("createButton");
-    button.classList.add("hidden");
-    // Show the form
-    const form = document.getElementById("contactForm");
-    form.classList.remove("hidden");
+  showEditForm() {
     // Update the form inputs
-    document.getElementById("firstName").value = this.props.firstName;
-    document.getElementById("lastName").value = this.props.lastName;
-    document.getElementById("phone").value = this.props.phone;
-    document.getElementById("email").value = this.props.email;
-    document.getElementById("dateOfBirth").value = this.props.dateOfBirth;
-    document.getElementById("streetAddress").value = this.props.streetAddress;
-    document.getElementById("city").value = this.props.city;
-    document.getElementById("state").value = this.props.state;
-    document.getElementById("zipCode").value = this.props.zipCode;
-    document.getElementById("id").value = this.props.id;
+    document.getElementById("editFirstName").value = this.props.firstName;
+    document.getElementById("editLastName").value = this.props.lastName;
+    document.getElementById("editPhone").value = this.props.phone;
+    document.getElementById("editEmail").value = this.props.email;
+    document.getElementById("editDateOfBirth").value = this.props.dateOfBirth;
+    document.getElementById("editStreetAddress").value = this.props.streetAddress;
+    document.getElementById("editCity").value = this.props.city;
+    document.getElementById("editState").value = this.props.state;
+    document.getElementById("editZipCode").value = this.props.zipCode;
+    document.getElementById("editSubmitButton").onclick = function () {
+      editContact(this.props.id);
+    };
 
-    // send the edit request
-    fetch
+    // Show the form
+    const form = document.getElementById("editForm");
+    form.classList.remove("hidden");
+
   }
 
   render() {
     return (
-      <React.Fragment>
+      <div>
+        <form id="editForm" className="hidden popup-form">
+          <h3>Edit Contact</h3>
+          <hr />
+          <div className="form-spacer">
+            <div className="flex-row">
+              <div>
+                <h5>Name</h5>
+                <input
+                  type="text"
+                  name="editFirstName"
+                  id="editFirstName"
+                  placeholder="First Name (John)"
+                />
+                <input
+                  type="text"
+                  name="editLastName"
+                  id="editLastName"
+                  placeholder="Last Name (Doe)"
+                />
+              </div>
+              <div>
+                <h5>Contact Info</h5>
+                <input
+                  type="text"
+                  name="editPhone"
+                  id="editPhone"
+                  placeholder="Phone (123-456-7890)"
+                />
+                <input
+                  type="text"
+                  name="editEmail"
+                  id="editEmail"
+                  placeholder="Email (jdoe@gmail.com)"
+                />
+              </div>
+            </div>
+            <h5>Date of Birth</h5>
+            <input
+              type="date"
+              name="editDateOfBirth"
+              id="editDateOfBirth"
+              placeholder="Birthday"
+            />
+            <h5>Address</h5>
+            <input
+              type="text"
+              name="editStreetAddress"
+              id="editStreetAddress"
+              placeholder="Street Address (123 Main St)"
+            />
+            <input
+              type="text"
+              name="editCity"
+              id="editCity"
+              placeholder="City (Boston)"
+            />
+            <input
+              type="text"
+              name="editState"
+              id="editState"
+              placeholder="State (MA)"
+            />
+            <input
+              type="text"
+              name="editZipCode"
+              id="editZipCode"
+              placeholder="Zip (02108)"
+            />
+            <hr />
+            <div className="form-section-1">
+              <button
+                id="editSubmitButton"
+                className="createButton"
+                onClick={(e) => this.props.onSubmitEdit()}
+              >
+                Save
+              </button>
+              <a
+                id="cancelEditButton"
+                href="/contacts"
+                className="createButton"
+              >
+                Cancel
+              </a>
+            </div>
+          </div>
+        </form>
         <li className="contact-card">
           <div className="contact-card-header">
             <div className="name-div">
@@ -78,7 +149,7 @@ export class Contact extends React.Component {
                   {this.props.dateOfBirth}
                 </td>
                 <td id="tableStreetAddress" width="25%">
-                  {this.props.streetAddress}
+                  {this.props.streetAddress + ", " + this.props.city + ", " + this.props.state + " " + this.props.zipCode}
                 </td>
                 <td id="tableLastEdited" width="12%">
                   {this.props.lastEdited}
@@ -87,15 +158,23 @@ export class Contact extends React.Component {
             </tbody>
           </table>
           <div id="icon-div" className="icon-div">
-            <button className="btn" id="editButton">
+            <button
+              className="btn"
+              id="editButton"
+              onClick={(e) => this.showEditForm()}
+            >
               <i className="fa-solid fa-pen-to-square"></i>
             </button>
-            <button className="btn" id="deleteButton" onClick={(e) => this.removeContact()}>
+            <button
+              className="btn"
+              id="deleteButton"
+              onClick={(e) => this.props.onRemove(this.props.id)}
+            >
               <i className="fa fa-trash"></i>
             </button>
           </div>
         </li>
-      </React.Fragment>
+      </div>
     );
   }
 }

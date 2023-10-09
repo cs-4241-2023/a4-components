@@ -14,44 +14,6 @@ export class TopBar extends React.Component {
     form.classList.remove("hidden");
   };
 
-  add( evt ) {
-    // Get the data from the form
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const dateOfBirth = document.getElementById("dateOfBirth").value;
-    const streetAddress = document.getElementById("streetAddress").value;
-    const city = document.getElementById("city").value;
-    const state = document.getElementById("state").value;
-    const zipCode = document.getElementById("zipCode").value;
-
-    console.log("addContact");
-
-    // POST the data to the server
-    fetch("/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        phone,
-        email,
-        dateOfBirth,
-        streetAddress,
-        city,
-        state,
-        zipCode,
-      })
-    }).then(response => response.json())
-      .then(json => {
-        // changing state triggers reactive behaviors
-        this.setState({ contacts: json })
-      });
-  }
-
   render() {
     return (
       <div id="contactHeader" className="top-bar">
@@ -104,7 +66,7 @@ export class TopBar extends React.Component {
             <div className="form-section-1">
               <button
                 className="createButton"
-                onClick={(e) => add()}
+                onClick={(e) => this.props.onCreate()}
               >
                 Create
               </button>
