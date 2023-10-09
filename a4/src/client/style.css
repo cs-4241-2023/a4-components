@@ -3,6 +3,9 @@ body {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
+h1{
+  text-align: center;
+}
 
 table,
 th,
@@ -22,7 +25,7 @@ button {
   transition: all 1s ease-out;
 }
 button:hover {
-  background-color: #006e90;
+  background-color: #5105a8;
 }
 #title {
   text-align: center;
