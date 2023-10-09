@@ -7,9 +7,6 @@ export class Contact extends React.Component {
 
   async removeContact() {
     // hide the component
-    const contact = document.getElementById(this.props.id);
-    contact.classList.add("hidden");
-    contact.remove();
     const response = await fetch("/remove", {
       method: "POST",
       headers: {
