@@ -4,46 +4,6 @@ import Contact from "../components/Contact";
 
 export default function Contacts() {
   var storedContacts = [];
-  const updateContacts = async function () {
-    // GET the current contacts
-    const response = await fetch("/docs", {
-      method: "GET",
-    });
-
-    const contacts = await response.json();
-    storedContacts = contacts;
-
-    console.log("CONTACTS: ", contacts);
-
-    // Clear the list
-    const list = document.getElementById("contactList");
-    list.innerHTML = "";
-
-    // for each contact in contacts
-    for (let i = 0; i < contacts.length; i++) {
-      // create the div element and add it to the parent element
-      const element = (
-        <Contact
-          firstName={contacts[i].firstName}
-          lastName={contacts[i].lastName}
-          phone={contacts[i].phone}
-          email={contacts[i].email}
-          dateOfBirth={contacts[i].dateOfBirth}
-          streetAddress={
-            contacts[i].streetAddress +
-            ", " +
-            contacts[i].city +
-            ", " +
-            contacts[i].state +
-            ", " +
-            contacts[i].zipCode
-          }
-          lastEdited={contacts[i].lastEdited + " day(s) ago"}
-        />
-      );
-      document.getElementById("contactList").appendChild(element);
-    }
-  };
 
   async function addContact() {
     // Get the data from the form

@@ -46,17 +46,8 @@ async function run() {
     users
   );
 
-  // Check the connection
-  app.use((req, res, next) => {
-    if (users !== null) {
-      next()
-    } else {
-      res.status(503).send()
-    }
-  })
-
   // Get the database contacts table for a specific user
-  app.get("/contacts", checkAuthenticated, async(req, res) => {
+  app.get("/docs", checkAuthenticated, async(req, res) => {
     console.log("Sent user contacts")
     if (users !== null) {
       // get the userContacts for a specific user id
@@ -90,7 +81,8 @@ async function run() {
             lastEdited: Math.floor(differenceInTime / (1000 * 3600 * 24))
           })
       }
-      res.json( newuserContacts )
+      res.send("BROKEN")
+      //res.json( newuserContacts )
     } 
   }
   })
@@ -123,7 +115,7 @@ async function run() {
       }
     })
     savedContacts = result
-    res.json(result)
+    res.json( result )
   })
 
     // Edit the req.body._id from the database table
@@ -211,9 +203,7 @@ function checkNotAuthenticated(req, res, next) {
 
 run()
 
-ViteExpress.listen( app, 3000, () => {
-  console.log( "App listening at http://localhost:3000" );
-} );
+ViteExpress.listen( app, 3000 );
 
 export default app;
 
