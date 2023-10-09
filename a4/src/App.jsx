@@ -1,19 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TopBar } from "./components/TopBar";
 import { Contact } from "./components/Contact";
 
 const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState([ ]);
 
 
-  // make sure to only do this once
-  if (contacts.length === 0) {
+  useEffect(() => {
     fetch('/docs')
       .then(response => response.json())
       .then(json => {
         setContacts(json)
       })
-  }
+  }, [])
 
   async function editContact(id) {
     const response = await fetch("/edit", {
@@ -66,7 +65,21 @@ const App = () => {
         zipCode,
       }),
     }).then((res) => res.json()).then((data) => {
-        this.setContacts({ contacts: data });
+        setContacts({ data });
+    });
+  }
+
+  
+  async function removeContact() {
+    // hide the component
+    const response = await fetch("/remove", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: this.props.id }),
+    }).then((response) => response.json()).then((data) => {
+      setContacts({ data });
     });
   }
 
@@ -100,7 +113,7 @@ const App = () => {
         <ul>
           {contacts.map((contact, i) => (
             <Contact
-              id = {contact._id}
+              id = {contact.id}
               firstName={contact.firstName}
               lastName={contact.lastName}
               phone={contact.phone}
@@ -116,6 +129,7 @@ const App = () => {
                 contact.zipCode
               }
               lastEdited={contact.lastEdited + " day(s) ago"}
+              onclick={removeContact}
             />
           ))}
         </ul>

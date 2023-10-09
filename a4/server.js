@@ -21,7 +21,22 @@ var contacts = [
       "$date": "2023-09-28T08:43:57.442Z"
     },
     "id": 0
-  }
+  },
+  {
+    "firstName": "John",
+    "lastName": "Smith",
+    "phone": "123-456-7890",
+    "email": "jsmith@yahoo.com",
+    "dateOfBirth": "1990-01-01",
+    "streetAddress": "123 Main St",
+    "city": "Boston",
+    "state": "MA",
+    "zipCode": "02101",
+    "lastEdited": {
+      "$date": "2023-09-28T08:43:57.442Z"
+    },
+    "id": 1
+  },
 ]
 
 var idCounter = 0
@@ -42,9 +57,10 @@ async function run() {
   })
 
   app.post('/remove', (req, res) => {
-    // Remove the req.body._id from the contacts list
-    console.log("Remove: ", req.body.index)
-    contacts = contacts.splice(req.body.index, 1)
+    // Remove the contact with the req.body.id
+    contacts = contacts.filter( contact => contact.id != req.body.id )
+    console.log("Remove: ", req.body.id)
+    console.log(contacts)
     res.json( contacts )
   })
 

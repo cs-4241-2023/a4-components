@@ -5,6 +5,7 @@ export class Contact extends React.Component {
     super(props);
   }
 
+
   async removeContact() {
     // hide the component
     const response = await fetch("/remove", {
@@ -13,7 +14,9 @@ export class Contact extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ id: this.props.id }),
-    })
+    }).then((response) => response.json()).then((data) => {
+      this.setState({ contacts: data });
+    });
   }
 
   async editContact() {
