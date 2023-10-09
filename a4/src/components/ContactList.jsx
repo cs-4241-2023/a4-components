@@ -9,7 +9,7 @@ export class ContactList extends React.Component {
     }
 
     load() {
-        fetch("/docs", { method: 'get'})
+        fetch("/docs", { method: 'GET'})
             .then((res) => res.json())
             .then((data) => {
                 this.setState({ contacts: data });

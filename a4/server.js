@@ -12,11 +12,7 @@ import methodOverride from "method-override";
 import dotenv from "dotenv";
 dotenv.config();
 
-var savedContacts = [];
-
 app.use(methodOverride("_method"));
-app.use( express.static( "public" ) );
-app.use( express.static("views") );
 app.use( express.json() );
 app.use( express.urlencoded({ extended:false }));
 app.use(flash());
@@ -81,8 +77,8 @@ async function run() {
             lastEdited: Math.floor(differenceInTime / (1000 * 3600 * 24))
           })
       }
-      res.send("BROKEN")
-      //res.json( newuserContacts )
+      console.log("SHIT IS BROKEN")
+      res.json( newuserContacts )
     } 
   }
   })
@@ -99,8 +95,7 @@ async function run() {
         contacts: req.body
       }
     })
-    savedContacts = result
-    res.json( result )
+    //savedContacts = result
   })
 
   // Remove the req.body._id from the database table
@@ -114,7 +109,7 @@ async function run() {
         }
       }
     })
-    savedContacts = result
+    //savedContacts = result
     res.json( result )
   })
 
@@ -138,7 +133,7 @@ async function run() {
         "contacts.$.lastEdited": new Date()
       }
     })
-    savedContacts = result
+    //savedContacts = result
   })
 
   // Check the login credentials
@@ -190,7 +185,6 @@ function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
   }
-
   res.redirect('/login')
 }
 
