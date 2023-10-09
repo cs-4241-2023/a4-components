@@ -26,11 +26,6 @@ export class TopBar extends React.Component {
           >
             Create Contact
           </button>
-          <form action="/logout?_method=DELETE" method="POST">
-            <button type="submit" className="logoutButton">
-              Logout
-            </button>
-          </form>
         </div>
       </div>
     );

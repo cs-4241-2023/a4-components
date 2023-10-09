@@ -1,198 +1,57 @@
 import express from "express";
 import ViteExpress from "vite-express";
 const app = express();
-import { MongoClient } from "mongodb";
-import { ObjectId } from "mongodb";
-import passport from "passport";
-import flash from "express-flash";
-import session from "express-session";
-import bcrypt from "bcrypt";
-import { initializePassport } from "./config/passport-config.js";
-import methodOverride from "method-override";
 import dotenv from "dotenv";
 dotenv.config();
-
-app.use(methodOverride("_method"));
 app.use( express.json() );
-app.use( express.urlencoded({ extended:false }));
-app.use(flash());
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}))
-app.use(passport.initialize());
-app.use(passport.session());
 
-const uri = "mongodb+srv://" + process.env.NAME + ":" + process.env.PASSWORD + "@a3-nicholas-borrello.drurqmd.mongodb.net/?retryWrites=true&w=majority"
-console.log(uri)
-const client = new MongoClient( uri );
-
-let users = null
+const contacts = [
+  {
+    "firstName": "Nick",
+    "lastName": "Borrello",
+    "phone": "123-456-7833",
+    "email": "nvborrello@wpi.edu",
+    "dateOfBirth": "2001-12-17",
+    "streetAddress": "99 West St",
+    "city": "Worcester",
+    "state": "MA",
+    "zipCode": "01609",
+    "lastEdited": {
+      "$date": "2023-09-28T08:43:57.442Z"
+    },
+    "_id": {
+      "$oid": "6514db7d8876d7768b718bc1"
+    }
+  }
+]
 
 async function run() {
-  await client.connect()
-  users = await client.db("a3-nicholas-borrello").collection("Users")
-
-  initializePassport(
-    passport, 
-    async userEmail => await users.findOne({ email: userEmail }), 
-    async id => await users.findOne({ _id: new ObjectId(id) }),
-    async GoogleID => await users.findOne({ GoogleID: GoogleID }),
-    users
-  );
 
   // Get the database contacts table for a specific user
-  app.get("/docs", checkAuthenticated, async(req, res) => {
-    console.log("Sent user contacts")
-    if (users !== null) {
-      // get the userContacts for a specific user id
-      const userInfo = await users.findOne({_id: req.user._id})
-      const userContacts = userInfo.contacts;
-
-      if(userContacts == null) {
-        res.json([])
-      }
-      else {
-        // For each contact in the database, convert the last edited date to a number of days
-        const newuserContacts = [];
-        for(let i = 0; i < userContacts.length; i++) {
-          // create a new json object with the number of days since last edited
-
-          const lastEdited = new Date(userContacts[i].lastEdited)
-          const currentDate = new Date();
-          const differenceInTime = currentDate.getTime() - lastEdited.getTime();
-          // construct a new json object with the number of days since last edited
-          newuserContacts.push({
-            _id: userContacts[i]._id,
-            firstName: userContacts[i].firstName,
-            lastName: userContacts[i].lastName,
-            phone: userContacts[i].phone,
-            email: userContacts[i].email,
-            dateOfBirth: userContacts[i].dateOfBirth,
-            streetAddress: userContacts[i].streetAddress,
-            city: userContacts[i].city,
-            state: userContacts[i].state,
-            zipCode: userContacts[i].zipCode,
-            lastEdited: Math.floor(differenceInTime / (1000 * 3600 * 24))
-          })
-      }
-      console.log("SHIT IS BROKEN")
-      res.json( newuserContacts )
-    } 
-  }
-  })
+  app.get("/docs", (req, res) => res.json(contacts))
 
   // Insert data into the table
-  app.post( "/add", checkAuthenticated, async (req,res) => {
+  app.post( "/add", (req,res) => {
     // get the userContacts for a specific user id
     req.body.lastEdited = new Date()
     req.body._id = new ObjectId()
-    const result = await users.updateOne({
-      _id: new ObjectId(req.user._id)
-    }, {
-      $push: {
-        contacts: req.body
-      }
-    })
-    //savedContacts = result
+    contacts.push(req.body)
+    res.json(contacts)
   })
 
-  // Remove the req.body._id from the database table
-  app.post('/remove', checkAuthenticated, async (req, res) => {
-    const result = await users.updateOne({
-      _id: new ObjectId(req.user._id)
-    }, {
-      $pull: {
-        contacts: {
-          _id: new ObjectId(req.body._id)
-        }
-      }
-    })
-    //savedContacts = result
-    res.json( result )
+  app.post('/remove', (req, res) => {
+    // Remove the req.body._id from the contacts list
+    contacts = contacts.filter( contact => contact._id != req.body._id )
+    res.json( contacts )
   })
 
-    // Edit the req.body._id from the database table
-  app.post('/edit', checkAuthenticated, async (req, res) => {
-    let newContacts = [];
-    newContacts.push(req.body)
-    const result = await users.updateOne({
-      "contacts._id": new ObjectId(req.body._id)
-    }, {
-      $set: {
-        "contacts.$.firstName": req.body.editFirstName,
-        "contacts.$.lastName": req.body.editLastName,
-        "contacts.$.phone": req.body.editPhone,
-        "contacts.$.email": req.body.editEmail,
-        "contacts.$.dateOfBirth": req.body.editDateOfBirth,
-        "contacts.$.streetAddress": req.body.editStreetAddress,
-        "contacts.$.city": req.body.editCity,
-        "contacts.$.state": req.body.editState,
-        "contacts.$.zipCode": req.body.editZipCode,
-        "contacts.$.lastEdited": new Date()
-      }
-    })
-    //savedContacts = result
+    // Update the contacts based on teh req.body._id
+  app.post('/edit', (req, res) => {
+    // Replace the contact with the req.body._id with the req.body
+    const index = contacts.findIndex( contact => contact._id == req.body._id )
+    contacts[index] = req.body
+    res.json( contacts )
   })
-
-  // Check the login credentials
-  app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/contacts',
-    failureRedirect: '/login',
-    failureFlash: true
-  }))
-
-  // Logout the user
-  app.delete('/logout', (req, res, next) => {
-    req.logOut((err) => {
-      if (err) {
-        return next(err);
-      }
-      res.redirect('/login');
-    });
-  });
-
-
-  // Check google login
-  app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile']
-  }))
-
-  app.get('/auth/google/redirect', 
-    passport.authenticate('google', {successRedirect: '/contacts', failureRedirect: '/login', failureFlash: true})
-  );
-
-  // Create a new user in the database
-  app.post('/register', checkNotAuthenticated, async (req, res) => {
-    // Hash the password
-    try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10)
-      users.insertOne({
-        email: req.body.email,
-        password: hashedPassword
-      })
-      console.log("User created: "+req.body.email+" "+hashedPassword)
-      res.redirect("/");
-    } catch {
-      console.log("Error creating user")
-      res.redirect("/register");
-    }
-  })
-}
-
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  }
-  res.redirect('/login')
-}
-
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/contacts')
-  }
-  next()
 }
 
 run()
