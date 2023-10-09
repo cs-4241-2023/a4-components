@@ -1,4 +1,5 @@
-import Contact from "./Contact";
+import React from "react";
+import { Contact } from "./Contact";
 
 export class ContactList extends React.Component {
     constructor(props) {
@@ -8,17 +9,18 @@ export class ContactList extends React.Component {
     }
 
     load() {
-        fetch("/contacts")
+        fetch("/docs", { method: 'get'})
             .then((res) => res.json())
             .then((data) => {
                 this.setState({ contacts: data });
             });
+        console.log("Contact list with " + this.state.contacts.length + " contacts loaded");
     }
 
     render() {
       return (
           <div className="contactList">
-              {contacts.map((contact) => (
+              {this.state.contacts.map((contact) => (
                   <Contact
                       firstName={contact.firstName}
                       lastName={contact.lastName}

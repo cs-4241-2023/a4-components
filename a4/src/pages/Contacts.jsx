@@ -1,6 +1,7 @@
 import React from "react";
-import TopBar from "../components/TopBar";
-import Contact from "../components/Contact";
+import { TopBar } from "../components/TopBar";
+import { Contact } from "../components/Contact";
+import { ContactList } from "../components/ContactList";
 
 export default function Contacts() {
   var storedContacts = [];
@@ -111,7 +112,7 @@ export default function Contacts() {
     <>
       <div id="parent-div">
         <TopBar />
-        <ul id="contactList" className="contact-list" />
+        <ContactList />
       </div>
       <form id="contactForm" className="hidden popup-form">
         <h3>Create Contact</h3>

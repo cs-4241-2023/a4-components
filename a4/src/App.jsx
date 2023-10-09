@@ -10,8 +10,6 @@ import {
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Contacts from "./pages/Contacts";
-import ContactList from "./components/ContactList";
-import { contactsLoader } from "./components/ContactList";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,9 +17,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/contacts" element={<Contacts />}>
-        <Route index element={<ContactList />} loader={contactsLoader} />
-      </Route>
+      <Route path="/contacts" element={<Contacts />}/>
     </Route>
   )
 );
