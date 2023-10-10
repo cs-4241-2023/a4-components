@@ -55,7 +55,7 @@ const display = function (event) {
        <td contenteditable='false'>${d.Name}</td>
        <td contenteditable='false'>${d.Birth}</td>
        <td contenteditable='false'>${d.Age} years old</td>
-       <td contenteditable='false'>row:${i} <input type="checkbox" class="checkOnce" id="C${i}"onclick='checkedOnClick(this)' value='${d._id}'/></td>
+       <td contenteditable='false'>row:${i} <input type="checkbox" class="checkOnce" id="C${i}"onclick='checkedOnClick(this)' value='${i}'/></td>
        `;
         i++;
         list.appendChild(item);
@@ -71,13 +71,41 @@ const clear = function (event) {
   table.innerHTML = "";
 };
 
+function deleterec(event) {
+  event.preventDefault();
+  let data=[];
+  let dis = document.querySelectorAll(".checkOnce");
+  dis.forEach(function(box){
+    if(box.checked==true){
+      data.push(box.value)
+    }
+  })
+  let json = {
+    num: data[0],
+  };
+  let response = fetch("/delete", {
+    method: "POST",
+    headers:{'Content-Type': 'application/json'},
+    body:JSON.stringify(json)
+  })
+    .then(res => res.json())
+    .then(function (res) {
+      document.querySelector("#dell").style.display = "block";
+      setTimeout(function () {
+        document.querySelector("#dell").style.display = "none";
+      }, 1500);
+    }).then(display(event));
+}
+
 
 window.onload= function(){
   const button1 = document.querySelector("#submit");
   const button2 = document.querySelector("#display");
+  const button3 = document.querySelector("#delete");
   const button4 = document.querySelector("#clear");
   button1.onclick = submit;
   button2.onclick = display;
   button4.onclick = clear;
+  button3.onclick = deleterec;
 }
 

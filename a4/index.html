@@ -48,7 +48,6 @@
 <div id="btn">
 <button id="submit">Submit</button>
 <button id="display">Display info</button>
-<button id="edit"> Edit submit</button>
 <button id="delete">Delete</button>
 <button id="clear">Clear</button>
 </div>
@@ -57,7 +56,19 @@
 <p id="uD">Table has been updated</p>
 
 <table id="data"></table>
-    <div id="app"></div>
+
+<script>
+
+  let buttonHere = false;
+  let i;
+  function checkedOnClick(el) {
+    let checkboxlist = document.getElementsByClassName("checkOnce");
+    for (let i = 0; i < checkboxlist.length; i++) {
+      checkboxlist.item(i).checked = false;
+    }
+    el.checked = true;
+  }
+</script>
    
   </body>
 </html>
