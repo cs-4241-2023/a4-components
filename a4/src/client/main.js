@@ -8,7 +8,7 @@ const submit = function (event) {
       Email: input[0].value,
       Name: input[1].value,
       Birth: input[2].value,
-      Age: age(input[2].value),
+      Age: age(input[2].value)
     };
 
   let response = fetch("/submit", {
