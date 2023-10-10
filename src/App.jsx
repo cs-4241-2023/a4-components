@@ -90,7 +90,7 @@ const App = () => {
               city= { contact.city }
               state= { contact.state }
               zipCode= { contact.zipCode }
-              lastEdited={contact.lastEdited + " day(s) ago"}
+              lastEdited={contact.lastEdited}
               onRemove={ remove }
               onSubmitEdit = { editContact }
             />
