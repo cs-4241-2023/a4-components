@@ -1,0 +1,55 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+#displayTable {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+td {
+    padding: 20px;
+    border-bottom: solid white 1px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+#submit,
+#name {
+    font-size: 20px;
+    padding: 10px;
+}
+
+#submit,
+.editSubmit {
+    margin-left: 10px;
+}
+
+#name,
+#n_name {
+    margin-right: 10px;
+    border-radius: 10px;
+    border-color: transparent;
+}
+
+#primary_color,
+#secondary_color,
+#teritary_color,
+#accent_1,
+#accent_2 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+}
