@@ -1,5 +1,5 @@
-import express from "express";
-import ViteExpress from "vite-express";
+import express from 'express';
+import ViteExpress from 'vite-express';
 
 const app = express();
 
@@ -14,6 +14,7 @@ app.post("/submit",(req,res)=>{
   appdata.push(req.body)
   res.json(appdata)
 })
+
 app.post("/delete", (req,res)=>{
   let dataDel= JSON.parse(req.body.num)
   if(dataDel>=0){
