@@ -1,0 +1,64 @@
+
+
+body {
+  background-color: #545ca9;
+  color:white;
+}
+
+.header1 {
+  color: #830D3B;
+  text-align: center
+}
+
+
+p {
+  color: #DBDBD5;
+}
+
+li {
+  color: #C7B33A;
+}
+
+html {
+  font-family: "Josefin Sans";
+}
+
+/* style the page using a grid layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 33% 33% 33%;
+  background-color: #8c1010;
+  padding: 10px;
+  height: 500px;
+  align-content: space-between;
+}
+
+.grid-item {
+  background-color: #545ca9;
+  border: 1px solid rgba(131, 49, 30, 0.8);
+  color: #830D3B;
+  padding: 40px;
+  font-size: 30px;
+  text-align: center;
+}
+
+#submit{
+  padding: 15px 32px;
+}
+
+input{
+  width: 100%;
+}
+
+#results {
+  grid-row-start: 1;
+  grid-row-end: 4;
+
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+table{
+  width: 100%;
+}
