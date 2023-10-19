@@ -10,7 +10,7 @@
   "author": "Mahir Sowad",
   "scripts": {
     "start": "node server.improved.js",
-    "dev": "vite",
+    "dev": "node server.improved.js",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
