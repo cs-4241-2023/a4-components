@@ -1,0 +1,12 @@
+{
+  "name": "Recipe Logger",
+  "version": "3.0",
+  "description": "An app to save recipe information and edit it to keep track of food recipes. A prev version now with React."
+  "author": "Adelynn Martin",
+  "scripts": {
+    "start": "node server.improved.js"
+  },
+  "dependencies": {
+    "mime": "^3.0.0"
+  }
+}

@@ -1,0 +1,63 @@
+/* Reset some default styles */
+body {
+  background-color: #F3F3FD; /* Light Lavender */
+  color: #C8C8E4; /* Dark Lavender */
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #FFEBF5; /* Complementary Pastel */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  color: #E6E6FA; /* Lavender Base */
+}
+
+.divider {
+  margin: 20px 0;
+  background-color: #C8C8E4; /* Dark Lavender */
+  height: 2px;
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.recipe-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recipe-table th, .recipe-table td {
+  border: 1px solid #C8C8E4; /* Dark Lavender */
+  padding: 8px 12px;
+}
+
+.recipe-table th {
+  background-color: #E6E6FA; /* Lavender Base */
+  color: #C8C8E4; /* Dark Lavender */
+}
+
+button {
+  background-color: #E6E6FA; /* Lavender Base */
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #C8C8E4; /* Dark Lavender */
+  color: #F3F3FD; /* Light Lavender */
+}
